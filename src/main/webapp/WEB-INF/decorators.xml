@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/decorators">
+    
+    <decorator name="principal" page="principal.jsp">
+        <pattern>/index</pattern>        
+    </decorator>
+    <decorator name="upload" page="principal.jsp">
+        <pattern>/upload*</pattern>        
+    </decorator>
+    <decorator name="comunicacao" page="principal.jsp">
+        <pattern>/comunicacao*</pattern>        
+    </decorator>    
+<!--    <decorator name="principal" page="principal.jsp">
+        <pattern></pattern>        
+    </decorator>-->
+    <excludes>
+        <pattern>/javascript*</pattern>
+    </excludes>    
+</decorators>

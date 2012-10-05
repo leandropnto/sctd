@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+	
+<hibernate-configuration>
+
+    <session-factory>
+	
+            <!--      Configuração SQL Server -->
+        <property name="hibernate.show_sql">true</property>    
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="hibernate.connection.datasource">java:/comp/env/jdbc/producao</property>
+        <property name="hibernate.connection.useUnicode">true</property>
+        <property name="hibernate.connection.characterEncoding">UTF-8</property>
+        
+        
+<!--        Mapeamento das classes-->
+     
+        <mapping class="br.com.cremerj.gercrm.model.Cargo" />
+        <mapping class="br.com.cremerj.gercrm.model.Grupo" />
+        <mapping class="br.com.cremerj.gercrm.model.MenuAdmin" />
+        <mapping class="br.com.cremerj.gercrm.model.Setor" />
+        <mapping class="br.com.cremerj.gercrm.model.Usuario" />
+        <mapping class="br.com.cremerj.gercrm.model.Destaque" />
+        
+       
+
+    </session-factory>
+
+</hibernate-configuration>
+	
