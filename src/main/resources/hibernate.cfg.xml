@@ -8,21 +8,20 @@
     <session-factory>
 	
             <!--      Configuração SQL Server -->
-        <property name="hibernate.show_sql">true</property>    
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-        <property name="hibernate.connection.datasource">java:/comp/env/jdbc/producao</property>
+        <property name="hibernate.connection.datasource">java:/comp/env/jdbc/tcc</property>
         <property name="hibernate.connection.useUnicode">true</property>
         <property name="hibernate.connection.characterEncoding">UTF-8</property>
+        <property name="hibernate.show_sql">true</property>    
+        <property name="hibernate.default_catalog">tcc</property>
+        <property name="hibernate.default_schema">public</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
         
         
 <!--        Mapeamento das classes-->
      
-        <mapping class="br.com.cremerj.gercrm.model.Cargo" />
-        <mapping class="br.com.cremerj.gercrm.model.Grupo" />
-        <mapping class="br.com.cremerj.gercrm.model.MenuAdmin" />
-        <mapping class="br.com.cremerj.gercrm.model.Setor" />
-        <mapping class="br.com.cremerj.gercrm.model.Usuario" />
-        <mapping class="br.com.cremerj.gercrm.model.Destaque" />
+        <mapping class="br.com.tcc.sctd.model.Usuario" />
+        <mapping class="br.com.tcc.sctd.model.Funcionario" />
         
        
 

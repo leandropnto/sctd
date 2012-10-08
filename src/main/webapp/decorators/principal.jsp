@@ -5,7 +5,7 @@
         <meta http-equiv="Pragma" content="no-cache" />
         <meta http-equiv="Cache-Control" content="no-cache" />
         <meta http-equiv="Expires" content="Sat, 01 Dec 2001 00:00:00 GMT"/>
-        <title><decorator:title default="GerCRM - Gerenciado do site www.cremerj.org.br" /></title>
+        <title><decorator:title default="SCTD - Sitema de Confecção Tavares Dutra" /></title>
 
         <script src="<c:url value="/javascript/jquery-1.6.2.min.js" />" type="text/javascript"></script>
         <script src="<c:url value="/javascript/jquery-ui-1.8.16.custom.min.js" />" type="text/javascript"></script>
@@ -32,7 +32,7 @@
                 width:1024px;
                 margin:0 auto;
                 text-align:left;
-                border:1px solid #c30;
+                border:1px solid #133783;
                 /*                voice-family: "\"}\""; */
                 voice-family:inherit;
 /*                width:1024px;*/
@@ -42,7 +42,15 @@
             }
             #topo {
                 height:90px;
-                background:#ddd;
+                background:#3B5998;
+            }
+            
+            #topo h1{
+                color: #FFF;
+                padding-top: 10px;
+                padding-left:20px;
+                font-family: 'Arial';
+                font-size: 24pt;
             }
             #principal {
                 float:left;
@@ -97,7 +105,7 @@
     <body> 
         <div id="tudo">
             <div id="topo"> 
-                <h1>DIV topo </h1> 
+                <h1>SCTD - Sistema de Confecção Tavares Dutra </h1> 
             </div> 
             <div id="principal"> 
                 <decorator:body />
@@ -119,11 +127,27 @@
                 <fieldset style="display: block;border: 1px solid #CCC;margin-top: 5px; background-color: #FFF; height: 500px">
                     <legend style="font-weight: bold; color: black;font-family: Arial, Helvetica, sans-serif;">Opções</legend>
                     <ul style="list-style: none; clear: both; padding-left: 5px; padding-bottom: 20px">
-                        <c:forEach items="${menu}" var="item" varStatus="contador">
-                            <li style="padding-bottom: 10px; <c:if test="${contador.index %2==0}" >background-color: #FFF</c:if>" >
-                                <a style="text-decoration:none;" href="<c:url value="${item.url}"/>">${item.nome}</a>
-                            </li>
-                        </c:forEach>
+                        <li>
+                            <a style="text-decoration:none;" href="<c:url value="/"/>">Home</a>
+                        </li>
+                        <li>
+                            <a style="text-decoration:none;" href="<c:url value="/funcionarios/"/>">Funcionário</a>
+                        </li>
+                        <li>
+                            <a style="text-decoration:none;" href="<c:url value="/pedidos/"/>">Pedidos</a>
+                        </li>
+                        <li>
+                            <a style="text-decoration:none;" href="<c:url value="/vendas/"/>">Vendas</a>
+                        </li>
+                        <li>
+                            <a style="text-decoration:none;" href="<c:url value="/clientes/"/>">Clientes</a>
+                        </li>
+                        <li>
+                            <a style="text-decoration:none;" href="<c:url value="/transportadoras/"/>">Transportadoras</a>
+                        </li>
+                        <li>
+                            <a style="text-decoration:none;" href="<c:url value="/administracao/"/>">Administração</a>
+                        </li>
                     </ul>
                 </fieldset>
             </div> 

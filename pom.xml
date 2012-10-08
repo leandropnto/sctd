@@ -85,7 +85,7 @@
     </dependencies>
 
     <build>
-        <finalName>gercrm</finalName>
+        <finalName>sctd</finalName>
         <outputDirectory>${basedir}/src/main/webapp/WEB-INF/classes</outputDirectory> 
         <resources>
             <resource>

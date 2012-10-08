@@ -2,7 +2,7 @@
 <decorators defaultdir="/decorators">
     
     <decorator name="principal" page="principal.jsp">
-        <pattern>/index</pattern>        
+        <pattern>/*</pattern>        
     </decorator>
     <decorator name="upload" page="principal.jsp">
         <pattern>/upload*</pattern>        
