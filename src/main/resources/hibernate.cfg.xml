@@ -20,8 +20,11 @@
         
 <!--        Mapeamento das classes-->
      
-        <mapping class="br.com.tcc.sctd.model.Usuario" />
+        <mapping class="br.com.tcc.sctd.model.Cargo" />
+        <mapping class="br.com.tcc.sctd.model.Departamento" />
         <mapping class="br.com.tcc.sctd.model.Funcionario" />
+        <mapping class="br.com.tcc.sctd.model.Usuario" />
+        
         
        
 

@@ -9,11 +9,16 @@ import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 /**
  *
@@ -37,10 +42,17 @@ public class Funcionario implements Serializable {
     Date dataContratacao;
     @Column(name="salario")
     BigDecimal salario;
-    @Column(name="cargo", length=100)
-    String cargo;
-    @Column(name="departamento", length=100)
-    String departamento;
+    
+    @ManyToOne(fetch= FetchType.EAGER)
+    @JoinColumn(name="idCargo")
+    @Fetch(FetchMode.JOIN)            
+    Cargo cargo;   
+    
+    @ManyToOne(fetch= FetchType.EAGER)
+    @JoinColumn(name="idDepartamento")
+    @Fetch(FetchMode.JOIN)    
+     
+    Departamento departamento;
 
     public Funcionario() {
     }
@@ -85,21 +97,24 @@ public class Funcionario implements Serializable {
         this.salario = salario;
     }
 
-    public String getCargo() {
+    public Cargo getCargo() {
         return cargo;
     }
 
-    public void setCargo(String cargo) {
+    public void setCargo(Cargo cargo) {
         this.cargo = cargo;
     }
 
-    public String getDepartamento() {
+    public Departamento getDepartamento() {
         return departamento;
     }
 
-    public void setDepartamento(String departamento) {
+    public void setDepartamento(Departamento departamento) {
         this.departamento = departamento;
     }
+
+    
+    
 
     @Override
     public int hashCode() {

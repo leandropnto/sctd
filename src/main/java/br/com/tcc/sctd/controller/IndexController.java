@@ -60,10 +60,10 @@ public class IndexController {
 
         Funcionario f = new Funcionario();
         f.setNome("Fulaninho de Teste");
-        f.setCargo("Administrador");
+ //       f.setCargo("Administrador");
         f.setDataNascimento(new Date(System.currentTimeMillis()));
         f.setDataContratacao(new Date(System.currentTimeMillis()));
-        f.setDepartamento("Financeiro");
+//        f.setDepartamento("Financeiro");
         f.setSalario(new BigDecimal("2500.56"));
         
         //funcionarios.salvar(f);

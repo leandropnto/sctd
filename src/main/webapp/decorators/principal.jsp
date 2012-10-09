@@ -63,13 +63,13 @@
             #nav-sec {
                 float:left;
                 width: 150px;
-                background:#eee;                    
+                background:#FFF;                    
                 margin-left:6px;
             }
             #navegacao {
                 float:left;
                 width: 150px;
-                background:#eee;
+                background:#FFF;
                 margin-left:-1024px;
                 margin-right:6px;
                 display:inline;                                              
@@ -78,6 +78,9 @@
                 height:50px;
                 background:#ddd;
                 clear:both;
+                background: #3B5998;
+                color: #FFF;
+                padding: 10px;
             } 
             h1{
                 font-size: 130%;
@@ -116,8 +119,8 @@
 
                     <ul style="list-style: none; clear: both; padding-left: 5px; padding-bottom: 20px">
                         <c:forEach items="${opcoes}" var="op" varStatus="cont">
-                            <li style="padding-bottom: 10px; <c:if test="${contador.index %2==0}" >background-color: #FFF</c:if>" >
-                                <a style="text-decoration:none;" href="<c:url value="${op.link}"/>">${op.nome}</a>
+                            <li style="padding-bottom: 10px; <c:if test="${contador.index %2==0}">background-color: #FFF</c:if>" >
+                                <a style="text-decoration:none;" href="<c:url value="${op.link}"/>">${op.descricao}</a>
                             </li>
                         </c:forEach>
                     </ul>
@@ -131,7 +134,7 @@
                             <a style="text-decoration:none;" href="<c:url value="/"/>">Home</a>
                         </li>
                         <li>
-                            <a style="text-decoration:none;" href="<c:url value="/funcionarios/"/>">Funcionário</a>
+                            <a style="text-decoration:none;" href="<c:url value="/funcionarios/"/>">Funcionários</a>
                         </li>
                         <li>
                             <a style="text-decoration:none;" href="<c:url value="/pedidos/"/>">Pedidos</a>
@@ -152,8 +155,11 @@
                 </fieldset>
             </div> 
             <div id="rodape">
-                <h2>DIV rodape</h2>
-                <p>Aqui vai o conte&uacute;do do rodap&eacute;</p> 
+                <span style='font: italic 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;'>
+                    Sistema de Confecção Tavares Dutra. <br/>
+                    Desenvolvido por Leandro Pinto, Vagner Praia da Silva e Camilla Dutra
+                </span>
+                  
             </div> 
             <!-- fim #tudo --> 
         </div> 
