@@ -26,6 +26,7 @@ import org.hibernate.criterion.Order;
 @Path("/funcionarios")
 @Resource
 public class FuncionarioController {
+
     private static final Logger LOG = Logger.getLogger(FuncionarioController.class);
     private final Result result;
     private final FuncionarioDao funcionarios;
@@ -46,56 +47,56 @@ public class FuncionarioController {
         opcoes.add(new Opcoes("/funcionarios/novo", "Incluir funcionário"));
         this.departamentos = departamentos;
         this.cargos = cargos;
-        
+
     }
-    
-    @Path(value={"/", "/index"})
-    public void index() throws DaoException{
+
+    @Path(value = {"/", "/index"})
+    public void index() throws DaoException {
         List<Funcionario> listaFuncionarios = funcionarios.buscaPaginada(0, REG_POR_PAGINA, Order.desc("matricula"));
         Long qtdDestaques = funcionarios.getQuantidadeDeFuncionarios();
         Long qtdPaginas = qtdDestaques / REG_POR_PAGINA;
         qtdPaginas += (qtdDestaques % REG_POR_PAGINA > 0) ? 1 : 0;
-        
+
         result.include("funcionarios", listaFuncionarios);
         result.include("opcoes", opcoes);
         result.include("qtde", qtdDestaques);
         result.include("qtdPaginas", qtdPaginas);
         result.include("paginaAtual", 1);
-        
+
     }
-    
 
     @Path({"/form", "/novo"})
-    public void form() throws DaoException{
+    public void form() throws DaoException {
         result.include("cargos", cargos.buscarTodos());
         result.include("departamentos", departamentos.buscarTodos());
-    }    
-    
-    public void salvar(Funcionario funcionario) throws DaoException{
-        funcionario.setDataContratacao(new Date(System.currentTimeMillis()));        
-        funcionarios.salvar(funcionario);        
+    }
+
+    public void salvar(Funcionario funcionario) throws DaoException {
+        funcionario.setDataContratacao(new Date(System.currentTimeMillis()));
+        funcionarios.salvar(funcionario);
         result.redirectTo(this).index();
     }
-    
+
     @Path("/editar/{funcionario.matricula}")
-    public void editar(Funcionario funcionario) throws DaoException{
+    public void editar(Funcionario funcionario) throws DaoException {
         Funcionario func = funcionarios.buscarPorId(funcionario.getMatricula());
-        if (func == null){
+        if (func == null) {
             LOG.info("funcionario não encontrado");
             return;
         }
-        
-        
+
+
         result.redirectTo(this).formEdicao(func);
     }
 
-    public void formEdicao(Funcionario f) {
-         result.include("funcionario", f);
-         result.include("opcoes", opcoes);
+    public void formEdicao(Funcionario f) throws DaoException {
+        result.include("funcionario", f);
+        result.include("opcoes", opcoes);
+        result.include("cargos", cargos.buscarTodos());
+        result.include("departamentos", departamentos.buscarTodos());
     }
-    
-    
-    public void atualizar(Funcionario funcionario){
+
+    public void atualizar(Funcionario funcionario) throws DaoException {
         try {
             funcionarios.atualizar(funcionario);
             result.redirectTo(this).index();
@@ -105,5 +106,4 @@ public class FuncionarioController {
             result.redirectTo(this).formEdicao(funcionario);
         }
     }
-    
 }
