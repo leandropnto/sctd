@@ -108,7 +108,7 @@
     <body> 
         <div id="tudo">
             <div id="topo"> 
-                <h1>SCTD - Sistema de Confecção Tavares Dutra </h1> 
+                <h1>SCTD - Sistema de Confecção Tavares e Dutra </h1> 
             </div> 
             <div id="principal"> 
                 <decorator:body />
@@ -156,7 +156,7 @@
             </div> 
             <div id="rodape">
                 <span style='font: italic 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;'>
-                    Sistema de Confecção Tavares Dutra. <br/>
+                    Sistema de Confecção Tavares e Dutra. <br/>
                     Desenvolvido por Leandro Pinto, Vagner Praia da Silva e Camilla Dutra
                 </span>
                   
