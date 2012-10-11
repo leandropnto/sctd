@@ -50,18 +50,28 @@ public class FuncionarioController {
 
     }
 
-    @Path(value = {"/", "/index"})
-    public void index() throws DaoException {
-        List<Funcionario> listaFuncionarios = funcionarios.buscaPaginada(0, REG_POR_PAGINA, Order.desc("matricula"));
-        Long qtdDestaques = funcionarios.getQuantidadeDeFuncionarios();
-        Long qtdPaginas = qtdDestaques / REG_POR_PAGINA;
-        qtdPaginas += (qtdDestaques % REG_POR_PAGINA > 0) ? 1 : 0;
+    @Path(value = {"/", "/index", "/{funcionario}"})
+    public void index(Funcionario funcionario) throws DaoException {
 
-        result.include("funcionarios", listaFuncionarios);
+        if (funcionario.getNome() != null || funcionario.getCargo() != null || funcionario.getDepartamento() != null) {
+            List<Funcionario> listaFuncionarios = funcionarios.buscarPorExemplo(funcionario);
+            result.include("funcionarios", listaFuncionarios);
+        } else {
+            List<Funcionario> listaFuncionarios = funcionarios.buscaPaginada(0, REG_POR_PAGINA, Order.desc("matricula"));
+            Long qtdDestaques = funcionarios.getQuantidadeDeFuncionarios();
+            Long qtdPaginas = qtdDestaques / REG_POR_PAGINA;
+            qtdPaginas += (qtdDestaques % REG_POR_PAGINA > 0) ? 1 : 0;
+            result.include("funcionarios", listaFuncionarios);
+            result.include("qtde", qtdDestaques);
+            result.include("qtdPaginas", qtdPaginas);
+
+        }
+
+
         result.include("opcoes", opcoes);
-        result.include("qtde", qtdDestaques);
-        result.include("qtdPaginas", qtdPaginas);
         result.include("paginaAtual", 1);
+        result.include("cargos", cargos.buscarTodos());
+        result.include("departamentos", departamentos.buscarTodos());
 
     }
 
@@ -74,7 +84,7 @@ public class FuncionarioController {
     public void salvar(Funcionario funcionario) throws DaoException {
         funcionario.setDataContratacao(new Date(System.currentTimeMillis()));
         funcionarios.salvar(funcionario);
-        result.redirectTo(this).index();
+        result.redirectTo(this).index(null);
     }
 
     @Path("/editar/{funcionario.matricula}")
@@ -99,7 +109,7 @@ public class FuncionarioController {
     public void atualizar(Funcionario funcionario) throws DaoException {
         try {
             funcionarios.atualizar(funcionario);
-            result.redirectTo(this).index();
+            result.redirectTo(this).index(null);
         } catch (DaoException ex) {
             LOG.error("Erro atualizando o funcionário. " + ex.getMessage());
             result.include("errors", "Erro atualizando o funcionário. " + ex.getMessage());
