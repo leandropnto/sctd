@@ -30,7 +30,7 @@ public class Funcionario implements Serializable {
 
     @Id
     @Column(name = "matricula")
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer matricula;
     @Column(name = "nome", nullable = false, length = 60)
     String nome;
@@ -40,19 +40,20 @@ public class Funcionario implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     @Column(name = "dtContratacao", nullable = false)
     Date dataContratacao;
-    @Column(name="salario")
+    @Column(name = "salario")
     BigDecimal salario;
-    
-    @ManyToOne(fetch= FetchType.EAGER)
-    @JoinColumn(name="idCargo")
-    @Fetch(FetchMode.JOIN)            
-    Cargo cargo;   
-    
-    @ManyToOne(fetch= FetchType.EAGER)
-    @JoinColumn(name="idDepartamento")
-    @Fetch(FetchMode.JOIN)    
-     
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idCargo")
+    @Fetch(FetchMode.JOIN)
+    Cargo cargo;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idDepartamento")
+    @Fetch(FetchMode.JOIN)
     Departamento departamento;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idStatus")
+    @Fetch(FetchMode.JOIN)
+    FuncionarioStatus status;
 
     public Funcionario() {
     }
@@ -113,8 +114,13 @@ public class Funcionario implements Serializable {
         this.departamento = departamento;
     }
 
-    
-    
+    public FuncionarioStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(FuncionarioStatus status) {
+        this.status = status;
+    }
 
     @Override
     public int hashCode() {
@@ -137,6 +143,4 @@ public class Funcionario implements Serializable {
         }
         return true;
     }
-    
-    
 }

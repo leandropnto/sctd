@@ -51,6 +51,10 @@ public class FuncionarioDao extends DaoGenericoImpl<Funcionario> {
         if (funcionario.getDepartamento().getId() >= 0) {
             criterio.add(Restrictions.eq("departamento", funcionario.getDepartamento()));
         }
+        
+        if (funcionario.getStatus().getId() >=0){
+            criterio.add(Restrictions.eq("status", funcionario.getStatus()));
+        }
 
         return criterio.list();
 

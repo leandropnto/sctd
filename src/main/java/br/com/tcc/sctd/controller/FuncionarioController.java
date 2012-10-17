@@ -10,6 +10,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.tcc.sctd.dao.CargoDao;
 import br.com.tcc.sctd.dao.DepartamentoDao;
 import br.com.tcc.sctd.dao.FuncionarioDao;
+import br.com.tcc.sctd.dao.FuncionarioStatusDao;
 import br.com.tcc.sctd.exceptions.DaoException;
 import br.com.tcc.sctd.model.Funcionario;
 import br.com.tcc.sctd.service.Opcoes;
@@ -34,19 +35,22 @@ public class FuncionarioController {
     private static final int REG_POR_PAGINA = 20;
     private final DepartamentoDao departamentos;
     private final CargoDao cargos;
+    private final FuncionarioStatusDao funcionariosStatus;
 
     /**
      *
      * @param result
      * @param funcionarios
      */
-    public FuncionarioController(Result result, FuncionarioDao funcionarios, DepartamentoDao departamentos, CargoDao cargos) {
+    public FuncionarioController(Result result, FuncionarioDao funcionarios, DepartamentoDao departamentos, 
+            CargoDao cargos, FuncionarioStatusDao funcionariosStatus) {
         this.result = result;
         this.funcionarios = funcionarios;
         opcoes = new ArrayList<Opcoes>();
         opcoes.add(new Opcoes("/funcionarios/novo", "Incluir funcionário"));
         this.departamentos = departamentos;
         this.cargos = cargos;
+        this.funcionariosStatus = funcionariosStatus;
 
     }
 
@@ -64,6 +68,7 @@ public class FuncionarioController {
             result.include("funcionarios", listaFuncionarios);
             result.include("qtde", qtdDestaques);
             result.include("qtdPaginas", qtdPaginas);
+            
 
         }
 
@@ -72,7 +77,7 @@ public class FuncionarioController {
         result.include("paginaAtual", 1);
         result.include("cargos", cargos.buscarTodos());
         result.include("departamentos", departamentos.buscarTodos());
-
+        result.include("listastatus", funcionariosStatus.buscarTodos());
     }
 
     @Path({"/form", "/novo"})

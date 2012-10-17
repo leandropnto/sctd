@@ -19,7 +19,7 @@
     }
 
     th {
-        font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+        font: bold 9px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
         color: #66A3D3; 
         border-right: 1px solid #C1DAD7;
         border-bottom: 1px solid #C1DAD7;
@@ -218,7 +218,7 @@
                         </c:forEach>
                     </select>                          
                 </label>
-                <label>Departamento<br/>                      
+                <label style="width: 200px; padding-bottom: 30px">Departamento<br/>                      
                     <select name="funcionario.departamento.id">
                         <option value="-1">Selecione o Departamento</option>
                         <c:forEach items="${departamentos}" var="departamento">
@@ -226,6 +226,14 @@
                         </c:forEach>
                     </select>
                 </label>
+                <label>Status<br/>                      
+                    <select name="funcionario.status.id">
+                        <option value="-1">Selecione o Status</option>
+                        <c:forEach items="${listastatus}" var="st">
+                            <option value="${st.id}">${st.descricao}</option>
+                        </c:forEach>
+                    </select>
+                </label>                
             </li>
             <li>
                 <button type="submit" style="color:#0029FF; width: 100px; font-family: arial; font-weight: bold">Buscar</button>
@@ -239,12 +247,13 @@
     <caption>Funcionários cadastrados</caption>
     <thead>
         <tr>
-            <th>Matrícula</th>
+            <th>Mat.</th>
             <th>Nome</th>
-            <th>Data Nascimento</th>
-            <th>Data Contratação</th>
+            <th>Nascimento</th>
+            <th>Contratação</th>
             <th>Cargo</th>
             <th>Departamento</th>
+            <th>Status</th>
 
         </tr>
     </thead>
@@ -257,6 +266,7 @@
                 <td><fmt:formatDate value="${funcionario.dataContratacao}" type="both" pattern="dd/MM/yyyy" /></td>
                 <td>${funcionario.cargo}</td>
                 <td>${funcionario.departamento}</td>
+                <td>${funcionario.status}</td>
             </tr>
         </c:forEach>
 
