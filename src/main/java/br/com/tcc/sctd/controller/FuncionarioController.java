@@ -9,6 +9,7 @@ import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.tcc.sctd.dao.CargoDao;
 import br.com.tcc.sctd.dao.DepartamentoDao;
+import br.com.tcc.sctd.dao.EspecialidadeDao;
 import br.com.tcc.sctd.dao.FuncionarioDao;
 import br.com.tcc.sctd.dao.FuncionarioStatusDao;
 import br.com.tcc.sctd.exceptions.DaoException;
@@ -37,6 +38,7 @@ public class FuncionarioController {
     private final DepartamentoDao departamentos;
     private final CargoDao cargos;
     private final FuncionarioStatusDao funcionariosStatus;
+    private final EspecialidadeDao especialidades;
 
     /**
      *
@@ -44,7 +46,7 @@ public class FuncionarioController {
      * @param funcionarios
      */
     public FuncionarioController(Result result, FuncionarioDao funcionarios, DepartamentoDao departamentos,
-            CargoDao cargos, FuncionarioStatusDao funcionariosStatus) {
+            CargoDao cargos, FuncionarioStatusDao funcionariosStatus, EspecialidadeDao especialidades) {
         this.result = result;
         this.funcionarios = funcionarios;
         opcoes = new ArrayList<Opcoes>();
@@ -52,6 +54,7 @@ public class FuncionarioController {
         this.departamentos = departamentos;
         this.cargos = cargos;
         this.funcionariosStatus = funcionariosStatus;
+        this.especialidades = especialidades;
 
     }
 
@@ -69,15 +72,12 @@ public class FuncionarioController {
 
         result.include("opcoes", opcoes);
         result.include("paginaAtual", 1);
-        result.include("cargos", cargos.buscarTodos());
-        result.include("departamentos", departamentos.buscarTodos());
-        result.include("listastatus", funcionariosStatus.buscarTodos());
+        includesComboBox();
     }
 
     @Path(value = {"/form", "/novo"}, priority = 1000)
     public void form() throws DaoException {
-        result.include("cargos", cargos.buscarTodos());
-        result.include("departamentos", departamentos.buscarTodos());
+        includesComboBox();
     }
 
     public void salvar(Funcionario funcionario) throws DaoException {
@@ -106,8 +106,7 @@ public class FuncionarioController {
     public void formEdicao(Funcionario f) throws DaoException {
         result.include("funcionario", f);
         result.include("opcoes", opcoes);
-        result.include("cargos", cargos.buscarTodos());
-        result.include("departamentos", departamentos.buscarTodos());
+        includesComboBox();
     }
 
     public void atualizar(Funcionario funcionario) throws DaoException {
@@ -124,7 +123,6 @@ public class FuncionarioController {
     public void filtrar(Funcionario funcionario) throws DaoException {
         if (funcionario.getNome() != null || funcionario.getCargo() != null || funcionario.getDepartamento() != null) {
             List<Funcionario> listaFuncionarios = funcionarios.buscarPorExemplo(funcionario);
-            result.include("funcionarios", listaFuncionarios);
             Long qtdDestaques = funcionarios.getQuantidadeDeFuncionarios();
             Long qtdPaginas = qtdDestaques / REG_POR_PAGINA;
             qtdPaginas += (qtdDestaques % REG_POR_PAGINA > 0) ? 1 : 0;
@@ -134,12 +132,16 @@ public class FuncionarioController {
 
             result.include("opcoes", opcoes);
             result.include("paginaAtual", 1);
-            result.include("cargos", cargos.buscarTodos());
-            result.include("departamentos", departamentos.buscarTodos());
-            result.include("listastatus", funcionariosStatus.buscarTodos());
+            includesComboBox();
         } else {
             result.redirectTo(this).index();
         }
     }
-    
+
+    private void includesComboBox() throws DaoException {
+        result.include("cargos", cargos.buscarTodos());
+        result.include("departamentos", departamentos.buscarTodos());
+        result.include("listastatus", funcionariosStatus.buscarTodos());
+        result.include("listaEspecialidades", especialidades.buscarTodos());
+    }
 }

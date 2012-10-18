@@ -58,7 +58,7 @@ public class Funcionario implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idEspecialidade")
     @Fetch(FetchMode.JOIN)
-    private Especialidade especilidade;
+    private Especialidade especialidade;
 
     public Funcionario() {
     }
@@ -135,12 +135,12 @@ public class Funcionario implements Serializable {
         this.cpf = cpf;
     }
 
-    public Especialidade getEspecilidade() {
-        return especilidade;
+    public Especialidade getEspecialidade() {
+        return especialidade;
     }
 
-    public void setEspecilidade(Especialidade especilidade) {
-        this.especilidade = especilidade;
+    public void setEspecialidade(Especialidade especialidade) {
+        this.especialidade = especialidade;
     }
 
     @Override

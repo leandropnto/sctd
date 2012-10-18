@@ -44,6 +44,7 @@
         background: #fff;
         padding: 6px 6px 6px 12px;
         color: #4f6b72;
+        font: 9px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
     }
 
 
@@ -199,18 +200,24 @@
     ${error.category} - ${error.message}<br />
 </c:forEach>
 
-    <form action="<c:url value="/funcionarios/filtrar" />" name="frmBuscaFuncionario" id="frmBuscarFuncionario">
+<form action="<c:url value="/funcionarios/filtrar" />" name="frmBuscaFuncionario" id="frmBuscarFuncionario">
     <fieldset id="fdFuncionarios" style="margin-top: 12px;">
         <ul>
             <li>
-                <label>Nome<br/>
+                <label style="width: 110px; padding-bottom: 30px">CPF<br/>
+                    <input type="text" name="funcionario.nome" value="${funcionario.cpf}" style="width: 100px"/>                      
+                </label>
+                <label style="width: 100px; padding-bottom: 30px">Matrícula<br/>
+                    <input type="text" name="funcionario.nome" value="${funcionario.matricula}" style="width: 60px"/>                      
+                </label>
+                <label style="width: 200px; padding-bottom: 30px">Nome<br/>
                     <input type="text" name="funcionario.nome" value="${funcionario.nome}" style="width: 270px"/>                      
                 </label>
 
             </li>
 
             <li>
-                <label style="width: 200px; padding-bottom: 30px">Cargo<br/>                        
+                <label style="width: 140px; padding-bottom: 30px">Cargo<br/>                        
                     <select name="funcionario.cargo.id">
                         <option value="-1">Selecione o Cargo</option>
                         <c:forEach items="${cargos}" var="cargo">
@@ -233,7 +240,17 @@
                             <option value="${st.id}">${st.descricao}</option>
                         </c:forEach>
                     </select>
-                </label>                
+                </label>                                  
+            </li>
+            <li  style="width: 200px; padding-bottom: 80px">
+                <label>Especialidade<br/>                      
+                    <select name="funcionario.especialidade.id">
+                        <option value="-1">Selecione a Especialidade</option>
+                        <c:forEach items="${listaEspecialidades}" var="especialidade">
+                            <option value="${especialidade.id}">${especialidade.descricao}</option>
+                        </c:forEach>
+                    </select>
+                </label>  
             </li>
             <li>
                 <button type="submit" style="color:#0029FF; width: 100px; font-family: arial; font-weight: bold">Buscar</button>
@@ -249,12 +266,12 @@
         <tr>
             <th>Mat.</th>
             <th>Nome</th>
-            <th>Nascimento</th>
-            <th>Contratação</th>
+            <th>Nasc.</th>
+            <th>Contr.</th>
             <th>Cargo</th>
             <th>Departamento</th>
             <th>Status</th>
-
+            <th>Especialidade</th>
         </tr>
     </thead>
     <tbody>
@@ -267,6 +284,7 @@
                 <td>${funcionario.cargo}</td>
                 <td>${funcionario.departamento}</td>
                 <td>${funcionario.status}</td>
+                <td>${funcionario.especialidade}</td>
             </tr>
         </c:forEach>
 

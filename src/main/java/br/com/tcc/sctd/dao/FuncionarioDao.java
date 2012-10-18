@@ -9,7 +9,6 @@ import br.com.tcc.sctd.model.Funcionario;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.MatchMode;
@@ -56,6 +55,9 @@ public class FuncionarioDao extends DaoGenericoImpl<Funcionario> {
             criterio.add(Restrictions.eq("status", funcionario.getStatus()));
         }
 
+        if (funcionario.getEspecialidade().getId() >=0){
+            criterio.add(Restrictions.eq("especialidade", funcionario.getEspecialidade()));
+        }
         return criterio.list();
 
     }
