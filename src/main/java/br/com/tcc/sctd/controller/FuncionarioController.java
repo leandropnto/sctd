@@ -13,6 +13,7 @@ import br.com.tcc.sctd.dao.FuncionarioDao;
 import br.com.tcc.sctd.dao.FuncionarioStatusDao;
 import br.com.tcc.sctd.exceptions.DaoException;
 import br.com.tcc.sctd.model.Funcionario;
+import br.com.tcc.sctd.model.FuncionarioStatus;
 import br.com.tcc.sctd.service.Opcoes;
 import java.util.ArrayList;
 import java.util.Date;
@@ -42,7 +43,7 @@ public class FuncionarioController {
      * @param result
      * @param funcionarios
      */
-    public FuncionarioController(Result result, FuncionarioDao funcionarios, DepartamentoDao departamentos, 
+    public FuncionarioController(Result result, FuncionarioDao funcionarios, DepartamentoDao departamentos,
             CargoDao cargos, FuncionarioStatusDao funcionariosStatus) {
         this.result = result;
         this.funcionarios = funcionarios;
@@ -54,24 +55,17 @@ public class FuncionarioController {
 
     }
 
-    @Path(value = {"/", "/index", "/{funcionario}"})
-    public void index(Funcionario funcionario) throws DaoException {
+    @Path(value = {"/", "/index"})
+    public void index() throws DaoException {
 
-        if (funcionario.getNome() != null || funcionario.getCargo() != null || funcionario.getDepartamento() != null) {
-            List<Funcionario> listaFuncionarios = funcionarios.buscarPorExemplo(funcionario);
-            result.include("funcionarios", listaFuncionarios);
-        } else {
-            List<Funcionario> listaFuncionarios = funcionarios.buscaPaginada(0, REG_POR_PAGINA, Order.desc("matricula"));
-            Long qtdDestaques = funcionarios.getQuantidadeDeFuncionarios();
-            Long qtdPaginas = qtdDestaques / REG_POR_PAGINA;
-            qtdPaginas += (qtdDestaques % REG_POR_PAGINA > 0) ? 1 : 0;
-            result.include("funcionarios", listaFuncionarios);
-            result.include("qtde", qtdDestaques);
-            result.include("qtdPaginas", qtdPaginas);
-            
 
-        }
-
+        List<Funcionario> listaFuncionarios = funcionarios.buscaPaginada(0, REG_POR_PAGINA, Order.desc("matricula"));
+        Long qtdDestaques = funcionarios.getQuantidadeDeFuncionarios();
+        Long qtdPaginas = qtdDestaques / REG_POR_PAGINA;
+        qtdPaginas += (qtdDestaques % REG_POR_PAGINA > 0) ? 1 : 0;
+        result.include("funcionarios", listaFuncionarios);
+        result.include("qtde", qtdDestaques);
+        result.include("qtdPaginas", qtdPaginas);
 
         result.include("opcoes", opcoes);
         result.include("paginaAtual", 1);
@@ -80,7 +74,7 @@ public class FuncionarioController {
         result.include("listastatus", funcionariosStatus.buscarTodos());
     }
 
-    @Path({"/form", "/novo"})
+    @Path(value = {"/form", "/novo"}, priority = 1000)
     public void form() throws DaoException {
         result.include("cargos", cargos.buscarTodos());
         result.include("departamentos", departamentos.buscarTodos());
@@ -88,8 +82,13 @@ public class FuncionarioController {
 
     public void salvar(Funcionario funcionario) throws DaoException {
         funcionario.setDataContratacao(new Date(System.currentTimeMillis()));
+        if (funcionario.getDepartamento().getId() == 1) {
+            funcionario.setStatus(new FuncionarioStatus(2));
+        } else {
+            funcionario.setStatus(new FuncionarioStatus(1));
+        }
         funcionarios.salvar(funcionario);
-        result.redirectTo(this).index(null);
+        result.redirectTo(this).index();
     }
 
     @Path("/editar/{funcionario.matricula}")
@@ -114,11 +113,33 @@ public class FuncionarioController {
     public void atualizar(Funcionario funcionario) throws DaoException {
         try {
             funcionarios.atualizar(funcionario);
-            result.redirectTo(this).index(null);
+            result.redirectTo(this).index();
         } catch (DaoException ex) {
             LOG.error("Erro atualizando o funcionário. " + ex.getMessage());
             result.include("errors", "Erro atualizando o funcionário. " + ex.getMessage());
             result.redirectTo(this).formEdicao(funcionario);
         }
     }
+
+    public void filtrar(Funcionario funcionario) throws DaoException {
+        if (funcionario.getNome() != null || funcionario.getCargo() != null || funcionario.getDepartamento() != null) {
+            List<Funcionario> listaFuncionarios = funcionarios.buscarPorExemplo(funcionario);
+            result.include("funcionarios", listaFuncionarios);
+            Long qtdDestaques = funcionarios.getQuantidadeDeFuncionarios();
+            Long qtdPaginas = qtdDestaques / REG_POR_PAGINA;
+            qtdPaginas += (qtdDestaques % REG_POR_PAGINA > 0) ? 1 : 0;
+            result.include("funcionarios", listaFuncionarios);
+            result.include("qtde", qtdDestaques);
+            result.include("qtdPaginas", qtdPaginas);
+
+            result.include("opcoes", opcoes);
+            result.include("paginaAtual", 1);
+            result.include("cargos", cargos.buscarTodos());
+            result.include("departamentos", departamentos.buscarTodos());
+            result.include("listastatus", funcionariosStatus.buscarTodos());
+        } else {
+            result.redirectTo(this).index();
+        }
+    }
+    
 }

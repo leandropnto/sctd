@@ -30,6 +30,12 @@ public class FuncionarioStatus implements Serializable {
     public FuncionarioStatus() {
     }
 
+    public FuncionarioStatus(Integer id) {
+        this.id = id;
+    }
+    
+    
+
     public FuncionarioStatus(Integer id, String descricao) {
         this.id = id;
         this.descricao = descricao;

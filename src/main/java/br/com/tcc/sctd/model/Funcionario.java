@@ -54,6 +54,11 @@ public class Funcionario implements Serializable {
     @JoinColumn(name = "idStatus")
     @Fetch(FetchMode.JOIN)
     FuncionarioStatus status;
+    private String cpf;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idEspecialidade")
+    @Fetch(FetchMode.JOIN)
+    private Especialidade especilidade;
 
     public Funcionario() {
     }
@@ -122,10 +127,26 @@ public class Funcionario implements Serializable {
         this.status = status;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public Especialidade getEspecilidade() {
+        return especilidade;
+    }
+
+    public void setEspecilidade(Especialidade especilidade) {
+        this.especilidade = especilidade;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + (this.matricula != null ? this.matricula.hashCode() : 0);
+        int hash = 3;
+        hash = 89 * hash + (this.matricula != null ? this.matricula.hashCode() : 0);
         return hash;
     }
 
@@ -142,5 +163,10 @@ public class Funcionario implements Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return nome.toUpperCase();
     }
 }
