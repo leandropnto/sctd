@@ -218,7 +218,7 @@
                         </c:forEach>
                     </select>                          
                 </label>
-                <label style="width: 200px; padding-bottom: 30px">Departamento<br/>                      
+                <label style="width: 200px; padding-bottom: 20px">Departamento<br/>                      
                     <select name="funcionario.departamento.id">
                         <option value="-1">Selecione o Departamento</option>
                         <c:forEach items="${departamentos}" var="departamento">
@@ -234,6 +234,17 @@
                         </c:forEach>
                     </select>
                 </label>                
+            </li>
+            <li>
+                <label style="width: 200px; padding-bottom: 30px">
+                    Especialidade<br/>
+                     <select name="funcionario.especialidade.id">
+                        <option value="-1">Selecione a Especialidade</option>
+                        <c:forEach items="${especialidades}" var="esp">
+                            <option value="${esp.id}">${esp.descricao}</option>
+                        </c:forEach>
+                    </select>  
+                </label>
             </li>
             <li>
                 <button type="submit" style="color:#0029FF; width: 100px; font-family: arial; font-weight: bold">Buscar</button>

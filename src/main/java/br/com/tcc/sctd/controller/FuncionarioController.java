@@ -7,8 +7,10 @@ package br.com.tcc.sctd.controller;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.Validator;
 import br.com.tcc.sctd.dao.CargoDao;
 import br.com.tcc.sctd.dao.DepartamentoDao;
+import br.com.tcc.sctd.dao.EspecialidadeDao;
 import br.com.tcc.sctd.dao.FuncionarioDao;
 import br.com.tcc.sctd.dao.FuncionarioStatusDao;
 import br.com.tcc.sctd.exceptions.DaoException;
@@ -37,6 +39,8 @@ public class FuncionarioController {
     private final DepartamentoDao departamentos;
     private final CargoDao cargos;
     private final FuncionarioStatusDao funcionariosStatus;
+    private final EspecialidadeDao especialidades;
+    private final Validator validator;
 
     /**
      *
@@ -44,7 +48,8 @@ public class FuncionarioController {
      * @param funcionarios
      */
     public FuncionarioController(Result result, FuncionarioDao funcionarios, DepartamentoDao departamentos,
-            CargoDao cargos, FuncionarioStatusDao funcionariosStatus) {
+            CargoDao cargos, FuncionarioStatusDao funcionariosStatus,
+            EspecialidadeDao especialidades, Validator validator) {
         this.result = result;
         this.funcionarios = funcionarios;
         opcoes = new ArrayList<Opcoes>();
@@ -52,6 +57,8 @@ public class FuncionarioController {
         this.departamentos = departamentos;
         this.cargos = cargos;
         this.funcionariosStatus = funcionariosStatus;
+        this.especialidades = especialidades;
+        this.validator = validator;
 
     }
 
@@ -72,12 +79,16 @@ public class FuncionarioController {
         result.include("cargos", cargos.buscarTodos());
         result.include("departamentos", departamentos.buscarTodos());
         result.include("listastatus", funcionariosStatus.buscarTodos());
+        result.include("especialidades", especialidades.buscarTodos());
+        
     }
 
     @Path(value = {"/form", "/novo"}, priority = 1000)
     public void form() throws DaoException {
         result.include("cargos", cargos.buscarTodos());
         result.include("departamentos", departamentos.buscarTodos());
+        result.include("especialidades", especialidades);
+     
     }
 
     public void salvar(Funcionario funcionario) throws DaoException {
@@ -104,14 +115,29 @@ public class FuncionarioController {
     }
 
     public void formEdicao(Funcionario f) throws DaoException {
+       
+        validator.onErrorUsePageOf(FuncionarioController.class).formEdicao(f);
         result.include("funcionario", f);
         result.include("opcoes", opcoes);
         result.include("cargos", cargos.buscarTodos());
         result.include("departamentos", departamentos.buscarTodos());
+        result.include("especialidades", especialidades.buscarTodos());
+         result.include("listastatus", funcionariosStatus.buscarTodos());
     }
 
     public void atualizar(Funcionario funcionario) throws DaoException {
         try {
+  /*          Funcionario f = funcionarios.buscarPorId(funcionario);
+            f.setNome(funcionario.getNome());
+            f.setCpf(funcionario.getCpf());
+            f.setCargo(funcionario.getCargo());
+            f.setDataNascimento(funcionario.getDataNascimento());
+            f.setDepartamento(funcionario.getDepartamento());
+            f.setEspecilidade(funcionario.getEspecialidade());
+            f.setMatricula(funcionario.getMatricula());
+            f.setSalario(funcionario.getSalario()); */
+            
+            
             funcionarios.atualizar(funcionario);
             result.redirectTo(this).index();
         } catch (DaoException ex) {
@@ -137,6 +163,7 @@ public class FuncionarioController {
             result.include("cargos", cargos.buscarTodos());
             result.include("departamentos", departamentos.buscarTodos());
             result.include("listastatus", funcionariosStatus.buscarTodos());
+            result.include("especialidades", especialidades.buscarTodos());
         } else {
             result.redirectTo(this).index();
         }
