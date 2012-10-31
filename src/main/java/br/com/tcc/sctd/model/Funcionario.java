@@ -139,7 +139,7 @@ public class Funcionario implements Serializable {
         return especialidade;
     }
 
-    public void setEspecilidade(Especialidade especialidade) {
+    public void setEspecialidade(Especialidade especialidade) {
         this.especialidade = especialidade;
     }
 

@@ -9,7 +9,6 @@ import br.com.tcc.sctd.model.Funcionario;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.MatchMode;
@@ -29,8 +28,16 @@ public class FuncionarioDao extends DaoGenericoImpl<Funcionario> {
         super(sessao);
     }
 
-    public Long getQuantidadeDeFuncionarios() {
+    public Long getQuantidadeDeFuncionarios(Funcionario f) {
         Criteria criterio = sessao.createCriteria(Funcionario.class);
+        if (f != null) {
+            Example example = Example.create(f)
+                    .enableLike(MatchMode.ANYWHERE)
+                    .ignoreCase()
+                    .excludeZeroes();
+            criterio.add(example);
+        }
+
         return (Long) criterio.setProjection(Projections.count("matricula")).uniqueResult();
     }
 
@@ -51,11 +58,14 @@ public class FuncionarioDao extends DaoGenericoImpl<Funcionario> {
         if (funcionario.getDepartamento().getId() >= 0) {
             criterio.add(Restrictions.eq("departamento", funcionario.getDepartamento()));
         }
-        
-        if (funcionario.getStatus().getId() >=0){
+
+        if (funcionario.getStatus().getId() >= 0) {
             criterio.add(Restrictions.eq("status", funcionario.getStatus()));
         }
 
+        if (funcionario.getEspecialidade().getId() >= 0) {
+            criterio.add(Restrictions.eq("especialidade", funcionario.getEspecialidade()));
+        }
         return criterio.list();
 
     }

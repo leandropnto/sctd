@@ -20,17 +20,29 @@ import javax.persistence.Table;
 @Table(catalog = "tcc", schema = "public", name = "Especialidade")
 public class Especialidade implements Serializable {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
-    
-    @Column(name="descricao", length=100, nullable=false)
-    String descricao;
-    
-    public Long getId() {
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(name = "descricao", nullable = false, length = 60)
+    private String descricao;
+
+    public Especialidade() {
+    }
+
+    public Especialidade(Integer id) {
+        this.id = id;
+    }
+
+    public Especialidade(Integer id, String descricao) {
+        this.id = id;
+        this.descricao = descricao;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -42,13 +54,10 @@ public class Especialidade implements Serializable {
         this.descricao = descricao;
     }
 
-    public Especialidade() {
-    }
-
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 17 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 41 * hash + (this.id != null ? this.id.hashCode() : 0);
         return hash;
     }
 

@@ -199,7 +199,7 @@
     ${error.category} - ${error.message}<br />
 </c:forEach>
 
-    <form action="<c:url value="/funcionarios/filtrar" />" name="frmBuscaFuncionario" id="frmBuscarFuncionario">
+<form action="<c:url value="/funcionarios/filtrar" />" name="frmBuscaFuncionario" id="frmBuscarFuncionario">
     <fieldset id="fdFuncionarios" style="margin-top: 12px;">
         <ul>
             <li>
@@ -235,6 +235,16 @@
                     </select>
                 </label>                
             </li>
+            <li  style="width: 200px; padding-bottom: 80px">
+                <label>Especialidade<br/>                      
+                    <select name="funcionario.especialidade.id">
+                        <option value="-1">Selecione a Especialidade</option>
+                        <c:forEach items="${listaEspecialidades}" var="especialidade">
+                            <option value="${especialidade.id}">${especialidade.descricao}</option>
+                        </c:forEach>
+                    </select>
+                </label>  
+            </li>
             <li>
                 <button type="submit" style="color:#0029FF; width: 100px; font-family: arial; font-weight: bold">Buscar</button>
             </li>
@@ -249,12 +259,12 @@
         <tr>
             <th>Mat.</th>
             <th>Nome</th>
-            <th>Nascimento</th>
-            <th>Contratação</th>
+            <!--            <th>Nascimento</th>
+                        <th>Contratação</th>-->
             <th>Cargo</th>
             <th>Departamento</th>
             <th>Status</th>
-
+            <th>Opções</th>
         </tr>
     </thead>
     <tbody>
@@ -262,11 +272,19 @@
             <tr>
                 <td style="text-align: right"><a href="<c:url value="/funcionarios/editar/${funcionario.matricula}"/>">${funcionario.matricula}</a></td>
                 <td>${funcionario.nome}</td>               
-                <td><fmt:formatDate value="${funcionario.dataNascimento}" type="both" pattern="dd/MM/yyyy" /></td>
-                <td><fmt:formatDate value="${funcionario.dataContratacao}" type="both" pattern="dd/MM/yyyy" /></td>
+<!--                <td><fmt:formatDate value="${funcionario.dataNascimento}" type="both" pattern="dd/MM/yyyy" /></td>
+                <td><fmt:formatDate value="${funcionario.dataContratacao}" type="both" pattern="dd/MM/yyyy" /></td>-->
                 <td>${funcionario.cargo}</td>
                 <td>${funcionario.departamento}</td>
                 <td>${funcionario.status}</td>
+                <td>
+                    <a href="<c:url value="/funcionarios/editar/${funcionario.matricula}"/>">
+                        <img src="<c:url value="/images/editar_peq.png"/>" alt="Editar" title="Alterar"/>
+                    </a>
+                    | <a href="<c:url value="/funcionarios/excluir/${funcionario.matricula}"/>">
+                        <img src="<c:url value="/images/excluir_peq.png"/>" alt="Excluir" title="Excluir"/>
+                    </a>
+                </td>
             </tr>
         </c:forEach>
 

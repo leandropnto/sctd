@@ -135,6 +135,17 @@
         <fieldset id="fdFuncionarios">
             <ul>
                 <li>
+                    <input type="hidden" value="${funcionario.matricula}" name="funcionario.matricula"/>
+                    <label>CPF<br/>
+                        <input type="text" name="funcionario.cpf" value="${funcionario.cpf}" style="width: 100px" readonly="true"
+                               style="background-color: #666"/>                      
+                    </label>                             
+                    <label>Data Contratação<br/>
+                        <input type="text" name="funcionario.dataContratacao" value="<fmt:formatDate value="${funcionario.dataContratacao}" type="both" pattern="dd/MM/yyyy" />" id="dataContratacao"
+                               style="width: 75px;"/>
+                    </label>   
+                </li>  
+                <li>
                     <label>Nome<br/>
                         <input type="text" name="funcionario.nome" value="${funcionario.nome}" style="width: 270px"/>                      
                     </label>
@@ -148,7 +159,7 @@
                     </label>                
                 </li>
                 <li>
-                    <label style="width: 200px; padding-bottom: 30px">Cargo<br/>                        
+                    <label style="width: 155px; padding-bottom: 30px">Cargo<br/>                        
                         <select name="funcionario.cargo.id">
                             <option value="-1">Selecione o Cargo</option>
                             <c:forEach items="${cargos}" var="cargo">
@@ -156,7 +167,7 @@
                             </c:forEach>
                         </select>                          
                     </label>
-                    <label  style="width: 200px; padding-bottom: 30px">Departamento<br/>                      
+                    <label style="width: 200px; padding-bottom: 30px">Departamento<br/>                      
                         <select name="funcionario.departamento.id">
                             <option value="-1">Selecione o Departamento</option>
                             <c:forEach items="${departamentos}" var="departamento">
@@ -166,26 +177,28 @@
                             </c:forEach>
                         </select>
                     </label>
-                    <label>Status<br/>                      
+                    <label style="width: 200px; padding-bottom: 30px">Status<br/>                      
                         <select name="funcionario.status.id">
-                            <option value="-1">Selecione o Status</option>
+                            <option value="-1">Selecione o Departamento</option>
                             <c:forEach items="${listastatus}" var="st">
-                                <option value="${st.id}"  <c:if test="${st.id == funcionario.status.id}">selected</c:if> >${st.descricao}</option>
+                                <option value="${st.id}" <c:if test="${st.id == funcionario.status.id}">selected</c:if> >
+                                    ${st.descricao}
+                                </option>
                             </c:forEach>
                         </select>
-                    </label>  
+                    </label>
                 </li>
                 <li>
-                    <label>Especialidade<br/>                      
+                    <label style="width: 200px; padding-bottom: 30px">Especialidade<br/>                      
                         <select name="funcionario.especialidade.id">
-                            <option value="-1">Selecione a especialidade</option>
-                            <c:forEach items="${especialidades}" var="especialidade">
+                            <option value="-1">Selecione a Especialidade</option>
+                            <c:forEach items="${listaEspecialidades}" var="especialidade">
                                 <option value="${especialidade.id}" <c:if test="${especialidade.id == funcionario.especialidade.id}">selected</c:if> >
                                     ${especialidade.descricao}
                                 </option>
                             </c:forEach>
                         </select>
-                    </label> 
+                    </label>                    
                 </li>
                 <li>
                     <button type="submit" style="color:#0029FF; width: 100px; font-family: arial; font-weight: bold">Cadastrar</button>
