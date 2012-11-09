@@ -19,4 +19,6 @@ public class DepartamentoDao extends DaoGenericoImpl<Departamento> {
         super(sessao);
     }
     
+    
+   
 }

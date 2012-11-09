@@ -7,11 +7,15 @@ package br.com.tcc.sctd.dao;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.tcc.sctd.exceptions.DaoException;
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Example;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 
 /**
  *
@@ -101,5 +105,26 @@ public class DaoGenericoImpl<L> implements DaoGenerico<L> {
         criterio.setMaxResults(maximoDeResultados);
         return criterio.list();
 
+    }
+    
+      public List<L> buscarPorExemplo(L objeto) {
+        Criteria criterio = sessao.createCriteria(classePersistente);
+        Example example = Example.create(objeto).enableLike(MatchMode.ANYWHERE).ignoreCase().excludeZeroes();
+        criterio.add(example);
+        
+        return criterio.list();
+        
+    }
+    
+    public Long qtdRegistros(L objeto) {
+        Criteria criterio = sessao.createCriteria(classePersistente);
+        Field f =  classePersistente.getDeclaredFields()[0];
+        if (objeto != null) {
+            Example example = Example.create(objeto).enableLike(MatchMode.ANYWHERE).ignoreCase().excludeZeroes();
+            criterio.add(example);
+            
+        }
+        
+        return (Long) criterio.setProjection(Projections.count(f.getName())).uniqueResult();
     }
 }

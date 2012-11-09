@@ -122,10 +122,11 @@
 
     }    
 </style>
-<c:forEach var="error" items="${errors}">
-    ${error.category} - ${error.message}<br />
-</c:forEach>
-
+<div class="<c:if test="${errors.size() > 0}">error</c:if>">
+    <c:forEach var="error" items="${errors}">
+        ${error.category} - ${error.message}<br />
+    </c:forEach>
+</div>
 <div id="stylized" class="myform">
     <form action="<c:url value="/funcionarios/salvar"/>" method="post" id="form" name="form">
         <h1>SCTD - Funcionários</h1>

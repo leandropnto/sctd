@@ -28,19 +28,8 @@ public class FuncionarioDao extends DaoGenericoImpl<Funcionario> {
         super(sessao);
     }
 
-    public Long getQuantidadeDeFuncionarios(Funcionario f) {
-        Criteria criterio = sessao.createCriteria(Funcionario.class);
-        if (f != null) {
-            Example example = Example.create(f)
-                    .enableLike(MatchMode.ANYWHERE)
-                    .ignoreCase()
-                    .excludeZeroes();
-            criterio.add(example);
-        }
 
-        return (Long) criterio.setProjection(Projections.count("matricula")).uniqueResult();
-    }
-
+    @Override
     public List<Funcionario> buscarPorExemplo(Funcionario funcionario) {
         Criteria criterio = sessao.createCriteria(Funcionario.class);
         Example example = Example.create(funcionario)

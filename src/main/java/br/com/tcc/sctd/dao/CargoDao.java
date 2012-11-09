@@ -14,7 +14,7 @@ import org.hibernate.Session;
  */
 @Component
 public class CargoDao extends DaoGenericoImpl<Cargo> {
-
+    
     public CargoDao(Session sessao) {
         super(sessao);
     }
