@@ -1,0 +1,741 @@
+/* icons */
+
+.ico {
+    display: inline-block;
+    text-indent: -9999px;
+}
+
+.tw-button {
+    background: url(../img/ico-tw.png) no-repeat;
+    height: 69px;
+    width: 71px;
+}
+
+.jornal-button {
+    background: url(../img/ico-jornal.png) no-repeat;
+    height: 78px;
+    width: 115px;
+}
+
+/* titulos */
+
+.tit1 {
+    color: #003b1d;
+    font-family: arial;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.tit2 {
+    color: #003b1d;
+    font-family: 'HelveticaNeueLTStd-Cn';
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.tit3 {
+    color: #000;
+    font-family: 'HelveticaNeueLTStd-Cn';
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.tit4 {
+    color: #00552a;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.tit5 {
+    color: #464646;
+    font-family: 'HelveticaNeueLTStd-Cn';
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.tit6 {
+    border-bottom: 1px solid #006029;
+    color: #000;
+    display: block;
+    font-family: 'HelveticaNeueLTStd-Cn';
+    font-size: 20px;
+    font-weight: bold;
+    padding-bottom: 3px;
+    width: 100%;
+}
+
+.tit7 {
+    color: #464646;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.tit8 {
+    color: #00552a;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* boxes */
+
+.box1 {
+    background: #7defb6;
+    border-top: 1px solid #006029;
+    padding: 15px 10px;
+}
+
+.box2 {
+    background: #e1eee7;
+    border-top: 1px solid #006029;
+    padding-bottom: 20px;
+}
+
+.box3 {
+    background: #c2f8de;
+    border-top: 1px solid #006029;
+    height: 110px;
+    padding: 15px 10px;
+    position: relative;
+}
+
+.box4 {
+    background: #e1eee7;
+    border-top: 1px solid #006029;
+    padding: 15px 10px;
+    position: relative;
+}
+
+/* lists */
+
+.ui-list {
+    display: inline-block;
+}
+
+.list-h li {
+    display: inline-block;
+}
+
+.list-v li {
+    display: block;
+    width: 100%;
+}
+
+.top-menu {
+    bottom: 20px;
+    color: #79f2b4;
+    display: inline-block;
+    position: absolute;
+    text-align: right;
+}
+
+.top-menu .ui-item {
+    margin-right: 3px;
+}
+
+.top-menu .ui-item.bracket {
+    margin-right: 0;
+}
+
+.top-menu a {
+    color: #79f2b4;
+    font-size: 18px;
+}
+
+.main-menu {
+    position: relative;
+}
+
+.main-menu .ui-item a {
+    cursor: pointer;
+    padding: 10px 0 7px;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+.main-menu .ui-item.last {
+    margin-right: 0;
+}
+
+.main-menu a {
+    color: #00552a;
+    display: block;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.dashed-list {
+    width: inherit;
+}
+
+.dashed-list h1 a {
+    color: #00552a;
+}
+
+.dashed-list li {
+    border-bottom: 1px dashed #006029;
+    padding-bottom: 0;
+    width: inherit;
+}
+
+/* slider */
+
+#slider {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.outer-slider-menu {
+    position: absolute;
+    right: 5px;
+    bottom: 19px;
+}
+
+#slider figure {
+    margin-bottom: 15px;
+}
+
+#slider h1 {
+    padding-left: 15px;
+}
+
+.slider-menu .ui-item {
+    background: url(../img/slider-menu-bg.gif) repeat-x;
+    border: 1px solid #98ad83;
+    font: bold 14px arial;
+    height: 20px;
+    padding-top: 5px;
+    text-align: center;
+    width: 30px;
+}
+
+.slider-menu .ui-item a {
+    color: #003b1d;
+}
+
+/* others */
+
+.pg-inicial {
+    display: block;
+    padding-top: 15px;
+}
+
+.pg-inicial a {
+    color: #003b1d;
+    font-family: 'HelveticaNeueLTStd-Cn';
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.footer-links {
+    margin-top: 40px;
+    overflow: hidden;
+}
+
+.footer-links * {
+    vertical-align: top;
+}
+
+.footer-links nav {
+    display: inline-block;
+    margin-right: 80px;
+}
+
+.footer-links nav.last {
+    margin-right: 0;
+}
+
+.footer-links nav .ui-item a {
+    color: #00552a;
+    font-family: arial;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.footer-links nav .ui-item {
+    margin-bottom: 10px;
+}
+
+.footer-links h4 {
+    margin-bottom: 20px;
+}
+
+.footer-links .last h4 {
+    margin-bottom: 5px;
+}
+
+.footer-address {
+    color: #252525;
+    float: right;
+    font: normal 12px arial;
+    margin-top: -40px;
+    width: 318px;
+}
+
+.subsedes figure {
+    text-align: center;
+}
+
+.noticias .text-date,
+.noticias .tit4,
+.noticias .description {
+    margin-bottom: 10px;
+}
+
+.read-more {
+    color: #00552a;
+}
+
+.text-date {
+    color: #000;
+    display: block;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.featured .box2 {
+    padding-bottom: 0;
+}
+
+.featured .box2 li {
+    padding: 15px 10px 20px;
+}
+
+.img-item figure {
+    display: inline-block;
+    margin-right: 10px;
+    margin-top: 10px;
+    vertical-align: top;
+}
+
+.img-item div {
+    display: inline-block;
+    vertical-align: top;
+    width: 65%;
+}
+
+.calendar {
+    background: url(../img/bg-calendar.png) no-repeat;
+    display: inline-block;
+    height: 66px;
+    margin-right: 20px;
+    position: relative;
+    width: 70px;
+}
+
+.calendar .month {
+    color: #fff;
+    display: block;
+    font-size: 10px;
+    margin-top: 11px;
+    text-align: center;
+}
+
+.calendar .day {
+    color: #00552a;
+    display: block;
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 3px;
+    text-align: center;
+}
+
+.link-calendar,
+.link-calendar:hover {
+    text-decoration: none;
+}
+
+.eventos p {
+    display: inline-block;
+    margin-top: -30px;
+    vertical-align: middle;
+    white-space: normal;
+}
+
+.eventos .tit4 {
+    display: inline-block;
+    max-width: 466px;
+    white-space: normal;
+}
+
+.eventos .ui-list {
+    width: 560px;
+}
+
+.twitter p {
+    text-align: center;
+}
+
+.twitter .tit2 {
+    display: inline-block;
+    margin-top: 35px;
+}
+
+.twitter .ico {
+    margin-right: 10px;
+    position: relative;
+    top: -25px;
+}
+
+.jornal-cremerj .box2 p {
+    display: inline-block;
+    margin-top: 10px;
+    position: relative;
+    top: 53px;
+}
+
+.jornal-cremerj .box2 div {
+    margin-top: -60px;
+}
+
+.jornal-cremerj a {
+    color: #00552a;
+    display: block;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.jornal-cremerj a.last {
+    margin-bottom: 0;
+}
+
+.jornal-cremerj .ico {
+    margin-right: 20px;
+}
+
+.esqueci-senha {
+    color: #00552a;
+    display: block;
+    font-size: 14px;
+    margin-top: 5px;
+    text-align: right;
+}
+
+#sidebar .encontre-medico input[type=text] {
+    width: 97%;
+}
+
+#sidebar .encontre-medico input[type=image] {
+    float: right;
+}
+
+.parents {
+    color: #00552a;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.parents a {
+    color: #00552a;
+}
+
+.children {
+    color: #464646;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.text-box {
+    color: #464646;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.text-box .tit5 {
+    margin-bottom: 15px;
+}
+
+.text-box .description {
+    margin-bottom: 20px;
+}
+
+#sidebar .noticias-recentes .box2 {
+    padding: 0;
+}
+
+#sidebar .noticias-recentes .box2 article {
+    padding: 15px 10px;
+}
+
+.menu-list {
+    margin-top: 20px;
+}
+
+.menu-list .list-v {
+    width: 100%;
+}
+
+.menu-list .tit6 {
+    margin-bottom: 15px;
+}
+
+.menu-list a {
+    color: #00552a;
+    font-family: arial;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.menu-list .ui-item {
+    display: inline-block;
+    margin-bottom: 15px;
+    width: 45%;
+}
+
+.mr {
+    margin-right: 140px;
+}
+
+.mr, 
+.mb {
+    vertical-align: top;
+}
+
+.mr section,
+.mb section {
+    height: 140px;
+    margin-bottom: 75px;
+}
+
+.mr .box2,
+.mr .box4,
+.mb .box2,
+.mb .box4 {
+    height: 110px;
+}
+
+.a {
+    position: absolute;
+    right: 49px;
+    top: 55px;	
+}
+
+.a2 {
+    color: #00552a;
+    font-size: 15px;
+    font-weight: bold;
+    position: absolute;
+    right: 15px;
+    top: 68px;	
+}
+
+.index-item {
+    display: none;
+}
+
+#sidebar .videos .box2 {
+    padding-left: 6px;
+}
+
+.area-medico .box1 {
+    height: 83px;
+}
+
+.encontre-medico .box1 {
+    height: 127px;
+}
+
+.webmail .box1 {
+    height: 64px;
+}
+
+.bonecos {
+    margin-left: 10px;
+}
+
+.obrigatorio {
+    color: #ff0000;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.alteracao-dados-cadastrais {
+    font-size: 12px;
+}
+
+.alteracao-dados-cadastrais fieldset {
+    margin-bottom: 40px;
+}
+
+.alteracao-dados-cadastrais .tit7 {
+    margin-bottom: 10px;
+}
+
+.alteracao-dados-cadastrais label {
+    display: block;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+.gecko .alteracao-dados-cadastrais label,
+.ie .alteracao-dados-cadastrais label {
+    margin-bottom: 10px;
+}
+
+.alteracao-dados-cadastrais span {
+    display: inline-block;
+    width: 118px;
+}
+
+.alteracao-dados-cadastrais input {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.alteracao-dados-cadastrais select {
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.explicacao {
+    font-style: italic;
+    position: absolute;
+    left: 110px;
+    top: 0;
+}
+
+.tipo-logradouro input,
+.numero input,
+.complemento input,
+.cep input {
+    width: 100px;
+}
+
+.tipo-logradouro .explicacao {
+    left: 225px;
+    top: 7px;
+}
+
+.logradouro input,
+.bairro input,
+.cidade input {
+    width: 340px;
+}
+
+.email-pessoal input {
+    width: 398px;
+}
+
+.telefone-fixo input,
+.telefone-celular input {
+    width: 90px;
+}
+
+.telefone-fixo .ddd,
+.telefone-celular .ddd {
+    margin-right: 7px;
+    width: 40px;
+}
+
+.home #sidebar section {
+    margin-bottom: 97px;
+}
+
+.home #sidebar .webmail {
+    margin-bottom: 18px;
+}
+
+.home #sidebar .videos,
+.home #sidebar .jornal-cremerj {
+    margin-bottom: 25px;
+}
+
+.bg-select {
+    background: url(../img/select.png) no-repeat;
+    height: 30px;
+    left: 239px;
+    position: absolute;
+    text-indent: -9999px;
+    top: 2px;
+    width: 26px;
+}
+
+.gecko .bg-select {
+    left: 243px;
+    top: 0;
+}
+
+.ie .bg-select {
+    top: 0;
+}
+
+.baixa-empresa input,
+.baixa-nome input,
+.registro-empresa input,
+.registro-nome input,
+.registro-logradouro input,
+.registro-bairro input,
+.registro-cidade input,
+.registr-contato input,
+.registro-cnae input {
+    width: 335px;
+}
+
+.baixa-data input,
+.registro-data input {
+    width: 30px;
+}
+
+.baixa-crm input,
+.baixa-cnpj input,
+.registro-crm input,
+.registro-cnpj input,
+.registro-grau input,
+.registro-numero-funcionarios input {
+    width: 190px;
+}
+
+
+.info, .success, .warning, .error, .validation {
+
+    border: 1px solid;
+
+    margin: 10px 0px;
+
+    padding:15px 10px 15px 50px;
+
+    background-repeat: no-repeat;
+
+    background-position: 10px center;
+
+}
+
+.info {
+
+    color: #00529B;
+
+    background-color: #BDE5F8;
+
+    background-image: url('<c:url value="/images/info.png"/>');
+
+}
+
+.success {
+
+    color: #4F8A10;
+
+    background-color: #DFF2BF;
+
+    background-image:url('<c:url value="/images/success.png" />');
+
+}
+
+.warning {
+
+    color: #9F6000;
+
+    background-color: #FEEFB3;
+
+    background-image: url('<c:url value="/images/warning.png"/>');
+
+}
+
+.error {
+
+    color: #D8000C;
+
+    background-color: #FFBABA;
+
+    background-image: url('<c:url value="/images/error.png"/>');
+
+}    

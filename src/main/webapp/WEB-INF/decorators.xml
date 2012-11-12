@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <decorators defaultdir="/decorators">
     
-    <decorator name="principal" page="principal.jsp">
+    <decorator name="principal" page="home.jsp">
         <pattern>/*</pattern>        
     </decorator>
-    <decorator name="upload" page="principal.jsp">
+    <decorator name="upload" page="home.jsp">
         <pattern>/upload*</pattern>        
     </decorator>
-    <decorator name="comunicacao" page="principal.jsp">
+    <decorator name="comunicacao" page="home.jsp">
         <pattern>/comunicacao*</pattern>        
     </decorator>    
 <!--    <decorator name="principal" page="principal.jsp">
@@ -15,5 +15,6 @@
     </decorator>-->
     <excludes>
         <pattern>/javascript*</pattern>
+        <pattern>/js*</pattern>
     </excludes>    
 </decorators>

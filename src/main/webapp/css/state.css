@@ -1,0 +1,30 @@
+.main-menu .is-active {
+	background: url(../img/main-menu-hover.gif) repeat-x;
+	border-bottom: 2px solid #006029;
+}
+
+.main-menu .ui-item:hover {
+  background: url(../img/main-menu-hover.gif) repeat-x;
+  border-bottom: 2px solid #006029;
+}
+
+.slider-menu .ui-item.is-active {
+	background: url(../img/active-slider-menu-bg.gif) repeat-x;
+	border: 1px solid #2c2c2c;
+}
+
+.slider-menu .ui-item.is-active a {
+	color: #fff;
+}
+
+.is-block {
+  display: block;
+}
+
+.is-hidden {
+  display: none;
+}
+
+.bg-select {
+  pointer-events: none;
+}
