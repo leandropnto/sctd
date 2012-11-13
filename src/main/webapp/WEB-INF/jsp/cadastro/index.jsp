@@ -13,6 +13,7 @@
                     <li><a href="<c:url value="/funcionarios/"/>">Funcionários</a></li>
                     <li><a href="<c:url value="/cargos/"/>">Cargos</a></li>
                     <li><a href="<c:url value="/departamentos/"/>">Departamentos</a></li>
+                    <li><a href="<c:url value="/cores/"/>">Cores</a></li>
                 </ul>
             </fieldset>
         </section>

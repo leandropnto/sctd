@@ -5,9 +5,7 @@
     </c:forEach>
 </div>
 <div id="stylized" class="myform">
-    <form action="<c:url value="/funcionarios/salvar"/>" method="post" id="form" name="form">
-        <h1>SCTD - Funcionários</h1>
-        <p>Formulário para cadastro de funcionários</p>
+    <form action="<c:url value="/funcionarios/salvar"/>" method="post" id="form" name="form">       
 
         <fieldset id="fdFuncionarios">
             <ul>

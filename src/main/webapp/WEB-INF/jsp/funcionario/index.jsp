@@ -3,6 +3,7 @@
     ${error.category} - ${error.message}<br />
 </c:forEach>
 
+<a href="<c:url value="/funcionarios/form"/>">Incluir</a>
 <form action="<c:url value="/funcionarios/filtrar" />" name="frmBuscaFuncionario" id="frmBuscarFuncionario">
     <fieldset id="fdFuncionarios" style="margin-top: 12px;">
         <ul>
@@ -55,7 +56,7 @@
                     </select>
                 </label>  
             </li>
-           
+
             <li>
                 <button type="submit" style="color:#0029FF; width: 100px; font-family: arial; font-weight: bold">Buscar</button>
             </li>
