@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
  * @author leandro
  */
 @Resource
-@Path("/cores")
+@Path("/cadastros/cores")
 public class CorController {
     private static final Logger LOG = LoggerFactory.getLogger(CorController.class);
     private final Result result;
@@ -33,13 +33,13 @@ public class CorController {
     
     @Path("/")
     public void index() throws DaoException{
-        LOG.debug("/cores/");
+        LOG.debug("/cadastros/cores/");
         
     }
     
     @Path("/filtrar")
     public void filtrar(Cor cor) throws DaoException{
-        LOG.debug("/cores/filtrar");        
+        LOG.debug("/cadastros/cores/filtrar");        
         Long qtdCores = cores.qtdRegistros(cor);
         Long qtdPaginas = qtdCores / REG_POR_PAGINA;
         qtdPaginas += (qtdCores % REG_POR_PAGINA > 0) ? 1 : 0;
@@ -54,7 +54,7 @@ public class CorController {
     }
     
     public void incluir(){
-        LOG.debug("/cores/incluir");
+        LOG.debug("/cadastros/cores/incluir");
         
     }
     
@@ -71,5 +71,33 @@ public class CorController {
         result.redirectTo(this).filtrar(cor);
     }
     
+    @Path("/excluir/{cor.id}")
+    public void excluir(Cor cor) throws DaoException{
+        if (cor != null && cor.getId() != null){
+            cores.excluir(cor);
+        }
+        
+        result.redirectTo(this).index();
+    }
+    
+    @Path("/editar/{cor.id}")
+    public void editar(Cor cor) throws DaoException{
+        
+        result.include("cor", cores.buscarPorId(cor.getId()));
+    }
+    
+    @Path("/atualizar")
+    public void atualizar(final Cor cor) throws DaoException{
+        validator.checking(new Validations(){{
+            that(cor != null && cor.getNome() != null && !cor.getNome().isEmpty(), "Cor", "cor.nome.nao.informado");
+        }});
+        
+        validator.onErrorRedirectTo(this).editar(cor);
+        
+        cores.atualizar(cor);
+        
+        result.include("msg", "Cor atualizada com sucesso.");
+        result.redirectTo(this).editar(cor);
+    }
     
 }

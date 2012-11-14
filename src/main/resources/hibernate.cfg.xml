@@ -20,14 +20,21 @@
         
 <!--        Mapeamento das classes-->
      
+        <mapping class="br.com.tcc.sctd.model.Botao" />
         <mapping class="br.com.tcc.sctd.model.Cargo" />
         <mapping class="br.com.tcc.sctd.model.Cor" />
         <mapping class="br.com.tcc.sctd.model.Departamento" />
-        <mapping class="br.com.tcc.sctd.model.Funcionario" />
-        <mapping class="br.com.tcc.sctd.model.Usuario" />
-        <mapping class="br.com.tcc.sctd.model.FuncionarioStatus" />
         <mapping class="br.com.tcc.sctd.model.Especialidade" />
-        
+        <mapping class="br.com.tcc.sctd.model.Funcionario" />        
+        <mapping class="br.com.tcc.sctd.model.FuncionarioStatus" />        
+        <mapping class="br.com.tcc.sctd.model.Linha" />        
+        <mapping class="br.com.tcc.sctd.model.Modelo" />
+        <mapping class="br.com.tcc.sctd.model.Produto" />
+        <mapping class="br.com.tcc.sctd.model.Tecido" />
+        <mapping class="br.com.tcc.sctd.model.Tipo" />
+        <mapping class="br.com.tcc.sctd.model.TipoEspecialidade" />
+        <mapping class="br.com.tcc.sctd.model.Usuario" />
+                
        
 
     </session-factory>

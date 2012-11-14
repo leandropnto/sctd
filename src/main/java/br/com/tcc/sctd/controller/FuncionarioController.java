@@ -25,7 +25,7 @@ import org.hibernate.criterion.Order;
  *
  * @author LeandroVBOX
  */
-@Path("/funcionarios")
+@Path("/cadastros/funcionarios")
 @Resource
 public class FuncionarioController {
 

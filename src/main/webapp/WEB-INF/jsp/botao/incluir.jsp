@@ -4,9 +4,9 @@
             <span class="parents">
                 <a href="<c:url value="/"/>">Página Inicial</a> > 
                 <a href="<c:url value="/cadastros/"/>">Cadastros</a> > 
-                <a href="<c:url value="/cadastros/cargos/"/>">Cargos</a> > 
+                <a href="<c:url value="/cadastros/botoes/"/>">Botões</a> > 
             </span>
-            <span class="children">Inclusão de cargos</span>
+            <span class="children">Inclusão de Botões</span>
         </section>
         <section class="text-box">
 
@@ -15,15 +15,14 @@
             </c:forEach>
 
             <div id="stylized" class="myform">
-                <form action="<c:url value="/cadastros/cargos/salvar"/>" method="post" id="form" name="form">
-                    <h1>SCTD - Cargos</h1>
-                    <p>Formulário para cadastro de cargos</p>
+                <form action="<c:url value="/cadastros/botoes/salvar"/>" method="post" id="form" name="form">
+                    
 
                     <fieldset id="fdFuncionarios">
                         <ul>
                             <li>
                                 <label>Descrição<br/>
-                                    <input type="text" name="cargo.descricao" value="${cargo.descricacao}" style="width: 200px; margin-bottom: 30px"/>                      
+                                    <input type="text" name="botao.nome" value="${botao.nome}" style="width: 200px; margin-bottom: 30px"/>                      
                                 </label>
 
                             </li>                

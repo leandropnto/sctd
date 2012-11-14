@@ -4,7 +4,7 @@
             <span class="parents">
                 <a href="<c:url value="/"/>">Página Inicial</a> > 
                 <a href="<c:url value="/cadastros/"/>">Cadastros</a> > 
-                <a href="<c:url value="/departamentos/"/>">Departamentos</a> > 
+                <a href="<c:url value="/cadastros/departamentos/"/>">Departamentos</a> > 
             </span>
             <span class="children">Pesquisa de Departamentos</span>
         </section>
@@ -14,8 +14,8 @@
                 ${error.category} - ${error.message}<br />
             </c:forEach>
                 
-            <a href="<c:url value="/departamentos/incluir"/>">Incluir</a> 
-            <form action="<c:url value="/departamentos/filtrar" />" name="frmBuscaDepartamento" id="frmBuscaDepartamento">
+            <a href="<c:url value="/cadastros/departamentos/incluir"/>">Incluir</a> 
+            <form action="<c:url value="/cadastros/departamentos/filtrar" />" name="frmBuscaDepartamento" id="frmBuscaDepartamento">
                 <fieldset id="fdDepartamentos" style="margin-top: 12px;">
                     <ul>
                         <li>
@@ -46,13 +46,13 @@
                 <tbody>
                     <c:forEach items="${departamentos}" var="departamento" varStatus="contador">
                         <tr>
-                            <td style="text-align: right; width: 15px;"><a href="<c:url value="/departamentos/editar/${departamento.id}"/>">${departamento.id}</a></td>
+                            <td style="text-align: right; width: 15px;"><a href="<c:url value="/cadastros/departamentos/editar/${departamento.id}"/>">${departamento.id}</a></td>
                             <td style="text-align: left; width: 300px;">${departamento.descricao}</td>
                             <td style="text-align: right; width: 40px;">
-                                <a href="<c:url value="/departamentos/editar/${departamento.id}"/>">
+                                <a href="<c:url value="/cadastros/departamentos/editar/${departamento.id}"/>">
                                     <img src="<c:url value="/images/editar_peq.png"/>" alt="Editar" title="Alterar"/>
                                 </a>
-                                | <a href="<c:url value="/departamentos/excluir/${departamento.id}"/>">
+                                | <a href="<c:url value="/cadastros/departamentos/excluir/${departamento.id}"/>">
                                     <img src="<c:url value="/images/excluir_peq.png"/>" alt="Excluir" title="Excluir"/>
                                 </a>
                             </td>
@@ -62,10 +62,10 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="2">Paginação: <a href="<c:url value="/departamentos/pagina/1" />"><<</a> 
+                        <td colspan="2">Paginação: <a href="<c:url value="/cadastros/departamentos/pagina/1" />"><<</a> 
                             <c:choose>
                                 <c:when test="${paginaAtual>1}">
-                                    <a href="<c:url value="/departamentos/pagina/${paginaAtual-1}" />"><</a>                         
+                                    <a href="<c:url value="/cadastros/departamentos/pagina/${paginaAtual-1}" />"><</a>                         
                                 </c:when>
                                 <c:otherwise>
                                     <
@@ -74,13 +74,13 @@
                             ${paginaAtual}
                             <c:choose>
                                 <c:when test="${paginaAtual < qtdPaginas}">
-                                    <a href="<c:url value="/departamentos/pagina/${paginaAtual+1}" />">></a> 
+                                    <a href="<c:url value="/cadastros/departamentos/pagina/${paginaAtual+1}" />">></a> 
                                 </c:when>
                                 <c:otherwise>
                                     >
                                 </c:otherwise>
                             </c:choose>
-                            <a href="<c:url value="/departamentos/pagina/${qtdPaginas}" />">>></a>    
+                            <a href="<c:url value="/cadastros/departamentos/pagina/${qtdPaginas}" />">>></a>    
 
 
                         </td>

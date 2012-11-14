@@ -4,7 +4,7 @@
             <span class="parents">
                 <a href="<c:url value="/"/>">Página Inicial</a> > 
                 <a href="<c:url value="/cadastros/"/>">Cadastros</a> > 
-                <a href="<c:url value="/cargos/"/>">Cargos</a> >                
+                <a href="<c:url value="/cadastros/cargos/"/>">Cargos</a> >                
             </span>
             <span class="children">Edição de Cargos</span>
         </section>
@@ -16,7 +16,7 @@
             </c:forEach>
             <br/>
             <div id="stylized" class="myform">    
-                <form action="<c:url value="/cargos/atualizar"/>" method="post">                    
+                <form action="<c:url value="/cadastros/cargos/atualizar"/>" method="post">                    
                     <input type="hidden" name="cargo.id" value="${cargo.id}" />
                     <fieldset id="fdFuncionarios">
                         <ul>
@@ -41,5 +41,3 @@
         </section>
     </section>
 </section>
-
-

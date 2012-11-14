@@ -4,9 +4,9 @@
             <span class="parents">
                 <a href="<c:url value="/"/>">Página Inicial</a> > 
                 <a href="<c:url value="/cadastros/"/>">Cadastros</a> > 
-                <a href="<c:url value="/cadastros/cores/"/>">Cores</a> > 
+                <a href="<c:url value="/cadastros/botoes/"/>">Botões</a> > 
             </span>
-            <span class="children">Pesquisa de Cores</span>
+            <span class="children">Pesquisa de Botões</span>
         </section>
         <section class="text-box">
             <c:forEach var="error" items="${errors}">
@@ -14,13 +14,13 @@
             </c:forEach>
 
             <br/>
-            <a href="<c:url value="/cadastros/cores/incluir"/>">Incluir</a>
-            <form action="<c:url value="/cadastros/cores/filtrar" />" name="frmBuscaDepartamento" id="frmBuscaDepartamento">
+            <a href="<c:url value="/cadastros/botoes/incluir"/>">Incluir</a>
+            <form action="<c:url value="/cadastros/botoes/filtrar" />" name="frmBuscaDepartamento" id="frmBuscaDepartamento">
                 <fieldset id="fdDepartamentos" style="margin-top: 12px;">
                     <ul>
                         <li>
-                            <label style="width: 110px; padding-bottom: 30px">Cor<br/>
-                                <input type="text" name="cor.nome" value="${cor.nome}" style="width: 100px"/>                      
+                            <label style="width: 110px; padding-bottom: 30px">Botão<br/>
+                                <input type="text" name="botao.nome" value="${botao.nome}" style="width: 100px"/>                      
                             </label>                
 
                         </li>
@@ -35,9 +35,9 @@
             </form>
 
 
-            <c:if test="${cores.size() >0}">
+            <c:if test="${botoes.size() >0}">
                 <table id="mytable">
-                    <caption>Cores cadastradas</caption>
+                    <caption>Botoões cadastradas</caption>
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -46,15 +46,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${cores}" var="cor" varStatus="contador">
+                        <c:forEach items="${botoes}" var="botao" varStatus="contador">
                             <tr>
-                                <td style="text-align: right; width: 15px;"><a href="<c:url value="/cadastros/cores/editar/${cargo.id}"/>">${cargo.id}</a></td>
-                                <td style="text-align: left; width: 300px;">${cor.nome}</td>
+                                <td style="text-align: right; width: 15px;"><a href="<c:url value="/cadastros/botoes/editar/${botao.id}"/>">${botao.id}</a></td>
+                                <td style="text-align: left; width: 300px;">${botao.nome}</td>
                                 <td style="text-align: right; width: 40px;">
-                                    <a href="<c:url value="/cadastros/cores/editar/${cor.id}"/>">
+                                    <a href="<c:url value="/cadastros/botoes/editar/${botao.id}"/>">
                                         <img src="<c:url value="/images/editar_peq.png"/>" alt="Editar" title="Alterar"/>
                                     </a>
-                                    | <a href="<c:url value="/cadastros/cores/excluir/${cor.id}"/>">
+                                    | <a href="<c:url value="/cadastros/botoes/excluir/${botao.id}"/>">
                                         <img src="<c:url value="/images/excluir_peq.png"/>" alt="Excluir" title="Excluir"/>
                                     </a>
                                 </td>
@@ -64,10 +64,10 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="2">Paginação: <a href="<c:url value="/cadastros/cores/pagina/1" />"><<</a> 
+                            <td colspan="2">Paginação: <a href="<c:url value="/cadastros/botoes/pagina/1" />"><<</a> 
                                 <c:choose>
                                     <c:when test="${paginaAtual>1}">
-                                        <a href="<c:url value="/cadastros/cores/pagina/${paginaAtual-1}" />"><</a>                         
+                                        <a href="<c:url value="/cadastros/botoes/pagina/${paginaAtual-1}" />"><</a>                         
                                     </c:when>
                                     <c:otherwise>
                                         <
@@ -76,13 +76,13 @@
                                 ${paginaAtual}
                                 <c:choose>
                                     <c:when test="${paginaAtual < qtdPaginas}">
-                                        <a href="<c:url value="/cadastros/cores/pagina/${paginaAtual+1}" />">></a> 
+                                        <a href="<c:url value="/cadastros/botoes/pagina/${paginaAtual+1}" />">></a> 
                                     </c:when>
                                     <c:otherwise>
                                         >
                                     </c:otherwise>
                                 </c:choose>
-                                <a href="<c:url value="/cadastros/cores/pagina/${qtdPaginas}" />">>></a>    
+                                <a href="<c:url value="/cadastros/botoes/pagina/${qtdPaginas}" />">>></a>    
 
 
                             </td>

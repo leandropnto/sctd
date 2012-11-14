@@ -27,7 +27,7 @@
 }
 
 .tit2 {
-    color: #003b1d;
+    color: #FFF;
     font-family: 'HelveticaNeueLTStd-Cn';
     font-size: 18px;
     font-weight: bold;
@@ -221,7 +221,7 @@
 }
 
 .pg-inicial a {
-    color: #003b1d;
+    color: #FFFFFF;
     font-family: 'HelveticaNeueLTStd-Cn';
     font-size: 20px;
     font-weight: bold;
@@ -246,7 +246,7 @@
 }
 
 .footer-links nav .ui-item a {
-    color: #00552a;
+    color: #FFF;
     font-family: arial;
     font-size: 12px;
     font-weight: normal;
@@ -265,7 +265,7 @@
 }
 
 .footer-address {
-    color: #252525;
+    color: #FFF;
     float: right;
     font: normal 12px arial;
     margin-top: -40px;

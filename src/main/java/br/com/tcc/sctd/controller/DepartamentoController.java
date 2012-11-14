@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
  * @author leandro
  */
 @Resource
-@Path("/departamentos")
+@Path("/cadastros/departamentos")
 public class DepartamentoController {
 
     private static final Logger LOG = LoggerFactory.getLogger(DepartamentoController.class);

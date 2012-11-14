@@ -4,7 +4,7 @@
             <span class="parents">
                 <a href="<c:url value="/"/>">Página Inicial</a> > 
                 <a href="<c:url value="/cadastros/"/>">Cadastros</a> > 
-                <a href="<c:url value="/departamentos/"/>">Departamentos</a> > 
+                <a href="<c:url value="/cadastros/departamentos/"/>">Departamentos</a> > 
             </span>
             <span class="children">Pesquisa de Departamentos</span>
         </section>
@@ -14,7 +14,7 @@
             </c:forEach>
 
             <a href="<c:url value="/departamentos/incluir"/>">Incluir</a> 
-            <form action="<c:url value="/departamentos/filtrar" />" name="frmBuscaDepartamento" id="frmBuscaDepartamento">
+            <form action="<c:url value="/cadastros/departamentos/filtrar" />" name="frmBuscaDepartamento" id="frmBuscaDepartamento">
                 <fieldset id="fdDepartamentos" style="margin-top: 12px;">
                     <ul>
                         <li>

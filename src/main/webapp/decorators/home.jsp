@@ -21,12 +21,12 @@
                 <div class="row main-header">
                     <h1 class="logo">
                         <a href="<c:url value="/"/>">
-                            <img src="<c:url value="/img/logo.gif" />" alt="SCTD -  Sistema de Confecção Tavares Dutra">
+                            <img src="<c:url value="/img/logo.png" />" alt="SCTD -  Sistema de Confecção Tavares Dutra">
                         </a>
                     </h1>
                     <nav class="ui-list">
                         <ul class="list-h top-menu">
-                            <li class="ui-item first"><a href="">Usuário</a></li>
+                            <li class="ui-item first"><a href="">Usuários</a></li>
                             <li class="ui-item bracket">|</li>
                             <li class="ui-item"><a href="">Configurações</a></li>
                             <li class="ui-item bracket">|</li>
@@ -92,8 +92,8 @@
                         </nav>
                     </aside>
                         <address class="footer-address">
-                            <p>CREMERJ - Praia de Botafogo (228), loja 119b  - Botafogo</p>
-                            <p>Rio de Janeiro/RJ - CEP: 22250-145 | Tel: 3184-7050</p>
+                            <p>Desenvolvido por:</p>
+                            <p>Leandro Pinto, Vagner Praia e Camilla Dutra</p>
                         </address>  
                 </div>
             </footer> 

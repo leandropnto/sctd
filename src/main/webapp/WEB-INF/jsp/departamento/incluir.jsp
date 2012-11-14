@@ -4,7 +4,7 @@
             <span class="parents">
                 <a href="<c:url value="/"/>">Página Inicial</a> > 
                 <a href="<c:url value="/cadastros/"/>">Cadastros</a> > 
-                <a href="<c:url value="/departamentos/"/>">Departamentos</a> > 
+                <a href="<c:url value="/cadastros/departamentos/"/>">Departamentos</a> > 
             </span>
             <span class="children">Incluir Departamento</span>
         </section>
@@ -15,7 +15,7 @@
 
 
             <div id="stylized" class="myform">
-                <form action="<c:url value="/departamentos/salvar"/>" method="post" id="form" name="form">
+                <form action="<c:url value="/cadastros/departamentos/salvar"/>" method="post" id="form" name="form">
                     <br/>
                     <fieldset id="fdFuncionarios">
                         <ul>

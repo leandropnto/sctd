@@ -5,15 +5,19 @@
                 <a href="<c:url value="/"/>">Página Inicial</a> > 
                 <a href="<c:url value="/cadastros/"/>">Cadastros</a> > 
             </span>
-            <span class="children">Pesquisa de Funcionários</span>
+            <span class="children">Opções de Cadastro</span>
         </section>
         <section class="text-box">
             <fieldset>
                 <ul>
-                    <li><a href="<c:url value="/funcionarios/"/>">Funcionários</a></li>
-                    <li><a href="<c:url value="/cargos/"/>">Cargos</a></li>
-                    <li><a href="<c:url value="/departamentos/"/>">Departamentos</a></li>
-                    <li><a href="<c:url value="/cores/"/>">Cores</a></li>
+                    <li><a href="<c:url value="/cadastros/botoes/"/>">Botões</a></li>
+                    <li><a href="<c:url value="/cadastros/cargos/"/>">Cargos</a></li>
+                    <li><a href="<c:url value="/cadastros/cores/"/>">Cores</a></li>
+                    <li><a href="<c:url value="/cadastros/departamentos/"/>">Departamentos</a></li>
+                    <li><a href="<c:url value="/cadastros/funcionarios/"/>">Funcionários</a></li>
+                    <li><a href="<c:url value="/cadastros/linhas/"/>">Linhas</a></li>
+                    <li><a href="<c:url value="/cadastros/tecidos/"/>">Tecidos</a></li>
+                    <li><a href="<c:url value="/cadastros/tipoespecialidade/"/>">Tipos de Especialidades</a></li>
                 </ul>
             </fieldset>
         </section>
