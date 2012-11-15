@@ -9,14 +9,24 @@
             <span class="children">Pesquisa de Cores</span>
         </section>
         <section class="text-box">
-            <c:forEach var="error" items="${errors}">
-                ${error.category} - ${error.message}<br />
-            </c:forEach>
+            <c:if test="${errors.size()>0}">
+                <div class="error">
+                    <c:forEach var="error" items="${errors}">
+                        ${error.category} - ${error.message}<br />
+                    </c:forEach>
+                </div>
+            </c:if>
+            <c:if test="${msg != null}">
+                <div class="success">
+                    ${msg}
+                </div>
+            </c:if>
 
             <br/>
             <a href="<c:url value="/cadastros/cores/incluir"/>">Incluir</a>
-            <form action="<c:url value="/cadastros/cores/filtrar" />" name="frmBuscaDepartamento" id="frmBuscaDepartamento">
-                <fieldset id="fdDepartamentos" style="margin-top: 12px;">
+            <form action="<c:url value="/cadastros/cores/filtrar" />" name="frmBuscaDepartamento" id="frmBuscaDepartamento" class="validate">
+                <fieldset class="formato1">
+                    <legend>Pesquisa de Cores</legend>
                     <ul>
                         <li>
                             <label style="width: 110px; padding-bottom: 30px">Cor<br/>
@@ -27,7 +37,7 @@
 
 
                         <li>
-                            <button type="submit" style="color:#0029FF; width: 100px; font-family: arial; font-weight: bold">Buscar</button>
+                            <button type="submit" class="button">Buscar</button>
                         </li>
                         <div class="spacer"></div>
                     </ul>
@@ -48,7 +58,7 @@
                     <tbody>
                         <c:forEach items="${cores}" var="cor" varStatus="contador">
                             <tr>
-                                <td style="text-align: right; width: 15px;"><a href="<c:url value="/cadastros/cores/editar/${cargo.id}"/>">${cargo.id}</a></td>
+                                <td style="text-align: right; width: 15px;"><a href="<c:url value="/cadastros/cores/editar/${cor.id}"/>">${cor.id}</a></td>
                                 <td style="text-align: left; width: 300px;">${cor.nome}</td>
                                 <td style="text-align: right; width: 40px;">
                                     <a href="<c:url value="/cadastros/cores/editar/${cor.id}"/>">
@@ -64,7 +74,7 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="2">Paginação: <a href="<c:url value="/cadastros/cores/pagina/1" />"><<</a> 
+                            <td colspan="3">Paginação: <a href="<c:url value="/cadastros/cores/pagina/1" />"><<</a> 
                                 <c:choose>
                                     <c:when test="${paginaAtual>1}">
                                         <a href="<c:url value="/cadastros/cores/pagina/${paginaAtual-1}" />"><</a>                         
@@ -89,15 +99,10 @@
                         </tr>
                     </tfoot>
                 </table>
-                <br/>
-
-                
+                <br/>                
+                <span class="destaque">Total de ${qtde} registros divididos em ${qtdPaginas} página(s)</span>
             </c:if>
 
-
-            <br/>
-
-            <span class="destaque">Total de ${qtde} registros divididos em ${qtdPaginas} página(s)</span>
 
         </section>
     </section>

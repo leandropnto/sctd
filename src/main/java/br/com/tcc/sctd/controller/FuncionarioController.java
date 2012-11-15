@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.apache.log4j.Logger;
-import org.hibernate.criterion.Order;
 
 /**
  *
@@ -63,22 +62,13 @@ public class FuncionarioController {
 
     @Path(value = {"/", "/index"})
     public void index() throws DaoException {
-        List<Funcionario> listaFuncionarios = funcionarios.buscaPaginada(0, REG_POR_PAGINA, Order.desc("matricula"));
-        Long qtdFuncionarios = funcionarios.qtdRegistros(null);
-        Long qtdPaginas = qtdFuncionarios / REG_POR_PAGINA;
-        qtdPaginas += (qtdFuncionarios % REG_POR_PAGINA > 0) ? 1 : 0;
-        result.include("funcionarios", listaFuncionarios);
-        result.include("qtde", qtdFuncionarios);
-        result.include("qtdPaginas", qtdPaginas);
-
-        result.include("opcoes", opcoes);
-        result.include("paginaAtual", 1);
-        includesComboBox();
+        LOG.debug("/funcionarios/index");
+        preencheCombos();
     }
 
-    @Path(value = {"/form", "/novo"}, priority = 1000)
-    public void form() throws DaoException {
-        includesComboBox();
+    @Path("/incluir")
+    public void incluir() throws DaoException {
+        preencheCombos();
     }
 
     public void salvar(final Funcionario funcionario) throws DaoException {
@@ -86,30 +76,30 @@ public class FuncionarioController {
         validator.checking(new Validations() {
 
             {
-                that(funcionario != null && funcionario.getCpf() !=null &&
-                        !funcionario.getCpf().isEmpty(), "CPF", "funcionario.cpf.nao.informado");
-                that(funcionario != null && funcionario.getDataNascimento() != null, "Data Nascimento", 
+                that(funcionario != null && funcionario.getCpf() != null
+                        && !funcionario.getCpf().isEmpty(), "CPF", "funcionario.cpf.nao.informado");
+                that(funcionario != null && funcionario.getDataNascimento() != null, "Data Nascimento",
                         "funcionario.data.nascimento.nao.informado");
-                that(funcionario != null && funcionario.getCargo() != null && funcionario.getCargo().getId() >=0, "Cargo", 
+                that(funcionario != null && funcionario.getCargo() != null && funcionario.getCargo().getId() >= 0, "Cargo",
                         "funcionario.cargo.nao.informado");
-                that(funcionario != null && funcionario.getDepartamento() != null && funcionario.getDepartamento().getId() >=0, "Departamento",
+                that(funcionario != null && funcionario.getDepartamento() != null && funcionario.getDepartamento().getId() >= 0, "Departamento",
                         "funcionario.departamento.nao.informado");
-                that(funcionario != null && funcionario.getEspecialidade() != null && funcionario.getEspecialidade().getId()>=0, "Especialidade",
+                that(funcionario != null && funcionario.getEspecialidade() != null && funcionario.getEspecialidade().getId() >= 0, "Especialidade",
                         "funcionario.especialidade.nao.informado");
                 that(funcionario != null && funcionario.getSalario() != null, "Salário",
-                        "funcionario.salario.nao.informado");              
-                        
+                        "funcionario.salario.nao.informado");
+
                 that(funcionario != null && funcionario.getSalario() != null && funcionario.getSalario().compareTo(BigDecimal.ZERO) > 0, "Salário",
                         "funcionario.salario.menor.zero");
             }
         });
 
-        if (validator.hasErrors()){
+        if (validator.hasErrors()) {
             LOG.debug("Erros de validação encontrados.");
         }
-        
-        validator.onErrorRedirectTo(this).form();
-        
+
+        validator.onErrorRedirectTo(this).incluir();
+
         funcionario.setDataContratacao(new Date(System.currentTimeMillis()));
         if (funcionario.getDepartamento().getId() == 1) {
             funcionario.setStatus(new FuncionarioStatus(2));
@@ -125,52 +115,48 @@ public class FuncionarioController {
         Funcionario func = funcionarios.buscarPorId(funcionario.getMatricula());
         if (func == null) {
             LOG.info("funcionario não encontrado");
-            return;
-        }
-
-
-        result.redirectTo(this).formEdicao(func);
+            result.include("msg", "Funcionário não encontrado.");
+            result.notFound();
+           
+        }   
+        
+        result.include("funcionario", func);
+        preencheCombos();
     }
 
-    public void formEdicao(Funcionario f) throws DaoException {
-
-        validator.onErrorUsePageOf(FuncionarioController.class).formEdicao(f);
-        result.include("funcionario", f);
-        result.include("opcoes", opcoes);
-        includesComboBox();
-    }
 
     public void atualizar(Funcionario funcionario) throws DaoException {
         try {
 
             funcionarios.atualizar(funcionario);
-            result.redirectTo(this).index();
+            result.include("msg", "Funcionário atualizado com sucesso.");
+            result.redirectTo(this).filtrar(funcionario);
         } catch (DaoException ex) {
             LOG.error("Erro atualizando o funcionário. " + ex.getMessage());
             result.include("errors", "Erro atualizando o funcionário. " + ex.getMessage());
-            result.redirectTo(this).formEdicao(funcionario);
+            result.redirectTo(this).editar(funcionario);
         }
     }
 
     public void filtrar(Funcionario funcionario) throws DaoException {
-        if (funcionario.getNome() != null || funcionario.getCargo() != null || funcionario.getDepartamento() != null) {
-            List<Funcionario> listaFuncionarios = funcionarios.buscarPorExemplo(funcionario);
-            Long qtdDestaques = funcionarios.qtdRegistros(funcionario);
-            Long qtdPaginas = qtdDestaques / REG_POR_PAGINA;
-            qtdPaginas += (qtdDestaques % REG_POR_PAGINA > 0) ? 1 : 0;
-            result.include("funcionarios", listaFuncionarios);
-            result.include("qtde", qtdDestaques);
-            result.include("qtdPaginas", qtdPaginas);
+        LOG.debug("/funcionarios/filtrar");
+        List<Funcionario> listaFuncionarios = funcionarios.buscarPorExemplo(funcionario);
+        Long qtdFuncionarios = funcionarios.qtdRegistros(funcionario);
+        Long qtdPaginas = qtdFuncionarios / REG_POR_PAGINA;
+        qtdPaginas += (qtdFuncionarios % REG_POR_PAGINA > 0) ? 1 : 0;
+        result.include("funcionarios", listaFuncionarios);
+        result.include("qtde", qtdFuncionarios);
+        result.include("qtdPaginas", qtdPaginas);
 
-            result.include("opcoes", opcoes);
-            result.include("paginaAtual", 1);
-            includesComboBox();
-        } else {
-            result.redirectTo(this).index();
-        }
+        result.include("opcoes", opcoes);
+        result.include("paginaAtual", 1);
+        preencheCombos();
+
+        result.redirectTo(this).index();
+
     }
 
-    private void includesComboBox() throws DaoException {
+    private void preencheCombos() throws DaoException {
         result.include("cargos", cargos.buscarTodos());
         result.include("departamentos", departamentos.buscarTodos());
         result.include("listastatus", funcionariosStatus.buscarTodos());

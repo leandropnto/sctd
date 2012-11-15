@@ -9,14 +9,24 @@
             <span class="children">Pesquisa de Botões</span>
         </section>
         <section class="text-box">
-            <c:forEach var="error" items="${errors}">
-                ${error.category} - ${error.message}<br />
-            </c:forEach>
+            <c:if test="${errors.size()>0}">
+                <div class="error">
+                    <c:forEach var="error" items="${errors}">
+                        ${error.category} - ${error.message}<br />
+                    </c:forEach>
+                </div>
+            </c:if>
+            <c:if test="${msg != null}">
+                <div class="success">
+                    ${msg}
+                </div>
+            </c:if>
 
             <br/>
             <a href="<c:url value="/cadastros/botoes/incluir"/>">Incluir</a>
-            <form action="<c:url value="/cadastros/botoes/filtrar" />" name="frmBuscaDepartamento" id="frmBuscaDepartamento">
-                <fieldset id="fdDepartamentos" style="margin-top: 12px;">
+            <form action="<c:url value="/cadastros/botoes/filtrar" />" name="frmBuscaDepartamento" id="frmBuscaDepartamento" class="validate">
+                <fieldset class="formato1">
+                    <legend>Pesquisa de Botões</legend>
                     <ul>
                         <li>
                             <label style="width: 110px; padding-bottom: 30px">Botão<br/>
@@ -27,7 +37,7 @@
 
 
                         <li>
-                            <button type="submit" style="color:#0029FF; width: 100px; font-family: arial; font-weight: bold">Buscar</button>
+                            <button type="submit" class="button">Pesquisar</button>
                         </li>
                         <div class="spacer"></div>
                     </ul>
@@ -91,14 +101,9 @@
                 </table>
                 <br/>
 
-                
+
+                <span class="destaque">Total de ${qtde} registros divididos em ${qtdPaginas} página(s)</span>
             </c:if>
-
-
-            <br/>
-
-            <span class="destaque">Total de ${qtde} registros divididos em ${qtdPaginas} página(s)</span>
-
         </section>
     </section>
 </section>

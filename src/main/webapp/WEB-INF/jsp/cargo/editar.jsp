@@ -11,27 +11,38 @@
         <section class="text-box">
 
 
-            <c:forEach var="error" items="${errors}">
-                ${error.category} - ${error.message}<br />
-            </c:forEach>
+            <c:if test="${errors.size()>0}">
+                <div class="error">
+                    <c:forEach var="error" items="${errors}">
+                        ${error.category} - ${error.message}<br />
+                    </c:forEach>
+                </div>
+            </c:if>
+            <c:if test="${msg != null}">
+                <div class="success">
+                    ${msg}
+                </div>
+            </c:if>
+            
             <br/>
             <div id="stylized" class="myform">    
-                <form action="<c:url value="/cadastros/cargos/atualizar"/>" method="post">                    
+                <form action="<c:url value="/cadastros/cargos/atualizar"/>" method="post" class="validate">                    
                     <input type="hidden" name="cargo.id" value="${cargo.id}" />
-                    <fieldset id="fdFuncionarios">
+                    <fieldset class="formato1">
                         <ul>
                             <li>                    
                                 <label>Descrição<br/>
                                     <input type="text" name="cargo.descricao" value="${cargo.descricao}" style="width: 100px" 
-                                           />                      
+                                           class="required"/>                      
+                                    <span>Informe a descrição</span>
                                 </label>                             
 
                             </li>  
 
                             <li>
-                                <button type="submit" style="color:#0029FF; width: 100px; font-family: arial; font-weight: bold">Atualizar</button>
+                                <button type="submit" class="button">Atualizar</button>
                             </li>
-                            <div class="spacer"></div>
+                            
                         </ul>
                     </fieldset>
                 </form>

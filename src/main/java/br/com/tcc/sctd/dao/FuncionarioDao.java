@@ -28,14 +28,10 @@ public class FuncionarioDao extends DaoGenericoImpl<Funcionario> {
         super(sessao);
     }
 
-
     @Override
     public List<Funcionario> buscarPorExemplo(Funcionario funcionario) {
         Criteria criterio = sessao.createCriteria(Funcionario.class);
-        Example example = Example.create(funcionario)
-                .enableLike(MatchMode.ANYWHERE)
-                .ignoreCase()
-                .excludeZeroes();
+        Example example = Example.create(funcionario).enableLike(MatchMode.ANYWHERE).ignoreCase().excludeZeroes();
         criterio.add(example);
         /*
          * Filtro do cargo
@@ -56,6 +52,36 @@ public class FuncionarioDao extends DaoGenericoImpl<Funcionario> {
             criterio.add(Restrictions.eq("especialidade", funcionario.getEspecialidade()));
         }
         return criterio.list();
+
+    }
+
+    @Override
+    public Long qtdRegistros(Funcionario objeto) {
+        Criteria criterio = sessao.createCriteria(Funcionario.class);
+
+        if (objeto != null) {
+            Example example = Example.create(objeto).enableLike(MatchMode.ANYWHERE).ignoreCase().excludeZeroes();
+            criterio.add(example);
+
+        }
+
+        if (objeto.getCargo().getId() >= 0) {
+            criterio.add(Restrictions.eq("cargo", objeto.getCargo()));
+        }
+
+        if (objeto.getDepartamento().getId() >= 0) {
+            criterio.add(Restrictions.eq("departamento", objeto.getDepartamento()));
+        }
+
+        if (objeto.getStatus().getId() >= 0) {
+            criterio.add(Restrictions.eq("status", objeto.getStatus()));
+        }
+
+        if (objeto.getEspecialidade().getId() >= 0) {
+            criterio.add(Restrictions.eq("especialidade", objeto.getEspecialidade()));
+        }
+
+        return (Long) criterio.setProjection(Projections.count("id")).uniqueResult();
 
     }
 }

@@ -706,7 +706,7 @@
 
     background-color: #BDE5F8;
 
-    background-image: url('<c:url value="/images/info.png"/>');
+    background-image: url('../images/info.png');
 
 }
 
@@ -716,7 +716,7 @@
 
     background-color: #DFF2BF;
 
-    background-image:url('<c:url value="/images/success.png" />');
+    background-image:url('../images/success.png');
 
 }
 
@@ -726,7 +726,7 @@
 
     background-color: #FEEFB3;
 
-    background-image: url('<c:url value="/images/warning.png"/>');
+    background-image: url('../images/warning.png');
 
 }
 
@@ -736,6 +736,6 @@
 
     background-color: #FFBABA;
 
-    background-image: url('<c:url value="/images/error.png"/>');
+    background-image: url('../images/error.png');
 
 }    

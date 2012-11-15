@@ -11,8 +11,20 @@
             <title><decorator:title default="SCTD -  Sistema de Confecção Tavares Dutra"/></title>
             <meta name="description" content="Festas e Eventos">
             <link href="<c:url value="/css/all.css" />" media="screen, projection" rel="stylesheet" type="text/css" />
-            <link href="<c:url value="/css/formularios.css" />" media="screen, projection" rel="stylesheet" type="text/css" />
+            <link href="<c:url value="/css/formularios.css" />" rel="stylesheet" type="text/css" />
+            <link href="<c:url value="/js/jquery-ui-1.8.16.custom.css" />" rel="stylesheet" type="text/css" />
+            <script src="<c:url value="/js/jquery-1.8.1.min.js"/>"></script>
+            <script src="<c:url value="/js/jquery-ui-1.8.16.custom.min.js"/>"></script>
             <script src="<c:url value="/js/modernizr-2.6.1.min.js"/>"></script>
+
+            <script src="<c:url value="/js/valida/jquery.validate.js"/>" type="text/javascript" charset="UTF-8"></script> 
+            <script src="<c:url value="/js/valida/js/jquery.maskMoney.js"/>" type="text/javascript" charset="UTF-8"></script> 
+            <link href="<c:url value="/js/valida/css/validate.css"/>" type="text/css" media="screen" rel="stylesheet" />
+            <!--[if lte IE 7]>
+            <link href="<c:url value="/js/valida/css/validate_ie7.css"/>" type="text/css" media="screen" rel="stylesheet" />
+            <![endif]-->	
+
+
             <decorator:head/>
         </head>
         <body>
@@ -30,7 +42,7 @@
                             <li class="ui-item bracket">|</li>
                             <li class="ui-item"><a href="">Configurações</a></li>
                             <li class="ui-item bracket">|</li>
-                            <li class="ui-item last"><a href="">Perguntas Frequentes</a></li>
+                            <li class="ui-item last"><a href="">FAQ</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -42,13 +54,14 @@
                                 <li class="ui-item"><a href="<c:url value="/cadastros/" />">Cadastros</a></li>
                                 <li class="ui-item"><a href="<c:url value="/pedidos/"/>">Pedidos</a></li>
                                 <li class="ui-item"><a href="<c:url value="/financeiro/"/>">Financeiro</a></li>
+                                <li class="ui-item"><a href="<c:url value="/realtorios/"/>">Relatórios</a></li>
                                 <li class="ui-item last"><a href="<c:url value="/contato/"/>">Contato</a></li>
                             </ul>
                         </nav>
                     </div>
                 </div>
             </header>
-            
+
             <section id="content" class="row">
                 <decorator:body/>
             </section>
@@ -82,7 +95,7 @@
                             <ul>
                                 <li class="ui-item"><a href="">Faturas</a></li>
                                 <li class="ui-item"><a href="">Cobranças</a></li>
-                                
+
                             </ul>
                         </nav>
                         <nav class="last">
@@ -91,15 +104,15 @@
                             </ul>
                         </nav>
                     </aside>
-                        <address class="footer-address">
-                            <p>Desenvolvido por:</p>
-                            <p>Leandro Pinto, Vagner Praia e Camilla Dutra</p>
-                        </address>  
+                    <address class="footer-address">
+                        <p>Desenvolvido por:</p>
+                        <p>Leandro Pinto, Vagner Praia e Camilla Dutra</p>
+                    </address>  
                 </div>
             </footer> 
-
-            <script src="<c:url value="/js/jquery-1.8.1.min.js"/>"></script>
-            <script src="<c:url value="/js/plugins.js"/>"></script>
+            
+            
+            
             <script src="<c:url value="/js/main.js"/>"></script>
         </body>
     </html>

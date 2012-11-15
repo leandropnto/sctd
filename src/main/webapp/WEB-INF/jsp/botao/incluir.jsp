@@ -9,26 +9,35 @@
             <span class="children">Inclusão de Botões</span>
         </section>
         <section class="text-box">
-
-            <c:forEach var="error" items="${errors}">
-                ${error.category} - ${error.message}<br />
-            </c:forEach>
-
+            <c:if test="${errors.size()>0}">
+                <div class="error">
+                    <c:forEach var="error" items="${errors}">
+                        ${error.category} - ${error.message}<br />
+                    </c:forEach>
+                </div>
+            </c:if>
+            <c:if test="${msg != null}">
+                <div class="success">
+                    ${msg}
+                </div>
+            </c:if>
+            <br/>
             <div id="stylized" class="myform">
-                <form action="<c:url value="/cadastros/botoes/salvar"/>" method="post" id="form" name="form">
-                    
+                <form action="<c:url value="/cadastros/botoes/salvar"/>" method="post" id="form" name="form" class="validate">                    
 
-                    <fieldset id="fdFuncionarios">
+                    <fieldset class="formato1">
+                        <legend>Inclusão de Botões</legend>
                         <ul>
                             <li>
                                 <label>Descrição<br/>
-                                    <input type="text" name="botao.nome" value="${botao.nome}" style="width: 200px; margin-bottom: 30px"/>                      
+                                    <input type="text" name="botao.nome" value="${botao.nome}" style="width: 200px; margin-bottom: 30px" 
+                                           class="required textoMedio"/>                      
+                                    <span>Nome do botão</span>
                                 </label>
-
                             </li>                
 
                             <li>
-                                <button type="submit" style="color:#0029FF; width: 100px; font-family: arial; font-weight: bold">Cadastrar</button>
+                                <button type="submit" class="button">Cadastrar</button>
                             </li>
                             <div class="spacer"></div>
                         </ul>

@@ -42,22 +42,16 @@ public class CargoController {
     @Get
     public void index() throws DaoException {
         LOG.debug("/cargos/index");
-        result.include("cargos", cargos.buscarTodos());
-        List<Cargo> listaCargos = cargos.buscarPorExemplo(new Cargo());
-        Long qtdCargos = cargos.qtdRegistros(new Cargo());
-        Long qtdPaginas = qtdCargos / REG_POR_PAGINA;
-        qtdPaginas += (qtdCargos % REG_POR_PAGINA > 0) ? 1 : 0;
-        result.include("cargos", listaCargos);
-        result.include("qtde", qtdCargos);
-        result.include("qtdPaginas", qtdPaginas);
-
-        result.include("opcoes", opcoes);
-        result.include("paginaAtual", 1);
+        
     }
 
     @Path("/editar/{cargo.id}")
     public void editar(Cargo cargo) throws DaoException {
         Cargo cargoRecuperado = cargos.buscarPorId(cargo.getId());
+        if(cargoRecuperado == null){
+            result.include("msg", "Cargo não encontrado.");
+            result.notFound();
+        }
         result.include("cargo", cargoRecuperado);
     }
 
@@ -73,6 +67,7 @@ public class CargoController {
         validator.onErrorRedirectTo(this).editar(cargo);
 
         cargos.atualizar(cargo);
+        result.include("msg", "Cargo atualizado com sucesso.");
         result.redirectTo(this).filtrar(cargo);
     }
 
@@ -88,6 +83,7 @@ public class CargoController {
         validator.onErrorRedirectTo(this).editar(cargo);
 
         cargos.atualizar(cargo);
+        result.include("msg", "Cargo cadastrado com sucesso.");
         result.redirectTo(this).filtrar(cargo);
     }
 
@@ -107,7 +103,7 @@ public class CargoController {
     }
 
     @Path("/filtrar")
-    public void filtrar(Cargo cargo) {
+    public void filtrar(Cargo cargo) throws DaoException {
          LOG.debug("/cargos/filtrar");
 
         List<Cargo> listaCargos = cargos.buscarPorExemplo(cargo);
@@ -120,5 +116,7 @@ public class CargoController {
 
         result.include("opcoes", opcoes);
         result.include("paginaAtual", 1);
+        
+        result.redirectTo(this).index();
     }
 }

@@ -70,15 +70,15 @@ th.specalt {
 
 .myform{
     margin:0 auto;
-    width: 680px;
+    width: 860px;
     padding:14px;
     height: 100%;
 
 }
 
-fieldset#fdFuncionarios {
+fieldset.formato1 {
     display: block;
-    margin: 0;
+    margin: 0;    
     margin-bottom: 10px;
     border: 1px groove #B7DDF2;
     border-collapse: collapse;
@@ -86,9 +86,21 @@ fieldset#fdFuncionarios {
     font-size: 14px;
     background-color: #EBF4FB;
     padding-bottom: 10px;
+    width: 100%;
 
 }
-fieldset#fdFuncionarios ul, fieldset#fdFuncionarios li{
+
+fieldset.formato1 legend{    
+  padding: 0.2em 1.0em;
+  margin-left: 10px;
+  border:1px solid green;
+  color:green;
+  font-size:90%;
+  text-align:left;
+  
+}
+
+fieldset.formato1 ul, fieldset.formato1 li{
     border:0; margin:0; padding:0; list-style:none;
     margin-bottom: 2px;
     font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -97,21 +109,22 @@ fieldset#fdFuncionarios ul, fieldset#fdFuncionarios li{
 
 }
 
-fieldset#fdFuncionarios li{
+fieldset.formato1 li{
     clear:both;
     list-style:none;
-    padding-bottom:10px;   
+    padding-bottom:2px;   
 }
-fieldset#fdFuncionarios label{
+fieldset.formato1 label{
     float:left;
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 10px;
     cursor: pointer;
     padding-left: 5px;
-    width: 100px;
+    
 }
 
-fieldset#fdFuncionarios label.grd{
+
+fieldset.formato1 label.grd{
     float:left;
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 10px;
@@ -119,21 +132,24 @@ fieldset#fdFuncionarios label.grd{
     padding-left: 5px;
     width: 470px;
 }   
-fieldset#fdFuncionarios label.med{
+fieldset.formato1 label.med{
     float:left;
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 10px;
     cursor: pointer;
     padding-left: 5px;
-    width: 330px;
+    width: 320px;
 }     
 
-fieldset#fdFuncionarios label.peq{
+fieldset.formato1 label.peq{
     float:left;
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 10px;
     cursor: pointer;
     padding-left: 5px;
     width: 80px;
-}    
+}  
 
+fieldset.formato1 input.textoMedio{
+    width: 138px;
+}

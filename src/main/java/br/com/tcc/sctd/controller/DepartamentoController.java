@@ -42,17 +42,6 @@ public class DepartamentoController {
     @Get
     public void index() throws DaoException {
         LOG.debug("/departamentos/index");
-        List<Departamento> listaDepartamentos = departamentos.buscarTodos();
-        Long qtdDestaques = departamentos.qtdRegistros(null);
-        Long qtdPaginas = qtdDestaques / REG_POR_PAGINA;
-        qtdPaginas += (qtdDestaques % REG_POR_PAGINA > 0) ? 1 : 0;
-        result.include("departamentos", listaDepartamentos);
-        result.include("qtde", qtdDestaques);
-        result.include("qtdPaginas", qtdPaginas);
-
-        result.include("opcoes", opcoes);
-        result.include("paginaAtual", 1);
-
 
     }
 
@@ -71,12 +60,10 @@ public class DepartamentoController {
             }
         });
 
-        if (validator.hasErrors()) {
-            result.include("departamento", departamento);
-        }
         validator.onErrorForwardTo(this).incluir();
 
         departamentos.salvar(departamento);
+        result.include("msg", "Departamento cadastrado com sucesso.");
         result.redirectTo(this).filtrar(departamento);
     }
 
@@ -91,11 +78,10 @@ public class DepartamentoController {
             }
         });
 
-        if (validator.hasErrors()) {
-            result.include("departamento", departamento);
-        }
+
         validator.onErrorForwardTo(this).incluir();
 
+        result.include("msg", "Departamento atualizado com sucesso.");
         departamentos.atualizar(departamento);
         result.redirectTo(this).filtrar(departamento);
     }
@@ -105,16 +91,17 @@ public class DepartamentoController {
         LOG.debug("/departamentos/filtrar");
 
         List<Departamento> listaDepartamentos = departamentos.buscarPorExemplo(departamento);
-        Long qtdDestaques = departamentos.qtdRegistros(departamento);
-        Long qtdPaginas = qtdDestaques / REG_POR_PAGINA;
-        qtdPaginas += (qtdDestaques % REG_POR_PAGINA > 0) ? 1 : 0;
+        Long qtdDepartamentos = departamentos.qtdRegistros(departamento);
+        Long qtdPaginas = qtdDepartamentos / REG_POR_PAGINA;
+        qtdPaginas += (qtdDepartamentos % REG_POR_PAGINA > 0) ? 1 : 0;
         result.include("departamentos", listaDepartamentos);
-        result.include("qtde", qtdDestaques);
+        result.include("qtde", qtdDepartamentos);
         result.include("qtdPaginas", qtdPaginas);
 
         result.include("opcoes", opcoes);
         result.include("paginaAtual", 1);
 
+        result.redirectTo(this).index();
 
     }
 
@@ -122,20 +109,22 @@ public class DepartamentoController {
     public void editar(Departamento departamento) throws DaoException {
         Departamento dep = departamentos.buscarPorId(departamento.getId());
         if (dep == null) {
-            LOG.info("Departamento não encontrado");
+            LOG.debug("Departamento não encontrado");
+            result.include("msg", "Departamento não encontrado.");
+            result.notFound();
         }
 
         result.include("departamento", dep);
     }
-     
-    
+
     @Path("/excluir/{departamento.id}")
     public void excluir(Departamento departamento) throws DaoException {
-        if (departamento != null && departamento.getId() >= 0){
-            departamentos.excluir(departamento);
-            result.include("msg" , "Departamento excluído com sucesso.");
+        if (departamento == null || departamento.getId() == null) {
+            result.include("msg", "Departamento não encontrado.");
         }
-        
-        result.redirectTo(this).filtrar(new Departamento());
+        departamentos.excluir(departamento);
+
+        result.include("msg", "Departamento excluído com sucesso.");
+        result.redirectTo(this).index();
     }
 }

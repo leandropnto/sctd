@@ -6,32 +6,45 @@
                 <a href="<c:url value="/cadastros/"/>">Cadastros</a> > 
                 <a href="<c:url value="/cadastros/tecidos/"/>">Tecidos</a> > 
             </span>
-            <span class="children">Inclusão de Tecidos</span>
+            <span class="children">Edição de Tecidos</span>
         </section>
         <section class="text-box">
 
-            <c:forEach var="error" items="${errors}">
-                ${error.category} - ${error.message}<br />
-            </c:forEach>
+            <c:if test="${errors.size()>0}">
+                <div class="error">
+                    <c:forEach var="error" items="${errors}">
+                        ${error.category} - ${error.message}<br />
+                    </c:forEach>
+                </div>
+            </c:if>
+            <c:if test="${msg != null}">
+                <div class="success">
+                    ${msg}
+                </div>
+            </c:if>
+
+            <br/>
 
             <div id="stylized" class="myform">
-                <form action="<c:url value="/cadastros/tecidos/atualizar"/>" method="post" id="form" name="form">
-                    
+                <form action="<c:url value="/cadastros/tecidos/atualizar"/>" method="post" id="form" name="form" class="validate">
 
-                    <fieldset id="fdFuncionarios">
+
+                    <fieldset class="formato1">
+                        <legend>Editar Tecidos</legend>
                         <ul>
                             <li>
                                 <label>Descrição<br/>
-                                    <input type="text" name="tecido.nome" value="${tecido.nome}" style="width: 200px; margin-bottom: 30px"/>                      
+                                    <input type="text" name="tecido.nome" value="${tecido.nome}" style="width: 200px;" class="required"/>                      
+                                    <span>Informe a descrição</span>
                                 </label>
 
                             </li>                
 
                             <li>
                                 <input type="hidden" name="tecido.id" value="${tecido.id}" />
-                                <button type="submit" style="color:#0029FF; width: 100px; font-family: arial; font-weight: bold">Atualizar</button>
+                                <button type="submit" class="button">Atualizar</button>
                             </li>
-                            <div class="spacer"></div>
+                            
                         </ul>
                     </fieldset>
                 </form>

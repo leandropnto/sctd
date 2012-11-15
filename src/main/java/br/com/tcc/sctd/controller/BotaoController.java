@@ -62,12 +62,13 @@ public class BotaoController {
     @Post("/salvar")
     public void salvar(final Botao botao) throws DaoException{
         validator.checking(new Validations(){{
-            that(botao != null && botao.getNome() !=null && !botao.getNome().isEmpty(), "Botão", "botao.nao.informada");
+            that(botao != null && botao.getNome() !=null && !botao.getNome().isEmpty(), "Botão", "botao.nome.nao.informado");
         }});
         
         validator.onErrorRedirectTo(this).incluir();
         
         botoes.salvar(botao);
+        result.include("msg", "Botão cadastrado com sucesso.");
         result.redirectTo(this).filtrar(botao);
     }
     
@@ -77,12 +78,17 @@ public class BotaoController {
             botoes.excluir(botao);
         }
         
+        result.include("msg", "Botão excluído com sucesso.");
         result.redirectTo(this).index();
     }
     
     @Path("/editar/{botao.id}")
     public void editar(Botao botao) throws DaoException{
-        
+        Botao b = botoes.buscarPorId(botao.getId());
+        if (b == null){
+            result.include("msg", "Botão não encontrado.");
+            result.notFound();
+        }
         result.include("botao", botoes.buscarPorId(botao.getId()));
     }
     
