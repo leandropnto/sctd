@@ -6,18 +6,7 @@ package br.com.tcc.sctd.model;
 
 import java.io.Serializable;
 import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  *
@@ -50,9 +39,7 @@ public class Modelo implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)    
     private Tipo tipo;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "especialidade", joinColumns = { @JoinColumn(name = "idModelo") }, inverseJoinColumns = { @JoinColumn(name = "idEspecialidade")})
-    private Set<TipoEspecialidade> especialidade;
+    
 
     public Modelo() {
     }
@@ -113,13 +100,6 @@ public class Modelo implements Serializable {
         this.tipo = tipo;
     }
 
-    public Set<TipoEspecialidade> getEspecialidade() {
-        return especialidade;
-    }
-
-    public void setEspecialidade(Set<TipoEspecialidade> especialidade) {
-        this.especialidade = especialidade;
-    }
 
     @Override
     public int hashCode() {

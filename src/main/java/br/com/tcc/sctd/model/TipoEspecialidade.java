@@ -5,12 +5,8 @@
 package br.com.tcc.sctd.model;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.List;
+import javax.persistence.*;
 
 /**
  *
@@ -30,6 +26,13 @@ public class TipoEspecialidade implements Serializable {
     @Column(name = "descricao", nullable = false, length = 150)
     private String descricao;
 
+   
+    @ManyToMany(mappedBy = "tipoEspecialidades")
+    private List<Funcionario> funcionarios;
+    
+    @ManyToMany
+    private List<Modelo> modelos; 
+    
     public TipoEspecialidade() {
     }
 
@@ -66,6 +69,25 @@ public class TipoEspecialidade implements Serializable {
         this.descricao = descricao;
     }
 
+    public List<Funcionario> getFuncionarios() {
+        return funcionarios;
+    }
+
+    public void setFuncionarios(List<Funcionario> funcionarios) {
+        this.funcionarios = funcionarios;
+    }
+
+    public List<Modelo> getModelos() {
+        return modelos;
+    }
+
+    public void setModelos(List<Modelo> modelos) {
+        this.modelos = modelos;
+    }
+
+    
+    
+    
     @Override
     public int hashCode() {
         int hash = 7;

@@ -17,8 +17,8 @@
             <script src="<c:url value="/js/jquery-ui-1.8.16.custom.min.js"/>"></script>
             <script src="<c:url value="/js/modernizr-2.6.1.min.js"/>"></script>
 
-            <script src="<c:url value="/js/valida/jquery.validate.js"/>" type="text/javascript" charset="UTF-8"></script> 
-            <script src="<c:url value="/js/valida/js/jquery.maskMoney.js"/>" type="text/javascript" charset="UTF-8"></script> 
+            <script src="<c:url value="/js/valida/jquery.validate.js"/>" type="text/javascript" charset="utf-8"></script> 
+            <script src="<c:url value="/js/valida/js/jquery.maskMoney.js"/>" type="text/javascript" charset="utf-8"></script> 
             <link href="<c:url value="/js/valida/css/validate.css"/>" type="text/css" media="screen" rel="stylesheet" />
             <!--[if lte IE 7]>
             <link href="<c:url value="/js/valida/css/validate_ie7.css"/>" type="text/css" media="screen" rel="stylesheet" />

@@ -39,6 +39,7 @@ public class FuncionarioController {
     private final EspecialidadeDao especialidades;
     private static final int REG_POR_PAGINA = 20;
     private static final int FUNC_DESLIGADO = 3;
+    private final TipoEspecialidadeDao tipoEspecialidades;
 
     /**
      *
@@ -47,7 +48,7 @@ public class FuncionarioController {
      */
     public FuncionarioController(Result result, FuncionarioDao funcionarios, DepartamentoDao departamentos,
             CargoDao cargos, FuncionarioStatusDao funcionariosStatus,
-            EspecialidadeDao especialidades, Validator validator) {
+            EspecialidadeDao especialidades, Validator validator, TipoEspecialidadeDao tipoEspecialidades) {
         this.result = result;
         this.funcionarios = funcionarios;
         opcoes = new ArrayList<Opcoes>();
@@ -57,6 +58,7 @@ public class FuncionarioController {
         this.funcionariosStatus = funcionariosStatus;
         this.especialidades = especialidades;
         this.validator = validator;
+        this.tipoEspecialidades = tipoEspecialidades;
 
     }
 
@@ -84,8 +86,7 @@ public class FuncionarioController {
                         "funcionario.cargo.nao.informado");
                 that(funcionario != null && funcionario.getDepartamento() != null && funcionario.getDepartamento().getId() >= 0, "Departamento",
                         "funcionario.departamento.nao.informado");
-                that(funcionario != null && funcionario.getEspecialidade() != null && funcionario.getEspecialidade().getId() >= 0, "Especialidade",
-                        "funcionario.especialidade.nao.informado");
+
                 that(funcionario != null && funcionario.getSalario() != null, "Salário",
                         "funcionario.salario.nao.informado");
 
@@ -160,7 +161,7 @@ public class FuncionarioController {
         result.include("cargos", cargos.buscarTodos());
         result.include("departamentos", departamentos.buscarTodos());
         result.include("listastatus", funcionariosStatus.buscarTodos());
-        result.include("listaEspecialidades", especialidades.buscarTodos());
+        result.include("listaEspecialidades", tipoEspecialidades.buscarTodos());
     }
 
     @Path("/excluir/{funcionario.matricula}")

@@ -48,9 +48,7 @@ public class FuncionarioDao extends DaoGenericoImpl<Funcionario> {
             criterio.add(Restrictions.eq("status", funcionario.getStatus()));
         }
 
-        if (funcionario.getEspecialidade().getId() >= 0) {
-            criterio.add(Restrictions.eq("especialidade", funcionario.getEspecialidade()));
-        }
+        
         return criterio.list();
 
     }
@@ -77,9 +75,7 @@ public class FuncionarioDao extends DaoGenericoImpl<Funcionario> {
             criterio.add(Restrictions.eq("status", objeto.getStatus()));
         }
 
-        if (objeto.getEspecialidade().getId() >= 0) {
-            criterio.add(Restrictions.eq("especialidade", objeto.getEspecialidade()));
-        }
+      
 
         return (Long) criterio.setProjection(Projections.count("id")).uniqueResult();
 

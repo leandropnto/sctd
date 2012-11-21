@@ -7,16 +7,8 @@ package br.com.tcc.sctd.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
+import java.util.List;
+import javax.persistence.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -54,11 +46,10 @@ public class Funcionario implements Serializable {
     @JoinColumn(name = "idStatus")
     @Fetch(FetchMode.JOIN)
     FuncionarioStatus status;
-    private String cpf;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "idEspecialidade")
-    @Fetch(FetchMode.JOIN)
-    private Especialidade especialidade;
+    private String cpf;   
+    @ManyToMany(cascade= CascadeType.ALL)
+    @Fetch(FetchMode.JOIN)    
+    private List<TipoEspecialidade> tipoEspecialidades;
 
     public Funcionario() {
     }
@@ -135,14 +126,17 @@ public class Funcionario implements Serializable {
         this.cpf = cpf;
     }
 
-    public Especialidade getEspecialidade() {
-        return especialidade;
+
+
+    public List<TipoEspecialidade> getTipoEspecialidades() {
+        return tipoEspecialidades;
     }
 
-    public void setEspecialidade(Especialidade especialidade) {
-        this.especialidade = especialidade;
+    public void setTipoEspecialidades(List<TipoEspecialidade> tipoEspecialidades) {
+        this.tipoEspecialidades = tipoEspecialidades;
     }
 
+    
     @Override
     public int hashCode() {
         int hash = 3;
