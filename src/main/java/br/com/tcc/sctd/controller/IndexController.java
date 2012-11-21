@@ -54,18 +54,18 @@ public class IndexController {
 
 
         result.include("itensMenu", "");
-        Usuario usuario = usuarios.buscarPorId(1);
-        LOG.info(usuario.getNome());
-
-
-        Funcionario f = new Funcionario();
-        f.setNome("Fulaninho de Teste");
- //       f.setCargo("Administrador");
-        f.setDataNascimento(new Date(System.currentTimeMillis()));
-        f.setDataContratacao(new Date(System.currentTimeMillis()));
-//        f.setDepartamento("Financeiro");
-        f.setSalario(new BigDecimal("2500.56"));
-        
+////        Usuario usuario = usuarios.buscarPorId(1);
+////        LOG.info(usuario.getNome());
+//
+//
+//        Funcionario f = new Funcionario();
+//        f.setNome("Fulaninho de Teste");
+// //       f.setCargo("Administrador");
+//        f.setDataNascimento(new Date(System.currentTimeMillis()));
+//        f.setDataContratacao(new Date(System.currentTimeMillis()));
+////        f.setDepartamento("Financeiro");
+//        f.setSalario(new BigDecimal("2500.56"));
+//        
         //funcionarios.salvar(f);
     }
     

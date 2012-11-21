@@ -46,9 +46,14 @@ public class Funcionario implements Serializable {
     @JoinColumn(name = "idStatus")
     @Fetch(FetchMode.JOIN)
     FuncionarioStatus status;
-    private String cpf;   
-    @ManyToMany(cascade= CascadeType.ALL)
-    @Fetch(FetchMode.JOIN)    
+    private String cpf;
+    @ManyToMany(fetch= FetchType.EAGER)
+    @JoinTable(name = "funcionario_tipoespecialidade", joinColumns = {
+        @JoinColumn(name = "matricula")
+    }, inverseJoinColumns = {
+        @JoinColumn(name = "id_especialidade")
+    })
+    
     private List<TipoEspecialidade> tipoEspecialidades;
 
     public Funcionario() {
@@ -126,8 +131,6 @@ public class Funcionario implements Serializable {
         this.cpf = cpf;
     }
 
-
-
     public List<TipoEspecialidade> getTipoEspecialidades() {
         return tipoEspecialidades;
     }
@@ -137,6 +140,7 @@ public class Funcionario implements Serializable {
     }
 
     
+
     @Override
     public int hashCode() {
         int hash = 3;

@@ -30,8 +30,7 @@ public class TipoEspecialidade implements Serializable {
     @ManyToMany(mappedBy = "tipoEspecialidades")
     private List<Funcionario> funcionarios;
     
-    @ManyToMany
-    private List<Modelo> modelos; 
+    
     
     public TipoEspecialidade() {
     }
@@ -77,14 +76,7 @@ public class TipoEspecialidade implements Serializable {
         this.funcionarios = funcionarios;
     }
 
-    public List<Modelo> getModelos() {
-        return modelos;
-    }
-
-    public void setModelos(List<Modelo> modelos) {
-        this.modelos = modelos;
-    }
-
+ 
     
     
     

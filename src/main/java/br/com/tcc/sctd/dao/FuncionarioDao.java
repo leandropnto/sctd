@@ -48,7 +48,7 @@ public class FuncionarioDao extends DaoGenericoImpl<Funcionario> {
             criterio.add(Restrictions.eq("status", funcionario.getStatus()));
         }
 
-        
+        criterio.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         return criterio.list();
 
     }
@@ -75,7 +75,7 @@ public class FuncionarioDao extends DaoGenericoImpl<Funcionario> {
             criterio.add(Restrictions.eq("status", objeto.getStatus()));
         }
 
-      
+
 
         return (Long) criterio.setProjection(Projections.count("id")).uniqueResult();
 
