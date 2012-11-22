@@ -38,8 +38,11 @@ public class FuncionarioController {
     private final FuncionarioStatusDao funcionariosStatus;
     private final EspecialidadeDao especialidades;
     private static final int REG_POR_PAGINA = 20;
-    private static final int FUNC_DESLIGADO = 3;
+    private static final int FUNC_DESLIGADO = 2;
+    private static final int FUNC_DESALOCADO = 4;
+    private static final int FUNC_ALOCADO = 1;
     private final TipoEspecialidadeDao tipoEspecialidades;
+    private final Integer DEP_PRODUCAO = 2;
 
     /**
      *
@@ -102,10 +105,13 @@ public class FuncionarioController {
         validator.onErrorRedirectTo(this).incluir();
 
         funcionario.setDataContratacao(new Date(System.currentTimeMillis()));
-        if (funcionario.getDepartamento().getId() == 1) {
-            funcionario.setStatus(new FuncionarioStatus(2));
+        
+        /* Regra para alocação de funcionário */
+        
+        if (funcionario.getDepartamento().getId() == DEP_PRODUCAO) {
+            funcionario.setStatus(new FuncionarioStatus(FUNC_DESALOCADO));
         } else {
-            funcionario.setStatus(new FuncionarioStatus(1));
+            funcionario.setStatus(new FuncionarioStatus(FUNC_ALOCADO));
         }
         funcionarios.salvar(funcionario);
         result.redirectTo(this).index();

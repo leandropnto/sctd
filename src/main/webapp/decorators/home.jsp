@@ -54,7 +54,7 @@
                                 <li class="ui-item"><a href="<c:url value="/cadastros/" />">Cadastros</a></li>
                                 <li class="ui-item"><a href="<c:url value="/pedidos/"/>">Pedidos</a></li>
                                 <li class="ui-item"><a href="<c:url value="/financeiro/"/>">Financeiro</a></li>
-                                <li class="ui-item"><a href="<c:url value="/realtorios/"/>">Relatórios</a></li>
+                                <li class="ui-item"><a href="<c:url value="/relatorios/"/>">Relatórios</a></li>
                                 <li class="ui-item last"><a href="<c:url value="/contato/"/>">Contato</a></li>
                             </ul>
                         </nav>

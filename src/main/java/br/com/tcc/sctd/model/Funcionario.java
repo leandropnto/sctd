@@ -46,6 +46,7 @@ public class Funcionario implements Serializable {
     @JoinColumn(name = "idStatus")
     @Fetch(FetchMode.JOIN)
     FuncionarioStatus status;
+    
     private String cpf;
     @ManyToMany(fetch= FetchType.EAGER)
     @JoinTable(name = "funcionario_tipoespecialidade", joinColumns = {
@@ -53,6 +54,7 @@ public class Funcionario implements Serializable {
     }, inverseJoinColumns = {
         @JoinColumn(name = "id_especialidade")
     })
+    
     
     private List<TipoEspecialidade> tipoEspecialidades;
 

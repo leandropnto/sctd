@@ -5,7 +5,6 @@
 package br.com.tcc.sctd.model;
 
 import java.io.Serializable;
-import java.util.Set;
 import javax.persistence.*;
 
 /**

@@ -4,9 +4,9 @@
             <span class="parents">
                 <a href="<c:url value="/"/>">Página Inicial</a> > 
                 <a href="<c:url value="/cadastros/"/>">Cadastros</a> > 
-                <a href="<c:url value="/cadastros/botoes/"/>">Botões</a> > 
+                <a href="<c:url value="/cadastros/tiposmodelo/"/>">Tipos</a> > 
             </span>
-            <span class="children">Pesquisa de Botões</span>
+            <span class="children">Pesquisa de Tipos</span>
         </section>
         <section class="text-box">
             <c:if test="${errors.size()>0}">
@@ -21,16 +21,17 @@
                     ${msg}
                 </div>
             </c:if>
+            
 
             <br/>
-            <a href="<c:url value="/cadastros/botoes/incluir"/>">Incluir</a>
-            <form action="<c:url value="/cadastros/botoes/filtrar" />" name="frmBuscaDepartamento" id="frmBuscaDepartamento" class="validate">
+            <a href="<c:url value="/cadastros/tiposmodelo/incluir"/>">Incluir</a>
+            <form action="<c:url value="/cadastros/tiposmodelo/filtrar" />" name="frmBuscaDepartamento" id="frmBuscaDepartamento" class="validate">
                 <fieldset class="formato1">
                     <legend>Pesquisa de Botões</legend>
                     <ul>
                         <li>
                             <label style="width: 110px; padding-bottom: 30px">Botão<br/>
-                                <input type="text" name="botao.nome" value="${botao.nome}" style="width: 100px"/>                      
+                                <input type="text" name="tipo.nome" value="${tipo.nome}" style="width: 100px"/>                      
                             </label>                
 
                         </li>
@@ -45,26 +46,28 @@
             </form>
 
 
-            <c:if test="${botoes.size() >0}">
+            <c:if test="${tipos.size() >0}">
                 <table id="mytable">
-                    <caption>Botões cadastradas</caption>
+                    <caption>Tipos cadastradas</caption>
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Descrição</th>           
+                            <th>Nome</th>           
+                            <th>Peso</th>           
                             <th>Opções</th>           
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${botoes}" var="botao" varStatus="contador">
+                        <c:forEach items="${tipos}" var="tipo" varStatus="contador">
                             <tr>
-                                <td style="text-align: right; width: 15px;"><a href="<c:url value="/cadastros/botoes/editar/${botao.id}"/>">${botao.id}</a></td>
-                                <td style="text-align: left; width: 300px;">${botao.nome}</td>
+                                <td style="text-align: right; width: 15px;"><a href="<c:url value="/cadastros/tiposmodelo/editar/${tipo.id}"/>">${tipo.id}</a></td>
+                                <td style="text-align: left; width: 300px;">${tipo.nome}</td>
+                                <td style="text-align: left; width: 100px;">${tipo.peso}</td>
                                 <td style="text-align: right; width: 40px;">
-                                    <a href="<c:url value="/cadastros/botoes/editar/${botao.id}"/>">
+                                    <a href="<c:url value="/cadastros/tiposmodelo/editar/${tipo.id}"/>">
                                         <img src="<c:url value="/images/editar_peq.png"/>" alt="Editar" title="Alterar"/>
                                     </a>
-                                    | <a href="<c:url value="/cadastros/botoes/excluir/${botao.id}"/>">
+                                    | <a href="<c:url value="/cadastros/tiposmodelo/excluir/${tipo.id}"/>">
                                         <img src="<c:url value="/images/excluir_peq.png"/>" alt="Excluir" title="Excluir"/>
                                     </a>
                                 </td>
@@ -74,10 +77,10 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="2">Paginação: <a href="<c:url value="/cadastros/botoes/pagina/1" />"><<</a> 
+                            <td colspan="2">Paginação: <a href="<c:url value="/cadastros/tipos/pagina/1" />"><<</a> 
                                 <c:choose>
                                     <c:when test="${paginaAtual>1}">
-                                        <a href="<c:url value="/cadastros/botoes/pagina/${paginaAtual-1}" />"><</a>                         
+                                        <a href="<c:url value="/cadastros/tipos/pagina/${paginaAtual-1}" />"><</a>                         
                                     </c:when>
                                     <c:otherwise>
                                         <
@@ -86,13 +89,13 @@
                                 ${paginaAtual}
                                 <c:choose>
                                     <c:when test="${paginaAtual < qtdPaginas}">
-                                        <a href="<c:url value="/cadastros/botoes/pagina/${paginaAtual+1}" />">></a> 
+                                        <a href="<c:url value="/cadastros/tipos/pagina/${paginaAtual+1}" />">></a> 
                                     </c:when>
                                     <c:otherwise>
                                         >
                                     </c:otherwise>
                                 </c:choose>
-                                <a href="<c:url value="/cadastros/botoes/pagina/${qtdPaginas}" />">>></a>    
+                                <a href="<c:url value="/cadastros/tipos/pagina/${qtdPaginas}" />">>></a>    
 
 
                             </td>

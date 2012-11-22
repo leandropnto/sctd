@@ -71,7 +71,7 @@
                                     </select>
                                     <span>Selecione o Departamento</span>
                                 </label>
-                                <label>Status<br/>                      
+<!--                                <label>Status<br/>                      
                                     <select name="funcionario.status.id" class="required">
                                         <option>Selecione o Status</option>
                                         <c:forEach items="${listastatus}" var="st">
@@ -81,7 +81,7 @@
                                         </c:forEach>
                                     </select>
                                     <span>Selecione o Status</span>
-                                </label>
+                                </label>-->
                             </li>
                             <li>
                                 <label>Especialidade<br/>                      

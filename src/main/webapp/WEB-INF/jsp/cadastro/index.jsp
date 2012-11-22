@@ -18,6 +18,8 @@
                     <li><a href="<c:url value="/cadastros/linhas/"/>">Linhas</a></li>
                     <li><a href="<c:url value="/cadastros/tecidos/"/>">Tecidos</a></li>
                     <li><a href="<c:url value="/cadastros/tipoespecialidade/"/>">Tipos de Especialidades</a></li>
+                    <li><a href="<c:url value="/cadastros/tiposmodelo/"/>">Tipos de Modelo</a></li>
+                    <li><a href="<c:url value="/cadastros/modelos/"/>">Modelos</a></li>
                 </ul>
             </fieldset>
         </section>

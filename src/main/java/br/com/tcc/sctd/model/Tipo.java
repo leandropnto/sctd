@@ -21,15 +21,15 @@ import javax.persistence.Table;
 public class Tipo implements Serializable {
 
     @Id
-    @Column
+    @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    @Column(nullable = false, length = 60)
+    @Column(nullable = false, length = 60, name="nome")
     private String nome;
     
-    @Column
-    private Float peso;
+    @Column(name="peso", nullable=true)
+    private Double peso;
 
     public Tipo() {
     }
@@ -50,11 +50,11 @@ public class Tipo implements Serializable {
         this.nome = nome;
     }
 
-    public Float getPeso() {
+    public Double getPeso() {
         return peso;
     }
 
-    public void setPeso(Float peso) {
+    public void setPeso(Double peso) {
         this.peso = peso;
     }
     
