@@ -34,6 +34,11 @@
         <mapping class="br.com.tcc.sctd.model.Tipo" />
         <mapping class="br.com.tcc.sctd.model.TipoEspecialidade" />
         <mapping class="br.com.tcc.sctd.model.Usuario" />
+        <mapping class="br.com.tcc.sctd.model.TipoAvaliacao" />
+        <mapping class="br.com.tcc.sctd.model.Transportadora" />
+        <mapping class="br.com.tcc.sctd.model.Cliente" />
+        <mapping class="br.com.tcc.sctd.model.PessoaFisica" />
+        <mapping class="br.com.tcc.sctd.model.PessoaJuridica" />
                 
        
 

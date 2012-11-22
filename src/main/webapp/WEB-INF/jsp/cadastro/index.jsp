@@ -20,6 +20,10 @@
                     <li><a href="<c:url value="/cadastros/tipoespecialidade/"/>">Tipos de Especialidades</a></li>
                     <li><a href="<c:url value="/cadastros/tiposmodelo/"/>">Tipos de Modelo</a></li>
                     <li><a href="<c:url value="/cadastros/modelos/"/>">Modelos</a></li>
+                    <li><a href="<c:url value="/cadastros/tipoavaliacao/"/>">Tipos de Avaliação</a></li>
+                    <li><a href="<c:url value="/cadastros/transportadoras/"/>">Transportadoras</a></li>
+                    <li><a href="<c:url value="/cadastros/pessoafisica/"/>">Pessoa Física</a></li>
+                    <li><a href="<c:url value="/cadastros/pessoajuridica/"/>">Pessoa Jurídica</a></li>
                 </ul>
             </fieldset>
         </section>

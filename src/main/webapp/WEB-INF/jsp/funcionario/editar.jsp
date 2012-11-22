@@ -43,7 +43,7 @@
                                 </label> 
                                 <label>Nascimento<br/>
                                     <input type="text" name="funcionario.dataNascimento" value="<fmt:formatDate value="${funcionario.dataNascimento}" type="both" pattern="dd/MM/yyyy" />" id="dataNascimento"
-                                           style="width: 75px;"class="required data"/>
+                                           style="width: 75px;" class="required data"/>
                                     <span>dd/mm/yyyy</span>
                                 </label> 
 

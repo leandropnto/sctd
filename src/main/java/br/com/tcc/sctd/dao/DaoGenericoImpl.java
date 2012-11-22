@@ -125,6 +125,10 @@ public class DaoGenericoImpl<L> implements DaoGenerico<L> {
             
         }
         
-        return (Long) criterio.setProjection(Projections.count(f.getName())).uniqueResult();
+        Long qtd = (Long) criterio.setProjection(Projections.count(f.getName())).uniqueResult();
+        if (qtd == null){
+            qtd = 0L;
+        }
+        return qtd;
     }
 }
