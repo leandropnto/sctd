@@ -6,6 +6,7 @@ package br.com.tcc.sctd.model;
 
 import br.com.tcc.sctd.constants.StatusCliente;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.*;
 
 /**
@@ -30,6 +31,10 @@ public class Cliente implements Serializable {
     @Column(name="status") 
     @Enumerated(EnumType.ORDINAL)
     private StatusCliente status;
+    
+    
+    @ManyToOne
+    private Endereco endereco;
 
     public Cliente() {
     }
@@ -73,7 +78,16 @@ public class Cliente implements Serializable {
     public void setStatus(StatusCliente status) {
         this.status = status;
     }
-    
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+  
     
 
     @Override

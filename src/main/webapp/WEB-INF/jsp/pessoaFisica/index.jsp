@@ -64,7 +64,7 @@
 
             <c:if test="${pessoas.size() >0}">
                 <table id="mytable">
-                    <caption>pessoafisica cadastradas</caption>
+                    <caption>Pessoas cadastradas</caption>
                     <thead>
                         <tr>
                             <th>ID</th>

@@ -52,7 +52,7 @@
                                     <span>Informe o E-mail</span>
                                 </label>
 
-                                <label>CPF<br/>
+                                <label>CNPJ<br/>
                                     <input type="text" name="pessoa.cnpj" value="${pessoa.cnpj}" style="width: 200px;"
                                            class="required cnpj"/> 
                                     <span>Informe o CPF</span>

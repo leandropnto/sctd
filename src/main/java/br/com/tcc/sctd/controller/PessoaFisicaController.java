@@ -7,8 +7,10 @@ package br.com.tcc.sctd.controller;
 import br.com.caelum.vraptor.*;
 import br.com.caelum.vraptor.validator.Validations;
 import br.com.tcc.sctd.constants.StatusCliente;
+import br.com.tcc.sctd.dao.EnderecoDao;
 import br.com.tcc.sctd.dao.PessoaFisicaDao;
 import br.com.tcc.sctd.exceptions.DaoException;
+import br.com.tcc.sctd.model.Endereco;
 import br.com.tcc.sctd.model.PessoaFisica;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,11 +28,13 @@ public class PessoaFisicaController {
     private final Validator validator;
     private final PessoaFisicaDao pessoas;
     private static final int REG_POR_PAGINA = 20;
+    private final EnderecoDao enderecos;
 
-    public PessoaFisicaController(Result result, Validator validator, PessoaFisicaDao pessoafisica) {
+    public PessoaFisicaController(Result result, Validator validator, PessoaFisicaDao pessoafisica, EnderecoDao enderecos) {
         this.result = result;
         this.validator = validator;
         this.pessoas = pessoafisica;
+        this.enderecos = enderecos;
     }
 
     @Path("/")
@@ -110,6 +114,7 @@ public class PessoaFisicaController {
             result.notFound();
         }
         result.include("pessoa", pessoas.buscarPorId(pessoa.getId()));
+        
     }
 
     @Path("/atualizar")
@@ -135,5 +140,16 @@ public class PessoaFisicaController {
         pessoas.atualizar(pessoa);
         result.include("msg", "Pessoa atualizada com sucesso.");
         result.redirectTo(this).filtrar(pessoa);
+    }
+    
+    
+    @Path("/endereco/{pessoa.id}/salvar")
+    public void salvarEndereco(PessoaFisica pessoa, Endereco endereco) throws DaoException{
+        PessoaFisica pessoaRecuperada = pessoas.buscarPorId(pessoa.getId());
+        enderecos.salvar(endereco);
+        pessoaRecuperada.setEndereco(endereco);
+        
+        result.include("msg", "Endereço Incluído com sucesso.");
+        result.redirectTo(this).editar(pessoa);
     }
 }

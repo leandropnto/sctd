@@ -39,6 +39,7 @@
         <mapping class="br.com.tcc.sctd.model.Cliente" />
         <mapping class="br.com.tcc.sctd.model.PessoaFisica" />
         <mapping class="br.com.tcc.sctd.model.PessoaJuridica" />
+        <mapping class="br.com.tcc.sctd.model.Endereco" />
                 
        
 
