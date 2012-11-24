@@ -98,7 +98,7 @@ try{
             
                 /* numeric value */
                 if ( $(this).hasClass('required') && $(this).hasClass('numeric') ){
-                    var nan = new RegExp(/(^-?\d\d*\.\d*$)|(^-?\d\d*$)|(^-?\.\d\d*$)/);
+                    var nan = new RegExp(/(^-?\d\d*\,\d*$)|(^-?\d\d*$)|(^-?\,\d\d*$)/);
                     if (!nan.test($.trim( $(this).val() ))){
                         $(this).removeClass('valid').addClass('invalid');
                         $(this).parent().find('span').html(numericMsg).fadeOut(500).fadeIn(500).fadeOut(500).fadeIn(500);

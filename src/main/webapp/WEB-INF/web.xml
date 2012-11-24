@@ -17,6 +17,16 @@
         <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
         <param-value>messages</param-value>
     </context-param>
+    
+    <context-param>  
+        <param-name>javax.servlet.jsp.jstl.fmt.locale</param-name>  
+        <param-value>pt_BR</param-value>  
+    </context-param>
+    
+    <context-param>
+        <param-name>br.com.caelum.vraptor.packages</param-name>
+        <param-value>br.com.caelum.vraptor.converter.l10n</param-value>
+    </context-param>
 	
     <filter>
         <filter-name>sitemesh</filter-name>
@@ -52,5 +62,5 @@
             <include-prelude>/WEB-INF/jsp/prelude.jspf</include-prelude>
         </jsp-property-group>
     </jsp-config>
-
+    
 </web-app>

@@ -4,6 +4,7 @@
  */
 package br.com.tcc.sctd.model;
 
+import br.com.tcc.sctd.constants.FormaPagamento;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -25,14 +26,23 @@ public class Venda implements Serializable {
     @Column(name="dataVenda", nullable=false)
     private Date dataVenda;
     @Column(name="precoTotal", nullable=false)
-    private BigDecimal precoTotal;
-    @OneToMany
+    private BigDecimal precoTotal;    
+    @OneToMany(mappedBy = "venda", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST) 
     private List<ItemVenda> itens;
     @OneToOne
     private Entrega entrega;
-    @ManyToOne
+    @ManyToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name = "idFuncionario")
     private Funcionario funcionario;
 
+    @ManyToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name="idCliente", nullable=true)
+    private Cliente cliente;
+    
+    @Column(name="formaPagamento")
+    @Enumerated(EnumType.ORDINAL)
+    private FormaPagamento formaPagamento;
+    
     public Venda() {
     }
     
@@ -85,6 +95,24 @@ public class Venda implements Serializable {
     public void setPrecoTotal(BigDecimal precoTotal) {
         this.precoTotal = precoTotal;
     }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public FormaPagamento getFormaPagamento() {
+        return formaPagamento;
+    }
+
+    public void setFormaPagamento(FormaPagamento formaPagamento) {
+        this.formaPagamento = formaPagamento;
+    }
+    
+    
 
     @Override
     public boolean equals(Object obj) {

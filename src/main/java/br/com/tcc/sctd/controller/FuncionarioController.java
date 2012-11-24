@@ -13,7 +13,6 @@ import br.com.tcc.sctd.constants.StatusFuncionario;
 import br.com.tcc.sctd.dao.*;
 import br.com.tcc.sctd.exceptions.DaoException;
 import br.com.tcc.sctd.model.Funcionario;
-import br.com.tcc.sctd.model.FuncionarioStatus;
 import br.com.tcc.sctd.service.Opcoes;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -35,13 +34,9 @@ public class FuncionarioController {
     private List<Opcoes> opcoes;
     private final DepartamentoDao departamentos;
     private final CargoDao cargos;
-    private final FuncionarioDao funcionarios;
-    private final FuncionarioStatusDao funcionariosStatus;
+    private final FuncionarioDao funcionarios;    
     private final EspecialidadeDao especialidades;
-    private static final int REG_POR_PAGINA = 20;
-    private static final int FUNC_DESLIGADO = 2;
-    private static final int FUNC_DESALOCADO = 4;
-    private static final int FUNC_ALOCADO = 1;
+    private static final int REG_POR_PAGINA = 20;   
     private final TipoEspecialidadeDao tipoEspecialidades;
     private final Integer DEP_PRODUCAO = 2;
 
@@ -51,15 +46,14 @@ public class FuncionarioController {
      * @param funcionarios
      */
     public FuncionarioController(Result result, FuncionarioDao funcionarios, DepartamentoDao departamentos,
-            CargoDao cargos, FuncionarioStatusDao funcionariosStatus,
+            CargoDao cargos,
             EspecialidadeDao especialidades, Validator validator, TipoEspecialidadeDao tipoEspecialidades) {
         this.result = result;
         this.funcionarios = funcionarios;
         opcoes = new ArrayList<Opcoes>();
         opcoes.add(new Opcoes("/funcionarios/novo", "Incluir funcionário"));
         this.departamentos = departamentos;
-        this.cargos = cargos;
-        this.funcionariosStatus = funcionariosStatus;
+        this.cargos = cargos;        
         this.especialidades = especialidades;
         this.validator = validator;
         this.tipoEspecialidades = tipoEspecialidades;
@@ -106,6 +100,7 @@ public class FuncionarioController {
         validator.onErrorRedirectTo(this).incluir();
 
         funcionario.setDataContratacao(new Date(System.currentTimeMillis()));
+        funcionario.setCpf(funcionario.getCpf().replaceAll("[.-]", ""));
         
         /* Regra para alocação de funcionário */
         
@@ -136,6 +131,7 @@ public class FuncionarioController {
     public void atualizar(Funcionario funcionario) throws DaoException {
         try {
 
+            funcionario.setCpf(funcionario.getCpf().replaceAll("[.-]", ""));
             funcionarios.atualizar(funcionario);
             result.include("msg", "Funcionário atualizado com sucesso.");
             result.redirectTo(this).filtrar(funcionario);

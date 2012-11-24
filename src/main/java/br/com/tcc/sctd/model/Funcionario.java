@@ -47,7 +47,9 @@ public class Funcionario implements Serializable {
     @Enumerated(EnumType.ORDINAL)
     StatusFuncionario status;
     
+    @Column(name="cpf", unique=true, length=11)
     private String cpf;
+    
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "funcionario_tipoespecialidade", joinColumns = {
         @JoinColumn(name = "matricula")

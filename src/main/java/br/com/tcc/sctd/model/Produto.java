@@ -27,7 +27,7 @@ public class Produto implements Serializable {
     @Column(nullable = false, length = 60)
     private String nome;
 
-    @Column
+    @Column(precision=10, scale=2)
     private BigDecimal valor;
 
     @ManyToOne(fetch = FetchType.EAGER)

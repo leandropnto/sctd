@@ -73,8 +73,8 @@
                                     <select name="funcionario.status.id">
                                         <option value>Selecione o Status</option>
                                         <c:forEach items="${listastatus}" var="st">
-                                            <option value="${st.id}" <c:if test="${st.id == funcionario.status.id}">selected</c:if> >
-                                                ${st.descricao}
+                                            <option value="${st.ordinal()}" <c:if test="${st == funcionario.status}">selected</c:if> >
+                                                ${st.toString()}
                                             </option>
                                         </c:forEach>
                                     </select>

@@ -14,15 +14,19 @@ import javax.persistence.*;
 @Entity
 @Table(catalog = "tcc", schema = "public", name = "ItemVenda")
 public class ItemVenda implements Serializable {
+
     @Id
-    @Column(name="id")
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name="quantidade", nullable=false)
+    @Column(name = "quantidade", nullable = false)
     private Integer quantidade;
-    
     @ManyToOne
+    @JoinColumn(name = "idProduto")
     private Produto produto;
+    @ManyToOne()
+    @JoinColumn(name = "idVenda")
+    private Venda venda;
 
     public ItemVenda() {
     }
@@ -51,6 +55,14 @@ public class ItemVenda implements Serializable {
         this.quantidade = quantidade;
     }
 
+    public Venda getVenda() {
+        return venda;
+    }
+
+    public void setVenda(Venda venda) {
+        this.venda = venda;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -77,7 +89,4 @@ public class ItemVenda implements Serializable {
     public String toString() {
         return "ItemVenda{" + "id=" + id + '}';
     }
-    
-    
-    
 }
