@@ -9,6 +9,7 @@ import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.validator.Validations;
+import br.com.tcc.sctd.constants.StatusFuncionario;
 import br.com.tcc.sctd.dao.*;
 import br.com.tcc.sctd.exceptions.DaoException;
 import br.com.tcc.sctd.model.Funcionario;
@@ -109,9 +110,9 @@ public class FuncionarioController {
         /* Regra para alocação de funcionário */
         
         if (funcionario.getDepartamento().getId() == DEP_PRODUCAO) {
-            funcionario.setStatus(new FuncionarioStatus(FUNC_DESALOCADO));
+            funcionario.setStatus(StatusFuncionario.DESALOCADO);
         } else {
-            funcionario.setStatus(new FuncionarioStatus(FUNC_ALOCADO));
+            funcionario.setStatus(StatusFuncionario.ALOCADO);
         }
         funcionarios.salvar(funcionario);
         result.redirectTo(this).index();
@@ -166,7 +167,7 @@ public class FuncionarioController {
     private void preencheCombos() throws DaoException {
         result.include("cargos", cargos.buscarTodos());
         result.include("departamentos", departamentos.buscarTodos());
-        result.include("listastatus", funcionariosStatus.buscarTodos());
+        result.include("listastatus", StatusFuncionario.values());
         result.include("listaEspecialidades", tipoEspecialidades.buscarTodos());
     }
 
@@ -175,7 +176,7 @@ public class FuncionarioController {
         Funcionario funcionarioEncontrado = null;
         if (funcionario != null) {
             funcionarioEncontrado = funcionarios.buscarPorId(funcionario.getMatricula());
-            funcionarioEncontrado.setStatus(new FuncionarioStatus(FUNC_DESLIGADO));
+            funcionarioEncontrado.setStatus(StatusFuncionario.DESLIGADO);
 
         }
         if (funcionarioEncontrado != null) {

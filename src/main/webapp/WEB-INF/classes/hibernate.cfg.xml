@@ -40,6 +40,11 @@
         <mapping class="br.com.tcc.sctd.model.PessoaFisica" />
         <mapping class="br.com.tcc.sctd.model.PessoaJuridica" />
         <mapping class="br.com.tcc.sctd.model.Endereco" />
+        <mapping class="br.com.tcc.sctd.model.Produto" />
+        <mapping class="br.com.tcc.sctd.model.Entrega" />
+        <mapping class="br.com.tcc.sctd.model.ItemVenda" />
+        <mapping class="br.com.tcc.sctd.model.Venda" />
+        
                 
        
 

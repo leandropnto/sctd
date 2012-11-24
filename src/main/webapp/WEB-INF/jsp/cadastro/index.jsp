@@ -24,6 +24,7 @@
                     <li><a href="<c:url value="/cadastros/transportadoras/"/>">Transportadoras</a></li>
                     <li><a href="<c:url value="/cadastros/pessoafisica/"/>">Pessoa Física</a></li>
                     <li><a href="<c:url value="/cadastros/pessoajuridica/"/>">Pessoa Jurídica</a></li>
+                    <li><a href="<c:url value="/cadastros/produtos/"/>">Produtos</a></li>
                 </ul>
             </fieldset>
         </section>

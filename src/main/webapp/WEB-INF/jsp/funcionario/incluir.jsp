@@ -25,7 +25,7 @@
                             <li>
                                 <label class="med">CPF<br/>
                                     <input type="text" name="funcionario.cpf" value="${funcionario.cpf}" id="cpf" class="required cpf"/>                      
-                                           <span>Informe um CPF válido</span>
+                                    <span>Informe um CPF válido</span>
                                 </label>
                                 <label class="med">Nome<br/>
                                     <input type="text" name="funcionario.nome" id="nome" class="required textoMedio" value="${funcionario.nome}" />
@@ -71,17 +71,6 @@
                                     </select>
                                     <span>Selecione o Departamento</span>
                                 </label>
-<!--                                <label>Status<br/>                      
-                                    <select name="funcionario.status.id" class="required">
-                                        <option>Selecione o Status</option>
-                                        <c:forEach items="${listastatus}" var="st">
-                                            <option value="${st.id}" <c:if test="${st.id == funcionario.status.id}">selected</c:if> >
-                                                ${st.descricao}
-                                            </option>
-                                        </c:forEach>
-                                    </select>
-                                    <span>Selecione o Status</span>
-                                </label>-->
                             </li>
                             <li>
                                 <label>Especialidade<br/>                      

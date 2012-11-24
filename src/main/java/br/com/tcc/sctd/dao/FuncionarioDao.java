@@ -5,6 +5,7 @@
 package br.com.tcc.sctd.dao;
 
 import br.com.caelum.vraptor.ioc.Component;
+import br.com.tcc.sctd.constants.StatusFuncionario;
 import br.com.tcc.sctd.model.Funcionario;
 import java.util.List;
 import org.apache.log4j.Logger;
@@ -44,7 +45,7 @@ public class FuncionarioDao extends DaoGenericoImpl<Funcionario> {
             criterio.add(Restrictions.eq("departamento", funcionario.getDepartamento()));
         }
 
-        if (funcionario.getStatus().getId() >= 0) {
+        if (funcionario.getStatus() != null) {
             criterio.add(Restrictions.eq("status", funcionario.getStatus()));
         }
 
@@ -71,7 +72,7 @@ public class FuncionarioDao extends DaoGenericoImpl<Funcionario> {
             criterio.add(Restrictions.eq("departamento", objeto.getDepartamento()));
         }
 
-        if (objeto.getStatus().getId() >= 0) {
+        if (objeto.getStatus() != null) {
             criterio.add(Restrictions.eq("status", objeto.getStatus()));
         }
 
@@ -79,5 +80,12 @@ public class FuncionarioDao extends DaoGenericoImpl<Funcionario> {
 
         return (Long) criterio.setProjection(Projections.count("id")).uniqueResult();
 
+    }
+    
+    public List<Funcionario> buscaFuncionariosAtivos(){
+        Criteria criterio = sessao.createCriteria(Funcionario.class);
+        criterio.add(Restrictions.eq("status", StatusFuncionario.ALOCADO));
+        criterio.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        return criterio.list();
     }
 }

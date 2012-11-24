@@ -61,9 +61,9 @@
                             </label>
                             <label>Status<br/>                      
                                 <select name="funcionario.status.id">
-                                    <option value="-1">Selecione o Status</option>
+                                    <option value>Selecione o Status</option>
                                     <c:forEach items="${listastatus}" var="st">
-                                        <option value="${st.id}">${st.descricao}</option>
+                                        <option value="${st.ordinal()}">${st.toString()}</option>
                                     </c:forEach>
                                 </select>
                             </label>                                  

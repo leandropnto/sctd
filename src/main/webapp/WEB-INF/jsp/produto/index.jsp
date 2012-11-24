@@ -4,12 +4,12 @@
             <span class="parents">
                 <a href="<c:url value="/"/>">Página Inicial</a> > 
                 <a href="<c:url value="/cadastros/"/>">Cadastros</a> > 
-                <a href="<c:url value="/cadastros/linhas/"/>">Linhas</a> > 
+                <a href="<c:url value="/cadastros/produtos/"/>">Produtos</a> > 
             </span>
-            <span class="children">Pesquisa de Linhas</span>
+            <span class="children">Pesquisa de Produtos</span>
         </section>
         <section class="text-box">
-           <c:if test="${errors.size()>0}">
+            <c:if test="${errors.size()>0}">
                 <div class="error">
                     <c:forEach var="error" items="${errors}">
                         ${error.category} - ${error.message}<br />
@@ -23,49 +23,51 @@
             </c:if>
 
             <br/>
-
-            <a href="<c:url value="/cadastros/linhas/incluir"/>">Incluir</a>
-            <form action="<c:url value="/cadastros/linhas/filtrar" />" name="frmBuscaDepartamento" id="frmBuscaDepartamento" class="validate">
+            <a href="<c:url value="/cadastros/produtos/incluir"/>">Incluir</a>
+            <form action="<c:url value="/cadastros/produtos/filtrar" />" name="frmBuscaDepartamento" id="frmBuscaDepartamento" class="validate">
                 <fieldset class="formato1">
-                    <legend>Pesquisa de Linhas</legend>
+                    <legend>Pesquisa de Produtos</legend>
                     <ul>
                         <li>
-                            <label style="width: 110px;">linha<br/>
-                                <input type="text" name="linha.nome" value="${linha.nome}" style="width: 200px"/>                      
-                            </label>                
-
+                            <label style="width: 210px;">Nome<br/>
+                                <input type="text" name="produto.nome" value="${produto.nome}" style="width: 200px;"/> 
+                                <span>Informe o nome do produto</span>
+                            </label>
                         </li>
-
 
                         <li>
                             <button type="submit" class="button">Buscar</button>
                         </li>
-                        <div class="spacer"></div>
+                        
                     </ul>
                 </fieldset>
             </form>
 
 
-            <c:if test="${linhas.size() >0}">
+            <c:if test="${produtos.size() >0}">
                 <table id="mytable">
-                    <caption>linhas cadastradas</caption>
+                    <caption>Produtos cadastradas</caption>
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Descrição</th>           
+                            <th>Nome</th>                                        
+                            <th>Quantidade</th>                                        
+                            <th>Status</th>                                        
                             <th>Opções</th>           
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${linhas}" var="linha" varStatus="contador">
+                        <c:forEach items="${produtos}" var="produto" varStatus="contador">
                             <tr>
-                                <td style="text-align: right; width: 15px;"><a href="<c:url value="/cadastros/linhas/editar/${linha.id}"/>">${linha.id}</a></td>
-                                <td style="text-align: left; width: 300px;">${linha.nome}</td>
+                                <td style="text-align: right; width: 15px;"><a href="<c:url value="/cadastros/produtos/editar/${produto.id}"/>">${produto.id}</a></td>
+                                <td style="text-align: left; width: 300px;">${produto.nome}</td>                               
+                                <td style="text-align: left; width: 50px;">${produto.quantidade}</td>                               
+                                <td style="text-align: left; width: 50px;">${produto.status.toString()}</td>                               
                                 <td style="text-align: right; width: 40px;">
-                                    <a href="<c:url value="/cadastros/linhas/editar/${linha.id}"/>">
+                                    <a href="<c:url value="/cadastros/produtos/editar/${produto.id}"/>">
                                         <img src="<c:url value="/images/editar_peq.png"/>" alt="Editar" title="Alterar"/>
                                     </a>
-                                    | <a href="<c:url value="/cadastros/linhas/excluir/${linha.id}"/>">
+                                    | <a href="<c:url value="/cadastros/produtos/excluir/${produto.id}"/>">
                                         <img src="<c:url value="/images/excluir_peq.png"/>" alt="Excluir" title="Excluir"/>
                                     </a>
                                 </td>
@@ -75,10 +77,10 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="3">Paginação: <a href="<c:url value="/cadastros/linhas/pagina/1" />"><<</a> 
+                            <td colspan="3">Paginação: <a href="<c:url value="/cadastros/produtos/pagina/1" />"><<</a> 
                                 <c:choose>
                                     <c:when test="${paginaAtual>1}">
-                                        <a href="<c:url value="/cadastros/linhas/pagina/${paginaAtual-1}" />"><</a>                         
+                                        <a href="<c:url value="/cadastros/produtos/pagina/${paginaAtual-1}" />"><</a>                         
                                     </c:when>
                                     <c:otherwise>
                                         <
@@ -87,24 +89,24 @@
                                 ${paginaAtual}
                                 <c:choose>
                                     <c:when test="${paginaAtual < qtdPaginas}">
-                                        <a href="<c:url value="/cadastros/linhas/pagina/${paginaAtual+1}" />">></a> 
+                                        <a href="<c:url value="/cadastros/produtos/pagina/${paginaAtual+1}" />">></a> 
                                     </c:when>
                                     <c:otherwise>
                                         >
                                     </c:otherwise>
                                 </c:choose>
-                                <a href="<c:url value="/cadastros/linhas/pagina/${qtdPaginas}" />">>></a>    
+                                <a href="<c:url value="/cadastros/produtos/pagina/${qtdPaginas}" />">>></a>    
 
 
                             </td>
                         </tr>
                     </tfoot>
                 </table>
-                <br/>
-
-                
-            <span class="destaque">Total de ${qtde} registros divididos em ${qtdPaginas} página(s)</span>
+                <br/>                
+                <span class="destaque">Total de ${qtde} registros divididos em ${qtdPaginas} página(s)</span>
             </c:if>
+
+
         </section>
     </section>
 </section>

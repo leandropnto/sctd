@@ -4,7 +4,9 @@
  */
 package br.com.tcc.sctd.model;
 
+import br.com.tcc.sctd.constants.StatusProduto;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.persistence.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -26,32 +28,30 @@ public class Produto implements Serializable {
     private String nome;
 
     @Column
-    private Float valor;
+    private BigDecimal valor;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn
     @Fetch(FetchMode.JOIN)
     private Modelo modelo;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn
     @Fetch(FetchMode.JOIN)
     private Botao botao;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn
     @Fetch(FetchMode.JOIN)
     private Cor cor;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn
-    @Fetch(FetchMode.JOIN)
-    private Departamento departamento;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn
     @Fetch(FetchMode.JOIN)
     private Linha linha;
+    
+    @Column(name="quantidade", nullable=false)
+    private Integer quantidade;
+    
+    @Column(name="status", nullable=false)
+    @Enumerated(EnumType.ORDINAL)
+    private StatusProduto status;
 
     public Produto() {
     }
@@ -72,13 +72,14 @@ public class Produto implements Serializable {
         this.nome = nome;
     }
 
-    public Float getValor() {
+    public BigDecimal getValor() {
         return valor;
     }
 
-    public void setValor(Float valor) {
+    public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
+
 
     public Botao getBotao() {
         return botao;
@@ -96,13 +97,6 @@ public class Produto implements Serializable {
         this.cor = cor;
     }
 
-    public Departamento getDepartamento() {
-        return departamento;
-    }
-
-    public void setDepartamento(Departamento departamento) {
-        this.departamento = departamento;
-    }
 
     public Linha getLinha() {
         return linha;
@@ -119,6 +113,24 @@ public class Produto implements Serializable {
     public void setModelo(Modelo modelo) {
         this.modelo = modelo;
     }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public StatusProduto getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusProduto status) {
+        this.status = status;
+    }
+    
+    
 
     @Override
     public int hashCode() {

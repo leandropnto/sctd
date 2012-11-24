@@ -12,9 +12,11 @@
             <meta name="description" content="Festas e Eventos">
             <link href="<c:url value="/css/all.css" />" media="screen, projection" rel="stylesheet" type="text/css" />
             <link href="<c:url value="/css/formularios.css" />" rel="stylesheet" type="text/css" />
-            <link href="<c:url value="/js/jquery-ui-1.8.16.custom.css" />" rel="stylesheet" type="text/css" />
-            <script src="<c:url value="/js/jquery-1.8.1.min.js"/>"></script>
-            <script src="<c:url value="/js/jquery-ui-1.8.16.custom.min.js"/>"></script>
+
+            <link href="<c:url value="/js/css/redmond/jquery-ui-1.9.2.custom.css"/>" rel="stylesheet">
+            <script src="<c:url value="/js/jquery-1.8.3.js"/>"></script>
+            <script src="<c:url value="/js/jquery-ui-1.9.2.custom.js"/>"></script>
+
             <script src="<c:url value="/js/modernizr-2.6.1.min.js"/>"></script>
 
             <script src="<c:url value="/js/valida/jquery.validate.js"/>" type="text/javascript" charset="utf-8"></script> 
@@ -110,9 +112,9 @@
                     </address>  
                 </div>
             </footer> 
-            
-            
-            
+
+
+
             <script src="<c:url value="/js/main.js"/>"></script>
         </body>
     </html>

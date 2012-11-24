@@ -6,7 +6,6 @@ package br.com.tcc.sctd.model;
 
 import br.com.tcc.sctd.constants.StatusCliente;
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.*;
 
 /**

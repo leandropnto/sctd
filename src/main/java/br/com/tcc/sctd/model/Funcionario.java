@@ -4,6 +4,7 @@
  */
 package br.com.tcc.sctd.model;
 
+import br.com.tcc.sctd.constants.StatusFuncionario;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -42,20 +43,17 @@ public class Funcionario implements Serializable {
     @JoinColumn(name = "idDepartamento")
     @Fetch(FetchMode.JOIN)
     Departamento departamento;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "idStatus")
-    @Fetch(FetchMode.JOIN)
-    FuncionarioStatus status;
+    @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.ORDINAL)
+    StatusFuncionario status;
     
     private String cpf;
-    @ManyToMany(fetch= FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "funcionario_tipoespecialidade", joinColumns = {
         @JoinColumn(name = "matricula")
     }, inverseJoinColumns = {
         @JoinColumn(name = "id_especialidade")
     })
-    
-    
     private List<TipoEspecialidade> tipoEspecialidades;
 
     public Funcionario() {
@@ -117,11 +115,11 @@ public class Funcionario implements Serializable {
         this.departamento = departamento;
     }
 
-    public FuncionarioStatus getStatus() {
+    public StatusFuncionario getStatus() {
         return status;
     }
 
-    public void setStatus(FuncionarioStatus status) {
+    public void setStatus(StatusFuncionario status) {
         this.status = status;
     }
 
@@ -140,8 +138,6 @@ public class Funcionario implements Serializable {
     public void setTipoEspecialidades(List<TipoEspecialidade> tipoEspecialidades) {
         this.tipoEspecialidades = tipoEspecialidades;
     }
-
-    
 
     @Override
     public int hashCode() {
