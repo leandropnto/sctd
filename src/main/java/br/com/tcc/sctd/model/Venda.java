@@ -21,13 +21,13 @@ import org.hibernate.annotations.FetchMode;
 @Table(catalog = "tcc", schema = "public", name = "Venda")
 public class Venda implements Serializable {
     @Id
-    @Column(name="id")
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Temporal(javax.persistence.TemporalType.DATE)
     @Column(name="dataVenda", nullable=false)
     private Date dataVenda;
-    @Column(name="precoTotal", nullable=false)
+    @Column(name="precoTotal", nullable=false, precision=10, scale=2)
     private BigDecimal precoTotal;    
     @OneToMany(mappedBy = "venda", cascade = CascadeType.PERSIST, fetch= FetchType.EAGER) 
     @Fetch(FetchMode.JOIN)

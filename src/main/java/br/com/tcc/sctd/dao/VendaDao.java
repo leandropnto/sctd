@@ -7,7 +7,6 @@ package br.com.tcc.sctd.dao;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.tcc.sctd.model.Venda;
 import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
@@ -22,15 +21,10 @@ public class VendaDao extends DaoGenericoImpl<Venda> {
         super(sessao);
     }
     
-    
-    public Venda buscarVendaCompleta(Venda v){
+    public Venda buscar(Venda venda){
         Criteria criterio = sessao.createCriteria(Venda.class);
-        criterio.createAlias("itens", "it");
-        
-        
-        criterio.add(Restrictions.eq("id", v.getId()));
-        criterio.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-        
+        criterio.add(Restrictions.eq("id", venda.getId()));
         return (Venda) criterio.uniqueResult();
     }
+    
 }

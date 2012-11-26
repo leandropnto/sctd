@@ -90,7 +90,8 @@
                                     " " + (item.endereco && item.endereco.cidade ? item.endereco.cidade : "") +
                                     " " + (item.endereco && item.endereco.estado ? item.endereco.estado : ""),
                                 cpf: ((item.endereco && item.cpf) ? item.cpf : item.cnpj),
-                                id: "cliente" +item.id
+                                id: "cliente" +item.id,
+                                status: item.status                                
                                 
                             }
                         }));
@@ -104,6 +105,7 @@
                 $('#clienteNome').val(ui.item.label);
                 $('#clienteID').attr('value', ui.item.chave)
                 $('#span_endereco').text(ui.item.endereco)
+                $('#clienteStatus').html("<br/>" + ui.item.status)
                 
                 
                 
@@ -310,8 +312,7 @@
                                     <input type="text" name="numparcelas" value="1" id="numparcelas"/>
                                     <span>Quantidade de Parcelas</span>
                                 </label>
-                            </li>
-                            </li>      
+                            </li>                               
                             <li><hr/></li>
 
                             <li>
@@ -323,8 +324,12 @@
                                                 <input type="text" name="cliente" value="" style="width: 100px" id="clienteBusca"/>                                                
                                             </label> 
                                             <label style="width: 250px;">Nome<br/>
-                                                <input type="text" name="clienteNome" value="" style="width: 240px" id="clienteNome"/>                                                
-                                            </label> 
+                                                <input type="text" name="clienteNome" value="" style="width: 240px" id="clienteNome"/>                                                   
+
+                                            </label>
+                                            <label id="clienteStatus" style="padding-top: 15px; padding-left: 10px; color:red;"> 
+                                                 
+                                            </label>
                                         </li>
                                         <li><span id="span_endereco"></span></li>
                                         <li>

@@ -6,10 +6,8 @@ package br.com.tcc.sctd.controller;
 
 import br.com.caelum.vraptor.*;
 import br.com.caelum.vraptor.validator.Validations;
-import br.com.tcc.sctd.dao.BotaoDao;
 import br.com.tcc.sctd.dao.TipoDao;
 import br.com.tcc.sctd.exceptions.DaoException;
-import br.com.tcc.sctd.model.Botao;
 import br.com.tcc.sctd.model.Tipo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

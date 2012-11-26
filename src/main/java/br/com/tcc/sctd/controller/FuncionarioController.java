@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -39,7 +40,7 @@ public class FuncionarioController {
     private static final int REG_POR_PAGINA = 20;   
     private final TipoEspecialidadeDao tipoEspecialidades;
     private final Integer DEP_PRODUCAO = 2;
-
+    
     /**
      *
      * @param result

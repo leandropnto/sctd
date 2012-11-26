@@ -16,10 +16,7 @@ import br.com.tcc.sctd.exceptions.DaoException;
 import br.com.tcc.sctd.model.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -152,11 +149,11 @@ public class PedidoController {
             p.setValor(totalVenda.divide(new BigDecimal(numparcelas.toString()), RoundingMode.HALF_UP));
             
             
-            GregorianCalendar gc = new GregorianCalendar();
-            gc.setTime(dataFatura);
-            gc.add(GregorianCalendar.MONTH, i + 1);
+           Calendar calendario = Calendar.getInstance();
+           calendario.setTime(dataFatura);
+           calendario.add(Calendar.MONTH, i+1);
             
-            p.setDataVencimento(dataFatura);
+            p.setDataVencimento(calendario.getTime());
             
             listaParcelas.add(p);
         }
@@ -164,18 +161,18 @@ public class PedidoController {
         f.setParcelas(listaParcelas);
         
         venda.setFatura(f);
+                
+        vendas.salvar(venda);    
         
+        result.redirectTo(this).informacaoVenda(venda);
         
-        vendas.salvar(venda);
-//        Venda vendaRecuperada = vendas.buscarVendaCompleta(venda);
-        Venda vendaRecuperada = vendas.buscarPorId(venda.getId());
-        
-        
+    }
+    
+    @Path("/venda/info/{venda.id}")
+    public void informacaoVenda(Venda venda) throws DaoException{
+        Venda vendaRecuperada = vendas.buscarPorId(venda.getId());                
         result.include("venda", vendaRecuperada);
-        LOG.debug(vendaRecuperada.getItens().get(0).getProduto().getNome());
         
-        
-//        result.redirectTo(this).index();
         
     }
 }
