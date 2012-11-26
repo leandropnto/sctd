@@ -6,6 +6,8 @@ package br.com.tcc.sctd.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 /**
  *
@@ -21,9 +23,12 @@ public class ItemVenda implements Serializable {
     private Integer id;
     @Column(name = "quantidade", nullable = false)
     private Integer quantidade;
-    @ManyToOne
-    @JoinColumn(name = "idProduto")
+    
+    @ManyToOne(fetch= FetchType.LAZY)
+    @Fetch(FetchMode.JOIN)
+    @JoinColumn(name = "idProduto", referencedColumnName="id")
     private Produto produto;
+    
     @ManyToOne()
     @JoinColumn(name = "idVenda")
     private Venda venda;

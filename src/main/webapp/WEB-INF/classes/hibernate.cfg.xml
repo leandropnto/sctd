@@ -44,6 +44,8 @@
         <mapping class="br.com.tcc.sctd.model.Entrega" />
         <mapping class="br.com.tcc.sctd.model.ItemVenda" />
         <mapping class="br.com.tcc.sctd.model.Venda" />
+        <mapping class="br.com.tcc.sctd.model.Fatura" />
+        <mapping class="br.com.tcc.sctd.model.Parcela" />
         
                 
        

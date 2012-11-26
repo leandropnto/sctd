@@ -20,7 +20,7 @@ import org.hibernate.annotations.FetchMode;
 public class Produto implements Serializable {
 
     @Id
-    @Column
+    @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
@@ -30,19 +30,19 @@ public class Produto implements Serializable {
     @Column(precision=10, scale=2)
     private BigDecimal valor;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
     private Modelo modelo;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
     private Botao botao;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
     private Cor cor;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
     private Linha linha;
     

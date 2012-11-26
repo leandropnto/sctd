@@ -10,6 +10,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 /**
  *
@@ -27,7 +29,8 @@ public class Venda implements Serializable {
     private Date dataVenda;
     @Column(name="precoTotal", nullable=false)
     private BigDecimal precoTotal;    
-    @OneToMany(mappedBy = "venda", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST) 
+    @OneToMany(mappedBy = "venda", cascade = CascadeType.PERSIST, fetch= FetchType.EAGER) 
+    @Fetch(FetchMode.JOIN)
     private List<ItemVenda> itens;
     @OneToOne
     private Entrega entrega;
@@ -42,6 +45,10 @@ public class Venda implements Serializable {
     @Column(name="formaPagamento")
     @Enumerated(EnumType.ORDINAL)
     private FormaPagamento formaPagamento;
+    
+    @OneToOne(cascade= CascadeType.PERSIST)
+    @JoinColumn(name="idFatura")    
+    private Fatura fatura;
     
     public Venda() {
     }
@@ -111,6 +118,16 @@ public class Venda implements Serializable {
     public void setFormaPagamento(FormaPagamento formaPagamento) {
         this.formaPagamento = formaPagamento;
     }
+
+    public Fatura getFatura() {
+        return fatura;
+    }
+
+    public void setFatura(Fatura fatura) {
+        this.fatura = fatura;
+    }
+    
+    
     
     
 

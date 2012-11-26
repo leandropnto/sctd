@@ -227,6 +227,18 @@
                 id: 'altEnderecoCep'
             }).appendTo('#form');
         });
+        
+        
+        //Método para a forma de pagamento
+        $('#selFormaPagamento').change(function(){
+            var opcao = $("option:selected", this).val();
+            if (opcao == 0 || opcao == 3){                
+                $('#numparcelas').val("1");
+                $('#numparcelas').attr("readonly", true);
+            } else {
+                $('#numparcelas').removeAttr("readonly");
+            }
+        });
             
         
     });
@@ -283,8 +295,10 @@
                                 <label style="width: 150px;">Total da Venda<br/>
                                     <input type="text" name="venda.precoTotal" value="0" readonly style="text-align: right"/>                                   
                                 </label> 
+                            </li>
+                            <li>
                                 <label>Forma de Pagamento<br/>
-                                    <select name="venda.formaPagamento" class="required">
+                                    <select name="venda.formaPagamento" class="required" id="selFormaPagamento">
                                         <option value>Selecione a forma de Pagamento</option>
                                         <c:forEach items="${formasPagamento}" var="forma">
                                             <option value="${forma.ordinal()}">${forma.toString()}</option>
@@ -292,6 +306,11 @@
                                     </select>
                                     <span>Selecione a forma de Pagamento</span>
                                 </label>
+                                <label>Parcelas<br/>
+                                    <input type="text" name="numparcelas" value="1" id="numparcelas"/>
+                                    <span>Quantidade de Parcelas</span>
+                                </label>
+                            </li>
                             </li>      
                             <li><hr/></li>
 

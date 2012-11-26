@@ -10,13 +10,15 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import static br.com.caelum.vraptor.view.Results.json;
 import br.com.tcc.sctd.constants.FormaPagamento;
+import br.com.tcc.sctd.constants.StatusFatura;
 import br.com.tcc.sctd.dao.*;
 import br.com.tcc.sctd.exceptions.DaoException;
 import br.com.tcc.sctd.model.*;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +30,7 @@ import org.slf4j.LoggerFactory;
 @Resource
 @Path("/pedidos")
 public class PedidoController {
+
     private final Result result;
     private final Validator validator;
     private final static Logger LOG = LoggerFactory.getLogger(PedidoController.class);
@@ -38,7 +41,7 @@ public class PedidoController {
     private final PessoaJuridicaDao pjs;
     private final EnderecoDao enderecos;
     private final ClienteDao clientes;
-
+    
     public PedidoController(Result result, Validator validator, ProdutoDao produtos, FuncionarioDao funcionarios, VendaDao vendas,
             PessoaFisicaDao pfs, PessoaJuridicaDao pjs, EnderecoDao enderecos, ClienteDao clientes) {
         this.result = result;
@@ -53,12 +56,12 @@ public class PedidoController {
     }
     
     @Path("/")
-    public void index(){
+    public void index() {
         LOG.debug("/pedido/index");
     }
     
     @Path("/venda")
-    public void formularioVenda() throws DaoException{
+    public void formularioVenda() throws DaoException {
         result.include("funcionarios", funcionarios.buscaFuncionariosAtivos());
         result.include("data", new Date(System.currentTimeMillis()));
         result.include("formasPagamento", FormaPagamento.values());
@@ -66,10 +69,10 @@ public class PedidoController {
     }
     
     @Path("/venda/buscaproduto")
-    public void buscarProdutos(String term){
+    public void buscarProdutos(String term) {
         LOG.debug("Buscando produtos: " + term);
         List<Produto> prods = produtos.buscarPorNome(term);
-        if (prods !=null && !prods.isEmpty()){
+        if (prods != null && !prods.isEmpty()) {
             LOG.debug("Produtos encontrados " + prods.size());
         }
         
@@ -77,11 +80,11 @@ public class PedidoController {
     }
     
     @Path("/venda/buscacliente")
-    public void buscarCliente(String term){
+    public void buscarCliente(String term) {
         LOG.debug("Buscando Cliente: " + term);
-        List<Cliente> clienteList =  pfs.buscaPorCPF(term);
+        List<Cliente> clienteList = pfs.buscaPorCPF(term);
         
-        if (clienteList == null || clienteList.isEmpty()){
+        if (clienteList == null || clienteList.isEmpty()) {
             clienteList = pjs.buscaPorCNPJ(term);
         }
         
@@ -89,9 +92,8 @@ public class PedidoController {
         result.use(json()).withoutRoot().from(clienteList).include("endereco").serialize();
     }
     
-    
     @Path("/venda/registrar")
-    public void registraVenda(Venda venda) throws DaoException{
+    public void registraVenda(Venda venda, Integer numparcelas) throws DaoException {
         LOG.debug("/venda/registrar");
         BigDecimal totalVenda = new BigDecimal("0.00");
         totalVenda.setScale(2, RoundingMode.HALF_UP);
@@ -99,21 +101,21 @@ public class PedidoController {
         
         
         for (ItemVenda itemVenda : itens) {
-            Produto p = produtos.buscarPorId(itemVenda.getProduto().getId());  
+            Produto p = produtos.buscarPorId(itemVenda.getProduto().getId());            
             BigDecimal calculado = new BigDecimal(p.getValor().multiply(new BigDecimal(itemVenda.getQuantidade().toString())).toString()); //p.getValor().multiply(new BigDecimal(itemVenda.getQuantidade().toString()));
             totalVenda = new BigDecimal(totalVenda.add(calculado).toString());
             itemVenda.setVenda(venda);
         }
-        
+
         //Busca o cliente
         Cliente c = clientes.buscarPorId(venda.getCliente().getId());
-        
-        
+
+
         /*
          * Cadastrou um novo endereco, salva o endereco e atribui ao cliente
          */
         Endereco endereco = venda.getCliente().getEndereco();
-        if (endereco != null && endereco.getId() == null){
+        if (endereco != null && endereco.getId() == null) {
             enderecos.salvar(endereco);
             c.setEndereco(endereco);
         }
@@ -123,14 +125,57 @@ public class PedidoController {
         venda.setCliente(c);
         
         LOG.debug("Total da Venda: " + totalVenda);
+        if (venda.getFormaPagamento() == FormaPagamento.DINHEIRO) {
+            LOG.debug("Calculando desconto");
+            BigDecimal valorDesconto = totalVenda.multiply(new BigDecimal("0.05"));
+            totalVenda = totalVenda.subtract(valorDesconto);
+        }
+        
+        
         venda.setPrecoTotal(totalVenda);
         venda.setDataVenda(new Date(System.currentTimeMillis()));
-        venda.setFuncionario(funcionarios.buscarPorId(venda.getFuncionario().getMatricula()));             
+        venda.setFuncionario(funcionarios.buscarPorId(venda.getFuncionario().getMatricula()));        
+        
+        Fatura f = new Fatura();
+        Date dataFatura = new Date(System.currentTimeMillis());
+        f.setDataLancamento(dataFatura);
+        f.setStatus(StatusFatura.ABERTA);
+        
+        
+        List<Parcela> listaParcelas = new ArrayList<Parcela>();
+        for (int i = 0; i < numparcelas; i++) {
+            Parcela p = new Parcela();
+            p.setDataEmissao(dataFatura);
+            p.setFatura(f);
+            p.setJuros(new BigDecimal("0"));
+            p.setDesconto(new BigDecimal("0"));
+            p.setValor(totalVenda.divide(new BigDecimal(numparcelas.toString()), RoundingMode.HALF_UP));
+            
+            
+            GregorianCalendar gc = new GregorianCalendar();
+            gc.setTime(dataFatura);
+            gc.add(GregorianCalendar.MONTH, i + 1);
+            
+            p.setDataVencimento(dataFatura);
+            
+            listaParcelas.add(p);
+        }
+        
+        f.setParcelas(listaParcelas);
+        
+        venda.setFatura(f);
+        
         
         vendas.salvar(venda);
+//        Venda vendaRecuperada = vendas.buscarVendaCompleta(venda);
+        Venda vendaRecuperada = vendas.buscarPorId(venda.getId());
         
-     
-        result.redirectTo(this).index();
+        
+        result.include("venda", vendaRecuperada);
+        LOG.debug(vendaRecuperada.getItens().get(0).getProduto().getNome());
+        
+        
+//        result.redirectTo(this).index();
         
     }
 }
