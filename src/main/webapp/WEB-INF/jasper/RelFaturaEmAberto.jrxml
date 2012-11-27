@@ -11,6 +11,7 @@
 	<field name="status" class="java.lang.Enum"/>
 	<field name="parcelas" class="java.util.List"/>
 	<field name="forma" class="java.lang.Object"/>
+	<field name="valorTotal" class="java.math.BigDecimal"/>
 	<background>
 		<band/>
 	</background>
@@ -34,7 +35,7 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="17">
+		<band height="15">
 			<staticText>
 				<reportElement uuid="24695466-2d91-4136-bd8f-6964c9d4411e" mode="Transparent" x="100" y="0" width="42" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
@@ -67,12 +68,12 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="106">
+		<band height="24">
 			<line>
 				<reportElement uuid="7622a694-98be-42dc-af0a-288ca11b8d0d" positionType="FixRelativeToBottom" x="-20" y="0" width="595" height="1"/>
 			</line>
 			<textField>
-				<reportElement uuid="4aecb47d-bfc1-403a-92a4-fc0ce2f09ecf" x="0" y="0" width="100" height="19" forecolor="#006699" backcolor="#FFFFFF"/>
+				<reportElement uuid="4aecb47d-bfc1-403a-92a4-fc0ce2f09ecf" x="0" y="1" width="100" height="19" forecolor="#006699" backcolor="#FFFFFF"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
@@ -86,11 +87,18 @@
 				<textFieldExpression><![CDATA[$F{dataLancamento}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="265ad1c1-73a7-4325-9586-a88e8ead2189" x="217" y="0" width="118" height="19" forecolor="#006699" backcolor="#FFFFFF"/>
+				<reportElement uuid="265ad1c1-73a7-4325-9586-a88e8ead2189" x="217" y="1" width="118" height="19" forecolor="#006699" backcolor="#FFFFFF"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="265ad1c1-73a7-4325-9586-a88e8ead2189" x="335" y="1" width="118" height="19" forecolor="#006699" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valorTotal}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

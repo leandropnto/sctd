@@ -82,6 +82,8 @@ public class PedidoController {
         }
         
         result.use(json()).withoutRoot().from(prods).serialize();
+        
+                    
     }
     
     @Path("/venda/buscacliente")
@@ -139,7 +141,7 @@ public class PedidoController {
         
         venda.setPrecoTotal(totalVenda);
         venda.setDataVenda(new Date(System.currentTimeMillis()));
-        venda.setFuncionario(funcionarios.buscarPorId(venda.getFuncionario().getMatricula()));        
+        venda.setFuncionario(funcionarios.buscarPorId(venda.getFuncionario().getMatricula()));            
         
         Fatura f = new Fatura();
         Date dataFatura = new Date(System.currentTimeMillis());
@@ -167,6 +169,8 @@ public class PedidoController {
         }
         
         f.setParcelas(listaParcelas);
+        
+        f.setValorTotal(totalVenda);
         
         venda.setFatura(f);
         
@@ -271,6 +275,7 @@ public class PedidoController {
         Entrega entrega = new Entrega();
         entrega.setPreco(totalVenda.multiply(new BigDecimal("0.05")));
         pedido.setEntrega(entrega);
+        pedido.getFatura().setValorTotal(totalVenda);
         
         pedidos.salvar(pedido);        
         

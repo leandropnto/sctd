@@ -7,6 +7,7 @@ package br.com.tcc.sctd.model;
 import br.com.tcc.sctd.constants.FormaPagamento;
 import br.com.tcc.sctd.constants.StatusFatura;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
@@ -31,6 +32,8 @@ public class Fatura implements Serializable {
     private List<Parcela> parcelas;
     @Enumerated(EnumType.ORDINAL)
     private FormaPagamento forma;
+    @Column(name="valorTotal", precision=10, scale=2)
+    private BigDecimal valorTotal;
 
     public Fatura() {
     }
@@ -75,6 +78,15 @@ public class Fatura implements Serializable {
         this.forma = forma;
     }
 
+    public BigDecimal getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(BigDecimal valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+
+    
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {

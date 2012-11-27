@@ -328,7 +328,7 @@
 
                                             </label>
                                             <label id="clienteStatus" style="padding-top: 15px; padding-left: 10px; color:red;"> 
-                                                 
+
                                             </label>
                                         </li>
                                         <li><span id="span_endereco"></span></li>
