@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="05e1bb8d-17b1-463f-8fba-657f9417e268">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="05e1bb8d-17b1-463f-8fba-657f9417e268">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -8,17 +8,17 @@
 	</queryString>
 	<field name="id" class="java.lang.Integer"/>
 	<field name="dataLancamento" class="java.util.Date"/>
-	<field name="status" class="java.lang.String"/>
+	<field name="status" class="java.lang.Enum"/>
 	<field name="parcelas" class="java.util.List"/>
-	<field name="forma" class="java.lang.String"/>
+	<field name="forma" class="java.lang.Object"/>
 	<background>
 		<band/>
 	</background>
 	<title>
 		<band height="96">
-			<image isLazy="true" onErrorType="Blank">
-				<reportElement uuid="7ae439c1-d68d-4a30-835c-bcb7e68c71f8" x="200" y="5" width="160" height="80"/>
-				<imageExpression><![CDATA[big-sctd-icon1.jpg]]></imageExpression>
+			<image onErrorType="Blank">
+				<reportElement uuid="b7965408-75df-4fd2-a4e8-b74d054ff731" x="165" y="5" width="191" height="82"/>
+				<imageExpression><![CDATA["big-sctd-icon1.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</title>
@@ -29,63 +29,70 @@
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="Arial" size="16" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Relatório de Faturas em Aberto
-                ]]></text>
+				<text><![CDATA[Relatório de Faturas]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="60">
+		<band height="17">
 			<staticText>
-				<reportElement uuid="24695466-2d91-4136-bd8f-6964c9d4411e" mode="Transparent" x="135" y="0" width="42" height="32" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement uuid="24695466-2d91-4136-bd8f-6964c9d4411e" mode="Transparent" x="100" y="0" width="42" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<text><![CDATA[Data]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="24695466-2d91-4136-bd8f-6964c9d4411e" mode="Transparent" x="20" y="0" width="15" height="32" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement uuid="24695466-2d91-4136-bd8f-6964c9d4411e" mode="Transparent" x="2" y="0" width="15" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<text><![CDATA[ID
                     ]]></text>
 			</staticText>
+			<staticText>
+				<reportElement uuid="18ba5288-6547-4c5a-ae06-21f442a902cb" x="217" y="0" width="41" height="15"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18ba5288-6547-4c5a-ae06-21f442a902cb" x="335" y="0" width="41" height="15"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="106">
 			<line>
-				<reportElement uuid="7646fc2a-6e5e-4217-b6fa-6503d16685af" x="0" y="32" width="595" height="1" forecolor="#666666"/>
+				<reportElement uuid="7622a694-98be-42dc-af0a-288ca11b8d0d" positionType="FixRelativeToBottom" x="-20" y="0" width="595" height="1"/>
 			</line>
 			<textField>
-				<reportElement uuid="4aecb47d-bfc1-403a-92a4-fc0ce2f09ecf" x="35" y="0" width="100" height="32" forecolor="#006699" backcolor="#FFFFFF"/>
+				<reportElement uuid="4aecb47d-bfc1-403a-92a4-fc0ce2f09ecf" x="0" y="0" width="100" height="19" forecolor="#006699" backcolor="#FFFFFF"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="64fb6070-29c1-41f3-8a47-ddb95f3bfafb" x="178" y="0" width="123" height="32" forecolor="#006699" backcolor="#FFFFFF"/>
+				<reportElement uuid="64fb6070-29c1-41f3-8a47-ddb95f3bfafb" x="100" y="1" width="117" height="19" forecolor="#006699" backcolor="#FFFFFF"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{dataLancamento}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement uuid="18ba5288-6547-4c5a-ae06-21f442a902cb" x="304" y="0" width="63" height="32"/>
-				<textElement>
-					<font fontName="Arial" size="12"/>
-				</textElement>
-				<text><![CDATA[Status]]></text>
-			</staticText>
 			<textField>
-				<reportElement uuid="265ad1c1-73a7-4325-9586-a88e8ead2189" x="370" y="0" width="93" height="32" forecolor="#006699" backcolor="#FFFFFF"/>
+				<reportElement uuid="265ad1c1-73a7-4325-9586-a88e8ead2189" x="217" y="0" width="118" height="19" forecolor="#006699" backcolor="#FFFFFF"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
 			</textField>
 		</band>
-	</columnHeader>
-	<detail>
-		<band height="20"/>
 	</detail>
 	<columnFooter>
 		<band/>

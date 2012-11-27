@@ -268,16 +268,19 @@ public class PedidoController {
         
         pedido.setStatus(StatusPedido.ABERTO);
         
+        Entrega entrega = new Entrega();
+        entrega.setPreco(totalVenda.multiply(new BigDecimal("0.05")));
+        pedido.setEntrega(entrega);
         
         pedidos.salvar(pedido);        
         
-        result.redirectTo(this).index();
-        //result.redirectTo(this).informacaoPedido(pedido);
+        
+        result.redirectTo(this).informacaoPedido(pedido);
         
     }
     
-    @Path("/pedidos/info/{pedido.id}")
-    private void informacaoPedido(Pedido pedido) throws DaoException {
+    @Path("/pedido/info/{pedido.id}")
+    public void informacaoPedido(Pedido pedido) throws DaoException {
         result.include("pedido", pedidos.buscarPorId(pedido.getId()));
     }
 }

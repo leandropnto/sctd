@@ -23,14 +23,12 @@ public class Entrega implements Serializable {
     private Integer id;
     private BigDecimal preco;
     @Temporal(javax.persistence.TemporalType.DATE)
-    @Column(name = "dataRecolhimento", nullable=false)
+    @Column(name = "dataRecolhimento", nullable=true)
     private Date dataRecolhimento;
     @Temporal(javax.persistence.TemporalType.DATE)
     @Column(name = "dataEntrega", nullable=true)
     private Date dataEntrega;
-    
-    @OneToOne
-    private Venda venda;
+        
 
     public Entrega() {
     }
@@ -66,14 +64,7 @@ public class Entrega implements Serializable {
     public void setPreco(BigDecimal preco) {
         this.preco = preco;
     }
-
-    public Venda getVenda() {
-        return venda;
-    }
-
-    public void setVenda(Venda venda) {
-        this.venda = venda;
-    }
+   
 
     @Override
     public boolean equals(Object obj) {

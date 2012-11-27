@@ -16,6 +16,10 @@ public enum StatusFatura {
     private StatusFatura(String statusFatura) {
         this.statusFatura = statusFatura;
     }
+
+    public String getStatusFatura() {
+        return statusFatura;
+    }
     
     
     

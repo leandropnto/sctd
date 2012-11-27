@@ -48,6 +48,10 @@ public class Pedido implements Serializable {
     @OneToOne(cascade= CascadeType.PERSIST)
     @JoinColumn(name="idFatura", referencedColumnName="id")
     private Fatura fatura;
+    
+    @OneToOne(cascade= CascadeType.PERSIST)
+    @JoinColumn(name="idEntrega", referencedColumnName="id")
+    private Entrega entrega;
 
     public Pedido() {
     }
@@ -132,6 +136,15 @@ public class Pedido implements Serializable {
         this.fatura = fatura;
     }
 
+    public Entrega getEntrega() {
+        return entrega;
+    }
+
+    public void setEntrega(Entrega entrega) {
+        this.entrega = entrega;
+    }
+
+    
     
     @Override
     public boolean equals(Object obj) {
