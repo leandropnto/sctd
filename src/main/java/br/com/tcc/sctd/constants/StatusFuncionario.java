@@ -9,7 +9,7 @@ package br.com.tcc.sctd.constants;
  * @author lpinto
  */
 public enum StatusFuncionario {
-    ALOCADO("Alocado"), DESALOCADO("Desalocado"), LICENCA("Licença"), DESLIGADO("Desligado");
+    ATIVO("Ativo"), INATIVO("Inativo"), DESALOCADO("Desalocado");
     
     private String statusFuncionario;
 

@@ -35,11 +35,11 @@ public class Funcionario implements Serializable {
     Date dataContratacao;
     @Column(name = "salario")
     BigDecimal salario;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idCargo")
     @Fetch(FetchMode.JOIN)
     Cargo cargo;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idDepartamento")
     @Fetch(FetchMode.JOIN)
     Departamento departamento;
@@ -50,7 +50,7 @@ public class Funcionario implements Serializable {
     @Column(name="cpf", unique=true, length=11)
     private String cpf;
     
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "funcionario_tipoespecialidade", joinColumns = {
         @JoinColumn(name = "matricula")
     }, inverseJoinColumns = {

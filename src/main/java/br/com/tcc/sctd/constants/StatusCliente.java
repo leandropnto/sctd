@@ -9,7 +9,7 @@ package br.com.tcc.sctd.constants;
  * @author lpinto
  */
 public enum StatusCliente {
-    ATIVO("Ativo"), SUSPENSO("Suspenso"), EXCLUIDO("Excluído");
+    ATIVO("Ativo"), INADIMPLENTE("Inadimplente"), DESATIVADO("Desativado");
     
     private String statusCliente;
 

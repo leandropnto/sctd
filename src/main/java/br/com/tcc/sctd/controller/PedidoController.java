@@ -11,12 +11,17 @@ import br.com.caelum.vraptor.Validator;
 import static br.com.caelum.vraptor.view.Results.json;
 import br.com.tcc.sctd.constants.FormaPagamento;
 import br.com.tcc.sctd.constants.StatusFatura;
+import br.com.tcc.sctd.constants.StatusItemPedido;
+import br.com.tcc.sctd.constants.StatusPedido;
 import br.com.tcc.sctd.dao.*;
 import br.com.tcc.sctd.exceptions.DaoException;
 import br.com.tcc.sctd.model.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,7 +32,7 @@ import org.slf4j.LoggerFactory;
 @Resource
 @Path("/pedidos")
 public class PedidoController {
-
+    
     private final Result result;
     private final Validator validator;
     private final static Logger LOG = LoggerFactory.getLogger(PedidoController.class);
@@ -38,9 +43,10 @@ public class PedidoController {
     private final PessoaJuridicaDao pjs;
     private final EnderecoDao enderecos;
     private final ClienteDao clientes;
+    private final PedidoDao pedidos;
     
     public PedidoController(Result result, Validator validator, ProdutoDao produtos, FuncionarioDao funcionarios, VendaDao vendas,
-            PessoaFisicaDao pfs, PessoaJuridicaDao pjs, EnderecoDao enderecos, ClienteDao clientes) {
+            PessoaFisicaDao pfs, PessoaJuridicaDao pjs, EnderecoDao enderecos, ClienteDao clientes, PedidoDao pedidos) {
         this.result = result;
         this.validator = validator;
         this.produtos = produtos;
@@ -50,6 +56,7 @@ public class PedidoController {
         this.pjs = pjs;
         this.enderecos = enderecos;
         this.clientes = clientes;
+        this.pedidos = pedidos;
     }
     
     @Path("/")
@@ -59,6 +66,7 @@ public class PedidoController {
     
     @Path("/venda")
     public void formularioVenda() throws DaoException {
+        LOG.debug("/pedidos/venda");
         result.include("funcionarios", funcionarios.buscaFuncionariosAtivos());
         result.include("data", new Date(System.currentTimeMillis()));
         result.include("formasPagamento", FormaPagamento.values());
@@ -136,7 +144,7 @@ public class PedidoController {
         Fatura f = new Fatura();
         Date dataFatura = new Date(System.currentTimeMillis());
         f.setDataLancamento(dataFatura);
-        f.setStatus(StatusFatura.ABERTA);
+        f.setStatus(StatusFatura.ANDAMENTO);
         
         
         List<Parcela> listaParcelas = new ArrayList<Parcela>();
@@ -149,9 +157,9 @@ public class PedidoController {
             p.setValor(totalVenda.divide(new BigDecimal(numparcelas.toString()), RoundingMode.HALF_UP));
             
             
-           Calendar calendario = Calendar.getInstance();
-           calendario.setTime(dataFatura);
-           calendario.add(Calendar.MONTH, i+1);
+            Calendar calendario = Calendar.getInstance();
+            calendario.setTime(dataFatura);
+            calendario.add(Calendar.MONTH, i + 1);
             
             p.setDataVencimento(calendario.getTime());
             
@@ -161,18 +169,115 @@ public class PedidoController {
         f.setParcelas(listaParcelas);
         
         venda.setFatura(f);
-                
-        vendas.salvar(venda);    
+        
+        vendas.salvar(venda);        
         
         result.redirectTo(this).informacaoVenda(venda);
         
     }
     
     @Path("/venda/info/{venda.id}")
-    public void informacaoVenda(Venda venda) throws DaoException{
-        Venda vendaRecuperada = vendas.buscarPorId(venda.getId());                
+    public void informacaoVenda(Venda venda) throws DaoException {
+        Venda vendaRecuperada = vendas.buscarPorId(venda.getId());        
         result.include("venda", vendaRecuperada);
         
         
+    }
+    
+    @Path("/pedido")
+    public void formularioPedido() throws DaoException {
+        LOG.debug("/pedidos/venda");
+        result.include("funcionarios", funcionarios.buscaFuncionariosAtivos());
+        result.include("data", new Date(System.currentTimeMillis()));
+        result.include("formasPagamento", FormaPagamento.values());
+    }
+    
+    @Path("/pedido/registrar")
+    public void registrarPedido(Pedido pedido, Integer numparcelas) throws DaoException {
+        
+        LOG.debug("/pedido/registrar");
+        BigDecimal totalVenda = new BigDecimal("0.00");
+        totalVenda.setScale(2, RoundingMode.HALF_UP);
+        List<ItemPedido> itens = pedido.getItens();
+        
+        
+        for (ItemPedido itemPedido : itens) {
+            Produto p = produtos.buscarPorId(itemPedido.getProduto().getId());            
+            BigDecimal calculado = new BigDecimal(p.getValor().multiply(new BigDecimal(itemPedido.getQuantidade().toString())).toString());            
+            totalVenda = new BigDecimal(totalVenda.add(calculado).toString());
+            itemPedido.setStatus(StatusItemPedido.PRODUCAO);
+            itemPedido.setPedido(pedido);
+        }
+
+        //Busca o cliente
+        Cliente c = clientes.buscarPorId(pedido.getCliente().getId());
+
+
+        /*
+         * Cadastrou um novo endereco, salva o endereco e atribui ao cliente
+         */
+        Endereco endereco = pedido.getCliente().getEndereco();
+        if (endereco != null && endereco.getId() == null) {
+            enderecos.salvar(endereco);
+            c.setEndereco(endereco);
+        }
+        
+        
+        
+        pedido.setCliente(c);
+        
+        LOG.debug("Total do Pedido: " + totalVenda);
+        if (pedido.getFatura().getForma() == FormaPagamento.DINHEIRO) {
+            LOG.debug("Calculando desconto");
+            BigDecimal valorDesconto = totalVenda.multiply(new BigDecimal("0.05"));
+            totalVenda = totalVenda.subtract(valorDesconto);
+        }
+        
+        
+        pedido.setPrecoTotal(totalVenda);
+        pedido.setDataPedido(new Date(System.currentTimeMillis()));
+        pedido.setFuncionario(funcionarios.buscarPorId(pedido.getFuncionario().getMatricula()));        
+        
+        
+        Date dataFatura = new Date(System.currentTimeMillis());
+        pedido.getFatura().setDataLancamento(dataFatura);
+        pedido.getFatura().setStatus(StatusFatura.ANDAMENTO);
+        
+        
+        
+        List<Parcela> listaParcelas = new ArrayList<Parcela>();
+        for (int i = 0; i < numparcelas; i++) {
+            Parcela p = new Parcela();
+            p.setDataEmissao(dataFatura);
+            p.setFatura(pedido.getFatura());
+            p.setJuros(new BigDecimal("0"));
+            p.setDesconto(new BigDecimal("0"));
+            p.setValor(totalVenda.divide(new BigDecimal(numparcelas.toString()), RoundingMode.HALF_UP));
+            
+            
+            Calendar calendario = Calendar.getInstance();
+            calendario.setTime(dataFatura);
+            calendario.add(Calendar.MONTH, i + 1);
+            
+            p.setDataVencimento(calendario.getTime());
+            
+            listaParcelas.add(p);
+        }
+        
+        pedido.getFatura().setParcelas(listaParcelas);
+        
+        pedido.setStatus(StatusPedido.ABERTO);
+        
+        
+        pedidos.salvar(pedido);        
+        
+        result.redirectTo(this).index();
+        //result.redirectTo(this).informacaoPedido(pedido);
+        
+    }
+    
+    @Path("/pedidos/info/{pedido.id}")
+    private void informacaoPedido(Pedido pedido) throws DaoException {
+        result.include("pedido", pedidos.buscarPorId(pedido.getId()));
     }
 }

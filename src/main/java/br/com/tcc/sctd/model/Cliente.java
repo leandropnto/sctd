@@ -31,7 +31,7 @@ public class Cliente implements Serializable {
     @Enumerated(EnumType.ORDINAL)
     private StatusCliente status;
     
-    @OneToOne(fetch= FetchType.EAGER)
+    @OneToOne(fetch= FetchType.LAZY)
     @JoinColumn(name="endereco_id")
     Endereco endereco;    
 

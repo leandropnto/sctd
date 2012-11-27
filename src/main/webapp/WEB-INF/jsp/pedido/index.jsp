@@ -10,7 +10,8 @@
         <section class="text-box">
             <fieldset>
                 <ul>
-                    <li><a href="<c:url value="/pedidos/venda"/>">Venda</a></li>
+                    <li><a href="<c:url value="/pedidos/venda"/>">Realizar Venda</a></li>
+                    <li><a href="<c:url value="/pedidos/pedido"/>">Realizar Pedido</a></li>
                 </ul>
             </fieldset>
         </section>

@@ -4,6 +4,7 @@
  */
 package br.com.tcc.sctd.model;
 
+import br.com.tcc.sctd.constants.FormaPagamento;
 import br.com.tcc.sctd.constants.StatusFatura;
 import java.io.Serializable;
 import java.util.Date;
@@ -28,6 +29,8 @@ public class Fatura implements Serializable {
     private StatusFatura status; 
     @OneToMany(mappedBy="fatura", fetch= FetchType.LAZY, cascade= CascadeType.PERSIST)
     private List<Parcela> parcelas;
+    @Enumerated(EnumType.ORDINAL)
+    private FormaPagamento forma;
 
     public Fatura() {
     }
@@ -62,6 +65,36 @@ public class Fatura implements Serializable {
 
     public void setStatus(StatusFatura status) {
         this.status = status;
+    }
+
+    public FormaPagamento getForma() {
+        return forma;
+    }
+
+    public void setForma(FormaPagamento forma) {
+        this.forma = forma;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Fatura other = (Fatura) obj;
+        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 53 * hash + (this.id != null ? this.id.hashCode() : 0);
+        return hash;
     }
 
     

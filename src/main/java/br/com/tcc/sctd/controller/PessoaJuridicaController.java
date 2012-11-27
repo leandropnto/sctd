@@ -105,7 +105,7 @@ public class PessoaJuridicaController {
             result.notFound();
         }
 
-        pessoaRecuperada.setStatus(StatusCliente.EXCLUIDO);
+        pessoaRecuperada.setStatus(StatusCliente.DESATIVADO);
 
         result.include("msg", "Empresa excluída com sucesso.");
         result.redirectTo(this).index();

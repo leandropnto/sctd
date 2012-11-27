@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -108,7 +107,7 @@ public class FuncionarioController {
         if (funcionario.getDepartamento().getId() == DEP_PRODUCAO) {
             funcionario.setStatus(StatusFuncionario.DESALOCADO);
         } else {
-            funcionario.setStatus(StatusFuncionario.ALOCADO);
+            funcionario.setStatus(StatusFuncionario.ATIVO);
         }
         funcionarios.salvar(funcionario);
         result.redirectTo(this).index();
@@ -173,7 +172,7 @@ public class FuncionarioController {
         Funcionario funcionarioEncontrado = null;
         if (funcionario != null) {
             funcionarioEncontrado = funcionarios.buscarPorId(funcionario.getMatricula());
-            funcionarioEncontrado.setStatus(StatusFuncionario.DESLIGADO);
+            funcionarioEncontrado.setStatus(StatusFuncionario.INATIVO);
 
         }
         if (funcionarioEncontrado != null) {

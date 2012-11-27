@@ -84,7 +84,7 @@ public class FuncionarioDao extends DaoGenericoImpl<Funcionario> {
     
     public List<Funcionario> buscaFuncionariosAtivos(){
         Criteria criterio = sessao.createCriteria(Funcionario.class);
-        criterio.add(Restrictions.eq("status", StatusFuncionario.ALOCADO));
+        criterio.add(Restrictions.eq("status", StatusFuncionario.ATIVO));
         criterio.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         return criterio.list();
     }

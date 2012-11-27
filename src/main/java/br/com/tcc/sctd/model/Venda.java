@@ -29,7 +29,7 @@ public class Venda implements Serializable {
     private Date dataVenda;
     @Column(name="precoTotal", nullable=false, precision=10, scale=2)
     private BigDecimal precoTotal;    
-    @OneToMany(mappedBy = "venda", cascade = CascadeType.PERSIST, fetch= FetchType.EAGER) 
+    @OneToMany(mappedBy = "venda", cascade = CascadeType.PERSIST, fetch= FetchType.LAZY) 
     @Fetch(FetchMode.JOIN)
     private List<ItemVenda> itens;
     @OneToOne

@@ -35,7 +35,7 @@ public class Modelo implements Serializable {
     @Column
     private Character sexo;
 
-    @ManyToOne(fetch = FetchType.EAGER)    
+    @ManyToOne(fetch = FetchType.LAZY)    
     private Tipo tipo;
 
     

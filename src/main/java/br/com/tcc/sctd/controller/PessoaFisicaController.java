@@ -101,7 +101,7 @@ public class PessoaFisicaController {
             result.notFound();
         }
 
-        pessoaRecuperada.setStatus(StatusCliente.EXCLUIDO);
+        pessoaRecuperada.setStatus(StatusCliente.DESATIVADO);
 
         result.include("msg", "Pessoa excluída com sucesso.");
         result.redirectTo(this).filtrar(pessoaRecuperada);
