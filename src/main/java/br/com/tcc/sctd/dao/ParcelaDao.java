@@ -5,17 +5,17 @@
 package br.com.tcc.sctd.dao;
 
 import br.com.caelum.vraptor.ioc.Component;
-import br.com.tcc.sctd.model.Entrega;
+import br.com.tcc.sctd.model.Parcela;
 import org.hibernate.Session;
 
 /**
  *
- * @author lpinto
+ * @author leandro
  */
 @Component
-public class EntregaDao extends DaoGenericoImpl<Entrega> {
+public class ParcelaDao extends DaoGenericoImpl<Parcela> {
 
-    public EntregaDao(Session sessao) {
+    public ParcelaDao(Session sessao) {
         super(sessao);
     }
     

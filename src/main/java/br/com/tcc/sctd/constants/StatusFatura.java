@@ -9,7 +9,7 @@ package br.com.tcc.sctd.constants;
  * @author leandro
  */
 public enum StatusFatura {
-    ANDAMENTO("Andamento"), QUITADO("Quidato"), ATRASADO("Atrasado");
+    ANDAMENTO("Andamento"), QUITADO("Quidato"), ATRASADO("Atrasado"), CANCELADA("Cancelada");
     
     private String statusFatura;
 

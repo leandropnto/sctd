@@ -28,7 +28,7 @@ public class Fatura implements Serializable {
     @Enumerated(EnumType.ORDINAL)
     @Column(name="status")
     private StatusFatura status; 
-    @OneToMany(mappedBy="fatura", fetch= FetchType.LAZY, cascade= CascadeType.PERSIST)
+    @OneToMany(mappedBy="fatura", fetch= FetchType.LAZY, cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Parcela> parcelas;
     @Enumerated(EnumType.ORDINAL)
     private FormaPagamento forma;

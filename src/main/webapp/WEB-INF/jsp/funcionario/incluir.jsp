@@ -42,7 +42,7 @@
                                 </label>   
                                 <label>Salário<br/>
                                     <input type="text" name="funcionario.salario" value="${funcionario.salario}" id="salario"
-                                           style="width: 75px;" class="required numeric"/>
+                                           style="width: 75px;" class=" numeric"/>
                                     <span>Salário</span>
                                 </label>      
                             </li>
@@ -74,7 +74,7 @@
                             </li>
                             <li>
                                 <label>Especialidade<br/>                      
-                                    <select name="funcionario.tipoEspecialidades[].id" class="required" multiple>                                        
+                                    <select name="funcionario.tipoEspecialidades[].id" class="" multiple>                                        
                                         <c:forEach items="${listaEspecialidades}" var="especialidade">
                                             <option value="${especialidade.id}" 
                                                     <c:if test="${especialidade.id == funcionario.especialidade.id}">selected</c:if> >

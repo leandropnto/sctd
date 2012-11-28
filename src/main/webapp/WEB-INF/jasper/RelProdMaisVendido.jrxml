@@ -66,7 +66,7 @@
 						<subreportParameterExpression><![CDATA[$F{itens}]]></subreportParameterExpression>
 					</subreportParameter>
 					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{itens})]]></dataSourceExpression>
-					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "RelProdMaisVendido_subreport1.jasper"]]></subreportExpression>
+					<subreportExpression><![CDATA["./RelProdMaisVendido_subreport1.jasper"]]></subreportExpression>
 				</subreport>
 			</elementGroup>
 		</band>

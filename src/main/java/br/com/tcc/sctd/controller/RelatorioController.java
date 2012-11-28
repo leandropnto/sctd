@@ -56,6 +56,7 @@ public class RelatorioController {
         List<Fatura> faturasList = faturas.buscarTodos();
 
         Map<String, Object> mapa = new HashMap<String, Object>();
+        
 
         return jasperMaker.makePdf("RelFaturaEmAberto.jasper", faturasList, "relatorio_faturas.pdf", false, mapa);
     }

@@ -33,7 +33,7 @@
                     <tr>
                         <td>${contador.index + 1}</td>
                         <td>${item.produto.nome}</td>
-                        <td>${item.produto.valor}</td>
+                        <td><fmt:formatNumber currencySymbol="R$" minFractionDigits="2" value="${item.produto.valor}"/></td>
                         <td>${item.quantidade}</td>
 
                     </tr>

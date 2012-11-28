@@ -84,7 +84,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{dataLancamento}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{dataLancamento})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="265ad1c1-73a7-4325-9586-a88e8ead2189" x="217" y="1" width="118" height="19" forecolor="#006699" backcolor="#FFFFFF"/>
@@ -93,7 +93,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 				<reportElement uuid="265ad1c1-73a7-4325-9586-a88e8ead2189" x="335" y="1" width="118" height="19" forecolor="#006699" backcolor="#FFFFFF"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
