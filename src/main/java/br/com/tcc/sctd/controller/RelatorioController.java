@@ -10,9 +10,11 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.interceptor.download.Download;
 import br.com.tcc.sctd.components.JasperMaker;
 import br.com.tcc.sctd.dao.FaturaDao;
+import br.com.tcc.sctd.dao.ItemVendaDao;
 import br.com.tcc.sctd.dao.VendaDao;
 import br.com.tcc.sctd.exceptions.DaoException;
 import br.com.tcc.sctd.model.Fatura;
+import br.com.tcc.sctd.model.ItemVenda;
 import br.com.tcc.sctd.model.Venda;
 import java.util.Date;
 import java.util.HashMap;
@@ -34,12 +36,14 @@ public class RelatorioController {
     private final JasperMaker jasperMaker;
     private final Result result;
     private final VendaDao vendas;
+    private final ItemVendaDao itensVenda;
 
-    public RelatorioController(FaturaDao faturas, JasperMaker jasperMaker, Result result, VendaDao vendas) {
+    public RelatorioController(FaturaDao faturas, JasperMaker jasperMaker, Result result, VendaDao vendas, ItemVendaDao itensVenda) {
         this.faturas = faturas;
         this.jasperMaker = jasperMaker;
         this.result = result;
         this.vendas = vendas;
+        this.itensVenda = itensVenda;
     }
 
     @Path("/")
@@ -68,10 +72,14 @@ public class RelatorioController {
 
     @Path("/produtos/maisvendidos/gerar")
     public Download gerarRelatorioProdutosMaisVendidos(Date dataInicial, Date dataFinal) throws DaoException {
-        List<Venda> vendaList = vendas.buscarPorDataDeVenda(dataInicial, dataFinal);
-
+//        List<Venda> vendaList = vendas.buscarPorDataDeVenda(dataInicial, dataFinal);
+//
         Map<String, Object> mapa = new HashMap<String, Object>();
-
-        return jasperMaker.makePdf("RelProdMaisVendido.jasper", vendaList, "relatorio_faturas.pdf", false, mapa);
+//
+//        return jasperMaker.makePdf("RelProdMaisVendido.jasper", vendaList, "relatorio_faturas.pdf", false, mapa);
+        
+        List<ItemVenda> itens = itensVenda.buscarPorData(dataInicial, dataFinal);
+        
+        return jasperMaker.makePdf("ProdutosVendas.jasper", itens, "relatorio_itens.pdf", false, mapa);
     }
 }

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Mais Vendidos" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5f3eeaa4-5f2c-4252-bad0-f6a7d94f17f0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="venda.dataVenda" class="java.util.Date"/>
+	<field name="quantidade" class="java.lang.Integer"/>
+	<field name="produto.nome" class="java.lang.String"/>
+	<variable name="SomaQuantidade" class="java.lang.Integer" resetType="Group" resetGroup="DataVenda" calculation="Sum">
+		<variableExpression><![CDATA[$F{quantidade}]]></variableExpression>
+	</variable>
+	<group name="DataVenda">
+		<groupExpression><![CDATA[$F{venda.dataVenda}]]></groupExpression>
+		<groupHeader>
+			<band height="54">
+				<rectangle>
+					<reportElement uuid="29c8dd9b-9b59-44d9-9845-31bb28626aab" x="16" y="31" width="499" height="20" backcolor="#CCCCCC"/>
+				</rectangle>
+				<rectangle>
+					<reportElement uuid="e0994219-8d27-46a1-bba8-23ef3093cc9d" x="1" y="-1" width="554" height="27" forecolor="#FFFFFF" backcolor="#CCCCCC"/>
+				</rectangle>
+				<textField>
+					<reportElement uuid="56f29c25-9ecc-4c43-834f-6f2a00e88767" x="44" y="3" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{venda.dataVenda})]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="aa965c58-49a2-4420-92f4-f7ba92f26f70" x="11" y="3" width="34" height="20"/>
+					<textElement/>
+					<text><![CDATA[Data:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="0048467b-9db9-49bf-85bd-e0cef1fa62c3" x="41" y="32" width="100" height="20"/>
+					<textElement/>
+					<text><![CDATA[Produto]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="eb656d13-bb08-409f-a526-f64011a65c16" x="292" y="32" width="100" height="20"/>
+					<textElement/>
+					<text><![CDATA[Quantidade]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="31">
+				<textField>
+					<reportElement uuid="98b39376-0546-4bf6-8916-14a8b5270e4e" x="288" y="3" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$V{SomaQuantidade}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="ccced6b0-8fd6-4f05-90d1-8e915d59ce74" x="238" y="3" width="48" height="20"/>
+					<textElement/>
+					<text><![CDATA[Total:]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="121">
+			<frame>
+				<reportElement uuid="03d063bf-e40c-4aaf-92d4-19e924e947db" mode="Opaque" x="-20" y="-20" width="595" height="139" backcolor="#006699"/>
+				<staticText>
+					<reportElement uuid="0c608b5a-84d0-426e-baf1-efa4bf1c75ba" x="231" y="20" width="304" height="43" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="24" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Produtos Mais Vendidos]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="d1a8e06a-0bbc-4bef-a7dc-00d1895fbcdc" x="355" y="108" width="180" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Venda de produtos]]></text>
+				</staticText>
+				<image>
+					<reportElement uuid="24c1f10f-73da-4961-9202-57ed5f261433" x="12" y="6" width="204" height="102"/>
+					<imageExpression><![CDATA["C:\\Repositorio\\sctd\\src\\main\\webapp\\WEB-INF\\jasper\\big-sctd-icon1.jpg"]]></imageExpression>
+				</image>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement uuid="fb89eb62-fbcd-49ab-a95e-02a19a0a00f2" x="-20" y="20" width="595" height="1" forecolor="#666666"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24">
+			<textField>
+				<reportElement uuid="273e2b42-8f3e-47fb-a502-39d0d0689e14" x="41" y="3" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{produto.nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cbd5ba0a-81d9-46e0-a243-290af8c48f81" x="292" y="1" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{quantidade}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement uuid="fec67aff-c04d-48c6-8b99-83bddfeed0a3" mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="eeeb2493-7940-4617-9120-1f8a044525c6" mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="967b0099-e132-49dd-8ae8-108ed490e102" x="0" y="4" width="100" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
