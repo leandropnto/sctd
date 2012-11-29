@@ -28,6 +28,14 @@ public class Entrega implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     @Column(name = "dataEntrega", nullable=true)
     private Date dataEntrega;
+    
+    @ManyToOne()
+    @JoinColumn(name="idTranportadora", referencedColumnName="id")
+    private Transportadora transportadora;
+    
+    @ManyToOne
+    @JoinColumn(name="idEndereco", referencedColumnName="id")
+    private Endereco endereco;
         
 
     public Entrega() {
@@ -64,7 +72,24 @@ public class Entrega implements Serializable {
     public void setPreco(BigDecimal preco) {
         this.preco = preco;
     }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public Transportadora getTransportadora() {
+        return transportadora;
+    }
+
+    public void setTransportadora(Transportadora transportadora) {
+        this.transportadora = transportadora;
+    }
    
+    
 
     @Override
     public boolean equals(Object obj) {

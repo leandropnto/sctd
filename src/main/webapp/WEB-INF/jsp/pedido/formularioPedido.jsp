@@ -321,7 +321,7 @@
                                     <ul>
                                         <li>
                                             <label style="width: 120px;">CPF/CNPJ<br/>
-                                                <input type="text" name="cliente" value="" style="width: 100px" id="clienteBusca"/>                                                
+                                                <input type="text" name="cliente" value="" style="width: 100px" id="clienteBusca" class="cpf"/>                                                
                                             </label> 
                                             <label style="width: 250px;">Nome<br/>
                                                 <input type="text" name="clienteNome" value="" style="width: 240px" id="clienteNome"/>                                                   

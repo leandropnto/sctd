@@ -96,6 +96,7 @@ public class PedidoController {
     @Path("/venda/buscacliente")
     public void buscarCliente(String term) {
         LOG.debug("Buscando Cliente: " + term);
+        term = term.replaceAll("[.-]", "");
         List<Cliente> clienteList = pfs.buscaPorCPF(term);
 
         if (clienteList == null || clienteList.isEmpty()) {

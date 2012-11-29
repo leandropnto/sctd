@@ -309,7 +309,7 @@
                                     <span>Selecione a forma de Pagamento</span>
                                 </label>
                                 <label>Parcelas<br/>
-                                    <input type="text" name="numparcelas" value="1" id="numparcelas"/>
+                                    <input type="text" name="numparcelas" value="1" id="numparcelas" class="numeric"/>
                                     <span>Quantidade de Parcelas</span>
                                 </label>
                             </li>                               
@@ -321,7 +321,7 @@
                                     <ul>
                                         <li>
                                             <label style="width: 120px;">CPF/CNPJ<br/>
-                                                <input type="text" name="cliente" value="" style="width: 100px" id="clienteBusca"/>                                                
+                                                <input type="text" name="cliente" value="" style="width: 100px" id="clienteBusca" class="cpf"/>                                                
                                             </label> 
                                             <label style="width: 250px;">Nome<br/>
                                                 <input type="text" name="clienteNome" value="" style="width: 240px" id="clienteNome"/>                                                   
@@ -357,8 +357,8 @@
                                             <label style="width: 100px;">Preço<br/>
                                                 <input type="text" name="preco" value="" id="preco" readonly/>                                                
                                             </label> 
-                                            <label style="width: 100px;">QTDE<br/>
-                                                <input type="text" name="qtde" value="" id="qtde"/>                                                
+                                            <label style="width: 100px;">Quantidade<br/>
+                                                <input type="text" name="qtde" value="" id="qtde" class="numeric"/>                                                
                                             </label> 
                                         </li>
                                     </ul>
