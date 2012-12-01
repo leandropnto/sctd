@@ -37,7 +37,7 @@ public class OrdemServico implements Serializable {
     private Integer quantidade;
     @Enumerated(EnumType.ORDINAL)
     private StatusOrdemServico status;
-    @ManyToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "OrdemServico_funcionario", joinColumns = {
         @JoinColumn(name = "id_ordem")
     }, inverseJoinColumns = {

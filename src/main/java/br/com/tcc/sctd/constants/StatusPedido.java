@@ -16,6 +16,11 @@ public enum StatusPedido {
     private StatusPedido(String statusPedido) {
         this.statusPedido = statusPedido;
     }
+
+    @Override
+    public String toString() {
+        return statusPedido;
+    }
     
     
     

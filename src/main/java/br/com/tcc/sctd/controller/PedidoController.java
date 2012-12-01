@@ -8,6 +8,7 @@ import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
+import br.com.caelum.vraptor.validator.ValidationMessage;
 import static br.com.caelum.vraptor.view.Results.json;
 import br.com.tcc.sctd.constants.FormaPagamento;
 import br.com.tcc.sctd.constants.StatusFatura;
@@ -47,6 +48,7 @@ public class PedidoController {
     private final ParcelaDao parcelas;
     private final EntregaDao entregas;
     private final FaturaDao faturas;
+    private final int REG_POR_PAGINA = 20;
 
     public PedidoController(Result result, Validator validator, ProdutoDao produtos, FuncionarioDao funcionarios, VendaDao vendas,
             PessoaFisicaDao pfs, PessoaJuridicaDao pjs, EnderecoDao enderecos, ClienteDao clientes, PedidoDao pedidos, ParcelaDao parcelas,
@@ -69,6 +71,7 @@ public class PedidoController {
     @Path("/")
     public void index() {
         LOG.debug("/pedido/index");
+        
     }
 
     @Path("/venda")
@@ -213,6 +216,12 @@ public class PedidoController {
         List<ItemPedido> itens = pedido.getItens();
 
 
+        if (itens == null || itens.isEmpty()){
+            validator.add(new ValidationMessage("Pedido sem itens. Insira itens antes de finalizar o pedido.", "Pedido"));
+        }
+        
+        validator.onErrorRedirectTo(this).formularioPedido();
+        
         for (ItemPedido itemPedido : itens) {
             Produto p = produtos.buscarPorId(itemPedido.getProduto().getId());
             BigDecimal calculado = new BigDecimal(p.getValor().multiply(new BigDecimal(itemPedido.getQuantidade().toString())).toString());
@@ -351,5 +360,27 @@ public class PedidoController {
         result.include("msg", "Pedido cancelado com sucesso.");
 
         result.redirectTo(this).formularioCancelarPedido();
+    }
+    
+    @Path("/pedido/filtrar")
+    public void filtrar(Pedido pedido) throws DaoException {
+        LOG.debug("/pedidos/filtrar");
+        Long qtdPedidos = pedidos.qtdRegistros(pedido);
+        Long qtdPaginas = qtdPedidos / REG_POR_PAGINA;
+        qtdPaginas += (qtdPedidos % REG_POR_PAGINA > 0) ? 1 : 0;
+        result.include("pedidos", pedidos.buscarPorExemplo(pedido));
+        result.include("qtde", qtdPedidos);
+        result.include("qtdPaginas", qtdPaginas);
+
+        result.include("paginaAtual", 1);
+        result.redirectTo(this).listarPedidos();
+
+
+    }
+    
+    @Path("/pedido/listar")
+    public void listarPedidos(){
+        LOG.debug("/pedido/listar");
+        result.include("listaStatus", StatusPedido.values());
     }
 }

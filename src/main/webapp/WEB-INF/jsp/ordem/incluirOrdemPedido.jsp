@@ -1,22 +1,7 @@
 <script>
     $(function() {
         
-        //Método para a forma de pagamento
-        $('#tipo').change(function(){
-            var opcao = $("option:selected", this).val();
-            console.log(opcao);
-            if (opcao == 1){                                
-                $('#liproduto').css("display","");
-                $('#lipedido').css("display", "none");
-                               
-            } else if (opcao == 2){
-                $('#liproduto').css("display", "none");
-                $('#lipedido').css("display", "");
-            } else {
-                $('#liproduto').css("display", "none");
-                $('#lipedido').css("display", "none");
-            }
-        });
+        
         
         //pedidoid
         //Busca produto
@@ -94,7 +79,7 @@
             <br/>
 
             <div id="stylized" class="myform">
-                <form action="<c:url value="/pedidos/ordem/salvarordemvenda"/>" method="post" id="form" name="form" class="validate">
+                <form action="<c:url value="/pedidos/ordem/salvarordempedido"/>" method="post" id="form" name="form" class="validate">
 
 
                     <fieldset class="formato1">
@@ -112,12 +97,7 @@
                                            value="<fmt:formatDate pattern="dd/MM/yyyy" value="${ordem.dataEntrega}"/>" style="width: 85px;"
                                            class="required data"/> 
                                     <span>dd/mm/aaaa</span>
-                                </label>
-                                <label>Quantidade<br/>
-                                    <input type="text" name="ordem.quantidade" value="${ordem.quantidade}" style="width: 100px;  "
-                                           class="required numeric" id="qtdeItens" readonly/> 
-                                    <span>Informe a quantidade</span>
-                                </label>
+                                </label>                                
                             </li>                             
 
                             <li>
@@ -131,6 +111,11 @@
                                     Item do pedido (Informe o número do PEDIDO e selecione um item)<br/>                                    
                                     <input type="text" name="ordem.item.id" value="" id="idpedido" class="required numeric"/>
                                     <span>Informe o número do PEDIDO e selecione um item</span>
+                                </label>
+                                <label>Quantidade<br/>
+                                    <input type="text" name="ordem.quantidade" value="${ordem.quantidade}" style="width: 100px;  "
+                                           class="required numeric" id="qtdeItens" /> 
+                                    <span>Informe a quantidade</span>
                                 </label>
                             </li>   
                             <li>

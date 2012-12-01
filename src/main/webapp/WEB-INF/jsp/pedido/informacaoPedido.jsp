@@ -14,6 +14,7 @@
                     <li>Data: <fmt:formatDate pattern="dd/MM/yyyy" value="${pedido.dataPedido}"/></li>
                     <li>Valor: <fmt:formatNumber currencySymbol="R$" value="${pedido.precoTotal}" type="currency" minFractionDigits="2"/></li>
                     <li>Funcionário: ${pedido.funcionario.nome}</li>
+                    <li>Status: ${pedido.status.toString()}</li>
 
                 </ul>
             </fieldset>

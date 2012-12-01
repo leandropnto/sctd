@@ -1,23 +1,6 @@
 <script>
     $(function() {
-        
-        //Método para a forma de pagamento
-        $('#tipo').change(function(){
-            var opcao = $("option:selected", this).val();
-            console.log(opcao);
-            if (opcao == 1){                                
-                $('#liproduto').css("display","");
-                $('#lipedido').css("display", "none");
-                               
-            } else if (opcao == 2){
-                $('#liproduto').css("display", "none");
-                $('#lipedido').css("display", "");
-            } else {
-                $('#liproduto').css("display", "none");
-                $('#lipedido').css("display", "none");
-            }
-        });
-        
+
         //pedidoid
         //Busca produto
         $( "#nomep" ).autocomplete({
@@ -112,11 +95,7 @@
                                            class="required data"/> 
                                     <span>dd/mm/aaaa</span>
                                 </label>
-                                <label>Quantidade<br/>
-                                    <input type="text" name="ordem.quantidade" value="${ordem.quantidade}" style="width: 100px;  "
-                                           class="required numeric"/> 
-                                    <span>Informe a quantidade</span>
-                                </label>
+                                
                             </li>                             
                             
                             <li>
@@ -129,6 +108,11 @@
                                 <label>
                                     Produto<br/>
                                     <input type="text" name="nomeproduto" value="" id="nomep"/>
+                                </label>
+                                <label>Quantidade<br/>
+                                    <input type="text" name="ordem.quantidade" value="${ordem.quantidade}" style="width: 100px;  "
+                                           class="required numeric"/> 
+                                    <span>Informe a quantidade</span>
                                 </label>
                             </li>    
                             <li><label> Funcionários<br/>

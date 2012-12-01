@@ -251,9 +251,8 @@
         <section class="breadcrumb">
             <span class="parents">
                 <a href="<c:url value="/"/>">Página Inicial</a> > 
-                <a href="<c:url value="/cadastros/"/>">Cadastros</a> > 
-                <a href="<c:url value="/cadastros/produtos/"/>">Produtos</a> > 
-                <a href="<c:url value="/cadastros/produtos/venda"/>">Venda</a> > 
+                <a href="<c:url value="/pedidos/"/>">Pedidos</a> > 
+                <a href="<c:url value="/pedidos/pedido"/>">Registro de Venda</a> >                 
             </span>
             <span class="children">Registro de Venda</span>
         </section>

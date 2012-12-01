@@ -4,7 +4,7 @@
             <span class="parents">
                 <a href="<c:url value="/"/>">Página Inicial</a> > 
                 <a href="<c:url value="/pedidos/"/>">Pedidos</a> > 
-                <a href="<c:url value="/pedidos/ordemservico/"/>">Ordens de Serviço</a> > 
+                <a href="<c:url value="/pedidos/ordem/"/>">Ordens de Serviço</a> > 
             </span>
             <span class="children">Pesquisa de Ordens de Serviço</span>
         </section>
