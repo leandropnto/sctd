@@ -13,7 +13,9 @@
                     <li><a href="<c:url value="/pedidos/venda"/>">Realizar Venda</a></li>
                     <li><a href="<c:url value="/pedidos/pedido"/>">Realizar Pedido</a></li>
                     <li><a href="<c:url value="/pedidos/pedido/cancelar"/>">Cancelar Pedido</a></li>
-                    <li><a href="<c:url value="/pedidos/ordem/incluir"/>">Registrar Ordem Serviço</a></li>
+                    <li><a href="<c:url value="/pedidos/ordem/"/>">Ordens de Serviço</a></li>
+                    <li><a href="<c:url value="/pedidos/ordem/incluirvenda"/>">Registrar Ordem Serviço - VENDA</a></li>
+                    <li><a href="<c:url value="/pedidos/ordem/incluirpedido"/>">Registrar Ordem Serviço - PEDIDO</a></li>
                 </ul>
             </fieldset>
         </section>

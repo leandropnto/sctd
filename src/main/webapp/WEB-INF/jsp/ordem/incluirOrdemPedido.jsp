@@ -1,4 +1,3 @@
-
 <script>
     $(function() {
         
@@ -21,10 +20,10 @@
         
         //pedidoid
         //Busca produto
-        $( "#nomep" ).autocomplete({
+        $( "#idpedido" ).autocomplete({
             source: function( request, response ) {
                 $.ajax({
-                    url: "<c:url value="/pedidos/venda/buscaproduto"/>",
+                    url: "<c:url value="/pedidos/ordem/buscarpedido"/>",
                     dataType: "json",
                     data: {
                         term: request.term
@@ -33,25 +32,26 @@
                         console.log(data);                        
                         response( $.map( data, function( item ) {
                             return {
-                                label: item.nome,
-                                value: item.nome,
-                                chave: item.id,
-                                preco: item.valor,
+                                label: item.id + "-" + item.produto.nome,
+                                value: item.id,
+                                produto: item.produto.id,
+                                preco: item.produto.valor,
+                                qtde: item.quantidade,
                                 id: "item" +item.id
                                 
                             }
                         }));
                     }
-                });''
+                });
             },
-            minLength: 2,
+            minLength: 1,
             select: function( event, ui ) {
                 
                 
-                $('#nomeproduto').val(ui.item.label);
-                $('#produtoid').val(ui.item.chave);
-                $('#preco').val(ui.item.preco);
-                $('#qtde').focus();
+                $('#nomeproduto').text("Item Selecionado: " + ui.item.label + ". Preço: R$ " + ui.item.preco);
+                $('#produtoid').val(ui.item.produto);
+                $('#qtdeItens').val(ui.item.qtde);
+                
                 
                 
                 
@@ -74,7 +74,7 @@
                 <a href="<c:url value="/pedidos/"/>">Pedidos</a> > 
                 <a href="<c:url value="/pedidos/ordem/"/>">Ordem Serviço</a> > 
             </span>
-            <span class="children">Registro de Ordem de Serviço</span>
+            <span class="children">Registro de Ordem de Serviço - VENDA</span>
         </section>
         <section class="text-box">
 
@@ -94,11 +94,11 @@
             <br/>
 
             <div id="stylized" class="myform">
-                <form action="<c:url value="/pedidos/ordem/salvar"/>" method="post" id="form" name="form" class="validate">
+                <form action="<c:url value="/pedidos/ordem/salvarordemvenda"/>" method="post" id="form" name="form" class="validate">
 
 
                     <fieldset class="formato1">
-                        <legend>Registro de Ordem de Serviço</legend>
+                        <legend>Ordem de Serviço - VENDA</legend>
                         <ul>
                             <li>
                                 <label style="width: 150px;">Data de Inicio<br/>
@@ -115,44 +115,43 @@
                                 </label>
                                 <label>Quantidade<br/>
                                     <input type="text" name="ordem.quantidade" value="${ordem.quantidade}" style="width: 100px;  "
-                                           class="required numeric"/> 
+                                           class="required numeric" id="qtdeItens" readonly/> 
                                     <span>Informe a quantidade</span>
                                 </label>
-                            </li>
-                            <li>
-                                <label>Tipo de Serviço<br/>
-                                    <select name="tipo" id="tipo">
-                                        <option value="0">Selecione</option>
-                                        <option value="1">Venda</option>
-                                        <option value="2">Pedido</option>
-                                    </select>
-                                </label>
-                            </li>  
-                            <li id="liproduto" style="display: none;">
-                                <input type="hidden" name="ordem.produto.id" value="${ordem.produto.id}" id="produtoid"/>
-                                <label>
-                                    Produto<br/>
-                                    <input type="text" name="nomeproduto" value="" id="nomep"/>
-                                </label>
-                            </li>
-                            <li id="lipedido" style="display: none">
-                                <label>
-                                    Pedido<br/>
-                                    <input type="text" name="pedido.id" value="${pedido.id}" id="pedidoid"/>
-                                </label>
-                                <label>Selecione o item<br/>
-                                    <select name="ordem.item.id" id="iditem">
-                                        <option value>Selecione</option>
+                            </li>                             
 
+                            <li>
+                                <label>
+                                    <input type="hidden" name="ordem.produto.id" value="${ordem.produto.id}" id="produtoid"/>
+                                </label>
+                                <span>Selecione um produto.</span>
+                            </li>
+                            <li id="liproduto">                                
+                                <label>
+                                    Item do pedido (Informe o número do PEDIDO e selecione um item)<br/>                                    
+                                    <input type="text" name="ordem.item.id" value="" id="idpedido" class="required numeric"/>
+                                    <span>Informe o número do PEDIDO e selecione um item</span>
+                                </label>
+                            </li>   
+                            <li>
+                                <span id="nomeproduto"></span>                                
+                            </li>
+
+                            <li><label> Funcionários<br/>
+                                    <select name="ordem.funcionarios[].matricula" class="required" multiple size="5">
+                                        <c:forEach items="${funcionarios}" var="funcionario">
+                                            <option value="${funcionario.matricula}">${funcionario.nome}</option>
+                                        </c:forEach>
                                     </select>
+                                    <span>Selecione um funcionário</span>
                                 </label>
                             </li>
+
                             <li>
                                 <label>Status<br/>
                                     <input type="text" name="ordem.status" value="${ordem.status}" readonly/>
                                 </label>
-                            </li>                
-
+                            </li>    
                             <li>
                                 <button type="submit" class="button">Cadastrar</button>
                             </li>

@@ -4,7 +4,7 @@
             <span class="parents">
                 <a href="<c:url value="/"/>">Página Inicial</a> > 
                 <a href="<c:url value="/pedidos/"/>">Pedidos</a> > 
-                <a href="<c:url value="/pedidos/ordemservico/"/>">Ordem de Serviço</a> > 
+                <a href="<c:url value="/pedidos/ordemservico/"/>">Ordens de Serviço</a> > 
             </span>
             <span class="children">Pesquisa de Ordens de Serviço</span>
         </section>
@@ -24,7 +24,7 @@
 
             <br/>
             <a href="<c:url value="/cadastros/produtos/incluir"/>"></a>
-            <form action="<c:url value="/cadastros/produtos/filtrar" />" name="frmBuscaDepartamento" id="frmBuscaDepartamento" class="validate">
+            <form action="<c:url value="/pedidos/ordem/filtrar" />" name="frmBuscaDepartamento" id="frmBuscaDepartamento" class="validate">
                 <fieldset class="formato1">
                     <legend>Pesquisa de Ordens de Serviço</legend>
                     <ul>
@@ -45,25 +45,29 @@
 
 
             <c:if test="${ordens.size() >0}">
-                <table id="mytable">
+                <table id="mytable" style="width: 100%">
                     <caption>Ordens cadastradas</caption>
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Início</th>
                             <th>Entrega</th>                                        
-                            <th>Quantidade</th>                                        
+                            <th>Produto</th>                                        
+                            <th>Qtde</th>                                        
                             <th>Status</th>                                        
                             <th>Opções</th>           
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${ordens}" var="produto" varStatus="contador">
+                        <c:forEach items="${ordens}" var="ordem" varStatus="contador">
                             <tr>
-                                <td style="text-align: right; width: 15px;"><a href="<c:url value="/pedidos/ordens/editar/${ordem.id}"/>">${ordem.id}</a></td>
-                                <td style="text-align: left; width: 300px;">${ordem.dataInicio}</td>                               
-                                <td style="text-align: left; width: 50px;">${ordem.quantidade}</td>                               
-                                <td style="text-align: left; width: 50px;">${ordem.status.toString()}</td>                               
-                                <td style="text-align: right; width: 40px;">
+                                <td style="text-align: right; width: 05%"><a href="<c:url value="/pedidos/ordens/editar/${ordem.id}"/>">${ordem.id}</a></td>
+                                <td style="text-align: left;  width: 10%"><fmt:formatDate pattern="dd/MM/yyyy" value="${ordem.dataInicio}"/></td>                               
+                                <td style="text-align: left;  width: 10%"><fmt:formatDate pattern="dd/MM/yyyy" value="${ordem.dataEntrega}"/></td>                               
+                                <td style="text-align: left;  width: 10%">${ordem.produto.nome}</td>                               
+                                <td style="text-align: right;  width: 10%">${ordem.quantidade}</td>                               
+                                <td style="text-align: left;  width: 10%">${ordem.status.toString()}</td>                               
+                                <td style="text-align: right;  width: 05%">
                                     <a href="<c:url value="/pedidos/ordem/editar/${ordem.id}"/>">
                                         <img src="<c:url value="/images/editar_peq.png"/>" alt="Editar" title="Alterar"/>
                                     </a>

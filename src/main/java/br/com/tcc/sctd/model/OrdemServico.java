@@ -5,20 +5,10 @@
 package br.com.tcc.sctd.model;
 
 import br.com.tcc.sctd.constants.StatusOrdemServico;
+import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import java.util.List;
+import javax.persistence.*;
 
 /**
  *
@@ -26,7 +16,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(catalog = "tcc", schema = "public", name = "OrdemServico")
-public class OrdemServico {
+public class OrdemServico implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,13 +30,20 @@ public class OrdemServico {
     @ManyToOne(optional=false)
     @JoinColumn(name="idProduto", referencedColumnName="id")
     private Produto produto;
-    @OneToOne(mappedBy="item")
+    @OneToOne
     @JoinColumn(name="idItem", referencedColumnName="id")
     private ItemPedido item;
     @Column(name="quantidade", nullable=false)
     private Integer quantidade;
     @Enumerated(EnumType.ORDINAL)
     private StatusOrdemServico status;
+    @ManyToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL)
+    @JoinTable(name = "OrdemServico_funcionario", joinColumns = {
+        @JoinColumn(name = "id_ordem")
+    }, inverseJoinColumns = {
+        @JoinColumn(name = "id_funcionario")
+    })
+    private List<Funcionario> funcionarios;
 
     public OrdemServico() {
     }
@@ -106,6 +103,16 @@ public class OrdemServico {
     public void setStatus(StatusOrdemServico status) {
         this.status = status;
     }
+
+    public List<Funcionario> getFuncionarios() {
+        return funcionarios;
+    }
+
+    public void setFuncionarios(List<Funcionario> funcionarios) {
+        this.funcionarios = funcionarios;
+    }
+    
+    
 
     @Override
     public boolean equals(Object obj) {
