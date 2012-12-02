@@ -9,13 +9,9 @@ import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.interceptor.download.Download;
 import br.com.tcc.sctd.components.JasperMaker;
-import br.com.tcc.sctd.dao.FaturaDao;
-import br.com.tcc.sctd.dao.ItemVendaDao;
-import br.com.tcc.sctd.dao.VendaDao;
+import br.com.tcc.sctd.dao.*;
 import br.com.tcc.sctd.exceptions.DaoException;
-import br.com.tcc.sctd.model.Fatura;
-import br.com.tcc.sctd.model.ItemVenda;
-import br.com.tcc.sctd.model.Venda;
+import br.com.tcc.sctd.model.*;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -37,13 +33,20 @@ public class RelatorioController {
     private final Result result;
     private final VendaDao vendas;
     private final ItemVendaDao itensVenda;
+    private final PedidoDao pedidos;
+    private final ParcelaDao parcelas;
+    private final ProdutoDao produtos;
 
-    public RelatorioController(FaturaDao faturas, JasperMaker jasperMaker, Result result, VendaDao vendas, ItemVendaDao itensVenda) {
+    public RelatorioController(FaturaDao faturas, JasperMaker jasperMaker, Result result, VendaDao vendas, ItemVendaDao itensVenda,
+            PedidoDao pedidos, ParcelaDao parcelas, ProdutoDao produtos) {
         this.faturas = faturas;
         this.jasperMaker = jasperMaker;
         this.result = result;
         this.vendas = vendas;
         this.itensVenda = itensVenda;
+        this.pedidos = pedidos;
+        this.parcelas = parcelas;
+        this.produtos = produtos;
     }
 
     @Path("/")
@@ -81,5 +84,42 @@ public class RelatorioController {
         List<ItemVenda> itens = itensVenda.buscarPorData(dataInicial, dataFinal);
         
         return jasperMaker.makePdf("ProdutosVendas.jasper", itens, "relatorio_itens.pdf", false, mapa);
+    }
+    
+    @Path("/pagamentos")
+    public Download gerarRelatorioPagamentos()throws DaoException {
+        List<Parcela> parcelasList = parcelas.buscarTodos();
+        Map<String, Object> mapa = new HashMap<String, Object>();
+        return jasperMaker.makePdf("Pagamentos.jasper", parcelasList, "pagamentos.pdf", false, mapa);
+    }
+    
+    /*
+    @Path("/ordensProducao")
+    public Download gerarRelatorioOrdensProducao()throws DaoException {
+        List<Parcela> ordensProducao = ordemProducaoDAO.buscarTodos();
+        Map<String, Object> mapa = new HashMap<String, Object>();
+        return jasperMaker.makePdf("AndamentoProducao.jasper", ordensProducao, "ordensProducao.pdf", false, mapa);
+    }
+    */
+    
+    @Path("/pedidos")
+    public Download gerarPedidos()throws DaoException {
+        List<Pedido> pedidosList = pedidos.buscarTodos();
+        Map<String, Object> mapa = new HashMap<String, Object>();
+        return jasperMaker.makePdf("Pedidos.jasper", pedidosList, "pedidos.pdf", false, mapa);
+    }
+    
+    @Path("/vendas")
+    public Download gerarVendas()throws DaoException {
+        List<Venda> vendasList = vendas.buscarTodos();
+        Map<String, Object> mapa = new HashMap<String, Object>();
+        return jasperMaker.makePdf("Vendas.jasper", vendasList, "vendas.pdf", false, mapa);
+    }
+    
+    @Path("/estoque")
+    public Download gerarEstoques()throws DaoException {
+        List<Produto> produtoList = produtos.buscarTodos();
+        Map<String, Object> mapa = new HashMap<String, Object>();
+        return jasperMaker.makePdf("EstoqueDeProdutos.jasper", produtoList, "produtos.pdf", false, mapa);
     }
 }

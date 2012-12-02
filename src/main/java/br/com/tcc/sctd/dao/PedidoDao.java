@@ -6,6 +6,7 @@ package br.com.tcc.sctd.dao;
 
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.tcc.sctd.constants.StatusItemPedido;
+import br.com.tcc.sctd.exceptions.DaoException;
 import br.com.tcc.sctd.model.ItemPedido;
 import br.com.tcc.sctd.model.Pedido;
 import java.lang.reflect.Field;
@@ -59,37 +60,48 @@ public class PedidoDao extends DaoGenericoImpl<Pedido> {
         Criteria criterio = sessao.createCriteria(Pedido.class);
         Example example = Example.create(objeto).enableLike(MatchMode.ANYWHERE).ignoreCase().excludeZeroes();
         criterio.add(example);
-        
-        if(objeto.getId() != null){
+
+        if (objeto.getId() != null) {
             criterio.add(Restrictions.eq("id", objeto.getId()));
         }
-        
+
         criterio.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-        
+
         return criterio.list();
     }
 
     @Override
     public Long qtdRegistros(Pedido objeto) {
-         Criteria criterio = sessao.createCriteria(Pedido.class);
-        Field f =  objeto.getClass().getDeclaredFields()[0];
+        Criteria criterio = sessao.createCriteria(Pedido.class);
+        Field f = objeto.getClass().getDeclaredFields()[0];
         if (objeto != null) {
             Example example = Example.create(objeto).enableLike(MatchMode.ANYWHERE).ignoreCase().excludeZeroes();
             criterio.add(example);
-            if (objeto.getId() != null){
+            if (objeto.getId() != null) {
                 criterio.add(Restrictions.eq("id", objeto.getId()));
             }
-            
+
         }
-        
+
         Long qtd = (Long) criterio.setProjection(Projections.count(f.getName())).uniqueResult();
-        if (qtd == null){
+        if (qtd == null) {
             qtd = 0L;
         }
         return qtd;
     }
-    
-    
-    
-    
+
+    @Override
+    public List<Pedido> buscarTodos() throws DaoException {
+
+        Criteria criterio  = sessao.createCriteria(Pedido.class);
+        try {
+            criterio.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+            
+            return criterio.list();
+        } catch (Exception e) {
+            throw new DaoException(e);
+        }
+
+
+    }
 }
