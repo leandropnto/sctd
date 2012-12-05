@@ -86,9 +86,9 @@ public class EntregaController {
                     pedidoRecuperado.getEntrega().setDataRecolhimento(data);
                     pedidos.atualizar(pedidoRecuperado);
                     result.include("msg", "Recolhimento do pedido registrado com sucesso.");
-                } else{
+                } else {
                     validator.add(new ValidationMessage("A entrega somente pode ser liberada para pedidos concluídos. "
-                            + "Atualmente o status do pedido é: " + pedidoRecuperado.getStatus() , "Status Pedido"));
+                            + "Atualmente o status do pedido é: " + pedidoRecuperado.getStatus(), "Status Pedido"));
                 }
 
             } else {
@@ -102,5 +102,61 @@ public class EntregaController {
 
         result.redirectTo(this).recolhimentoParaEntrega();
 
+    }
+
+    @Path("/entrega")
+    public void informarEntrega() throws DaoException {
+        LOG.debug("/pedidos/entrega");
+        //result.include("entregas", entregas.buscarEntregasAbertas());
+    }
+
+    @Path("/registrarentrega")
+    public void registrarEntrega(Venda venda, Pedido pedido, Date data) throws DaoException {
+        LOG.debug("/pedidos/entrega/registrarrecolhimento");
+        if ((venda.getId() != null) && (pedido.getId() != null) || (venda.getId() == null) && (pedido.getId() == null)) {
+            validator.add(new ValidationMessage("Informe o número do pedido OU o número da venda", "Pedido/Venda"));
+        }
+
+        validator.onErrorRedirectTo(this).informarEntrega();
+
+        if (venda != null && venda.getId() != null) {
+            Venda vendaRecuperada = vendas.buscarPorId(venda.getId());
+            if (vendaRecuperada == null) {
+                validator.add(new ValidationMessage("Venda não encontrada.", "Venda"));
+                LOG.debug("Venda não encontrada.");
+
+            } else {
+                if (vendaRecuperada.getEntrega() != null) {
+                    venda.getEntrega().setDataRecolhimento(data);
+                    vendas.atualizar(vendaRecuperada);
+                    result.include("msg", "Recolhimento da venda registrado com sucesso.");
+                } else {
+                    validator.add(new ValidationMessage("Venda sem entrega registrada.", "Venda"));
+                    LOG.debug("Venda sem entrega registrada.");
+                }
+            }
+        }
+
+        validator.onErrorRedirectTo(this).recolhimentoParaEntrega();
+
+        if (pedido != null && pedido.getId() != null) {
+            Pedido pedidoRecuperado = pedidos.buscarPorId(pedido.getId());
+            if (pedido != null) {
+                if (pedidoRecuperado.getStatus() == StatusPedido.CONCLUIDO) {
+                    pedidoRecuperado.getEntrega().setDataRecolhimento(data);
+                    pedidos.atualizar(pedidoRecuperado);
+                    result.include("msg", "Recolhimento do pedido registrado com sucesso.");
+                } else {
+                    validator.add(new ValidationMessage("A entrega somente pode ser liberada para pedidos concluídos. "
+                            + "Atualmente o status do pedido é: " + pedidoRecuperado.getStatus(), "Status Pedido"));
+                }
+
+            } else {
+                validator.add(new ValidationMessage("Pedido não encontrado.", "Pedido"));
+            }
+        }
+
+        validator.onErrorRedirectTo(this).recolhimentoParaEntrega();
+        result.redirectTo(this).recolhimentoParaEntrega();
     }
 }

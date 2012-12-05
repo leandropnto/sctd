@@ -25,6 +25,7 @@
                 <hr/>
                 <ul>
                     <li><a href="<c:url value="/pedidos/entrega/recolhimento"/>">Registrar Recolhimento</a></li>
+                    <li><a href="<c:url value="/pedidos/entrega/entrega"/>">Registrar Entrega</a></li>
                 </ul>
             </fieldset>
         </section>

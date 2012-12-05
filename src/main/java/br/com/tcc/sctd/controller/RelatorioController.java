@@ -88,7 +88,7 @@ public class RelatorioController {
     
     @Path("/pagamentos")
     public Download gerarRelatorioPagamentos()throws DaoException {
-        List<Parcela> parcelasList = parcelas.buscarTodos();
+        List<Parcela> parcelasList = parcelas.buscarPagos();
         Map<String, Object> mapa = new HashMap<String, Object>();
         return jasperMaker.makePdf("Pagamentos.jasper", parcelasList, "pagamentos.pdf", false, mapa);
     }
@@ -122,4 +122,6 @@ public class RelatorioController {
         Map<String, Object> mapa = new HashMap<String, Object>();
         return jasperMaker.makePdf("EstoqueDeProdutos.jasper", produtoList, "produtos.pdf", false, mapa);
     }
+    
+  
 }
