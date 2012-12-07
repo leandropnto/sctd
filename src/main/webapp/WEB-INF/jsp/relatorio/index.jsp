@@ -12,10 +12,11 @@
                 <ul>
                     <li><a href="<c:url value="/relatorios/alocacao"/>">Alocação de Funcionários</a></li>
                     <li><a href="<c:url value="/relatorios/pagamentos"/>">Pagamentos</a></li>
-                    <li><a href="<c:url value="/relatorios/ordemservico/"/>">Ordens de Serviço</a></li>
-                    <li><a href="<c:url value="/relatorios/prodfuncionarios/"/>">Produtividade dos Funcionários</a></li>                    
+                    <li><a href="<c:url value="/relatorios/ordemservico"/>">Ordens de Serviço</a></li>
+                    <li><a href="<c:url value="/relatorios/prodfuncionarios"/>">Produtividade dos Funcionários</a></li>                    
                     <li><a href="<c:url value="/relatorios/faturas"/>">Faturas</a></li>
                     <li><a href="<c:url value="/relatorios/produtos/maisvendidos"/>">Produtos Mais Vendidos</a></li>
+                    <li><a href="<c:url value="/relatorios/estoque"/>">Estoque de Produtos</a></li>
                     
                 </ul>
             </fieldset>

@@ -55,26 +55,27 @@
                             <th>Produto</th>                                        
                             <th>Qtde</th>                                        
                             <th>Status</th>                                        
-                            <th>Opções</th>           
+<!--                            <th>Opções</th>           -->
                         </tr>
                     </thead>
                     <tbody>
                         <c:forEach items="${ordens}" var="ordem" varStatus="contador">
                             <tr>
-                                <td style="text-align: right; width: 05%"><a href="<c:url value="/pedidos/ordens/editar/${ordem.id}"/>">${ordem.id}</a></td>
+<!--                                <td style="text-align: right; width: 05%"><a href="<c:url value="/pedidos/ordens/editar/${ordem.id}"/>">${ordem.id}</a></td>-->
+                                <td style="text-align: right; width: 05%">${ordem.id}</td>
                                 <td style="text-align: left;  width: 10%"><fmt:formatDate pattern="dd/MM/yyyy" value="${ordem.dataInicio}"/></td>                               
                                 <td style="text-align: left;  width: 10%"><fmt:formatDate pattern="dd/MM/yyyy" value="${ordem.dataEntrega}"/></td>                               
                                 <td style="text-align: left;  width: 10%">${ordem.produto.nome}</td>                               
                                 <td style="text-align: right;  width: 10%">${ordem.quantidade}</td>                               
                                 <td style="text-align: left;  width: 10%">${ordem.status.toString()}</td>                               
-                                <td style="text-align: right;  width: 05%">
+<!--                                <td style="text-align: right;  width: 05%">
                                     <a href="<c:url value="/pedidos/ordem/editar/${ordem.id}"/>">
                                         <img src="<c:url value="/images/editar_peq.png"/>" alt="Editar" title="Alterar"/>
                                     </a>
                                     | <a href="<c:url value="/pedidos/ordem/excluir/${produto.id}"/>">
                                         <img src="<c:url value="/images/excluir_peq.png"/>" alt="Excluir" title="Excluir"/>
                                     </a>
-                                </td>
+                                </td>-->
                             </tr>
                         </c:forEach>
 

@@ -158,6 +158,7 @@ public class PedidoController {
         Date dataFatura = new Date(System.currentTimeMillis());
         f.setDataLancamento(dataFatura);
         f.setStatus(StatusFatura.ANDAMENTO);
+        f.setForma(venda.getFormaPagamento());
 
 
         List<Parcela> listaParcelas = new ArrayList<Parcela>();
