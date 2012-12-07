@@ -75,15 +75,11 @@ public class RelatorioController {
 
     @Path("/produtos/maisvendidos/gerar")
     public Download gerarRelatorioProdutosMaisVendidos(Date dataInicial, Date dataFinal) throws DaoException {
-//        List<Venda> vendaList = vendas.buscarPorDataDeVenda(dataInicial, dataFinal);
-//
         Map<String, Object> mapa = new HashMap<String, Object>();
-//
-//        return jasperMaker.makePdf("RelProdMaisVendido.jasper", vendaList, "relatorio_faturas.pdf", false, mapa);
         
         List<ItemVenda> itens = itensVenda.buscarPorData(dataInicial, dataFinal);
         
-        return jasperMaker.makePdf("ProdutosVendas.jasper", itens, "relatorio_itens.pdf", false, mapa);
+        return jasperMaker.makePdf("ProdutosVendas.jasper", itens, "produtoMaisVendidos.pdf", false, mapa);
     }
     
     @Path("/pagamentos")

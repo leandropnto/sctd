@@ -11,6 +11,7 @@
             <fieldset class="formato1">
                 <legend>Venda Registrada</legend>
                 <ul>
+                    <li style="padding-top: 10px;">Nº Venda: ${venda.id}</li>
                     <li>Data: <fmt:formatDate pattern="dd/MM/yyyy" value="${venda.dataVenda}"/></li>
                     <li>Valor: <fmt:formatNumber currencySymbol="R$" value="${venda.precoTotal}" type="currency" minFractionDigits="2"/></li>
                     <li>Funcionário: ${venda.funcionario.nome}</li>

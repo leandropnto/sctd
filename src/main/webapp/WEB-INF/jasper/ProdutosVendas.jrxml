@@ -6,8 +6,17 @@
 	<field name="venda.dataVenda" class="java.util.Date"/>
 	<field name="quantidade" class="java.lang.Integer"/>
 	<field name="produto.nome" class="java.lang.String"/>
-	<variable name="SomaQuantidade" class="java.lang.Integer" resetType="Group" resetGroup="DataVenda" calculation="Sum">
+	<variable name="SomaQuantidade" class="java.lang.Integer" resetType="Group" resetGroup="ProdutoNome" calculation="Sum">
 		<variableExpression><![CDATA[$F{quantidade}]]></variableExpression>
+	</variable>
+	<variable name="somaTotal" class="java.lang.Integer" incrementType="Group" incrementGroup="DataVenda" calculation="Sum">
+		<variableExpression><![CDATA[$V{SomaQuantidade}]]></variableExpression>
+	</variable>
+	<variable name="somaMes" class="java.lang.Integer" resetType="Group" resetGroup="DataVenda" incrementType="Group" incrementGroup="ProdutoNome" calculation="Sum">
+		<variableExpression><![CDATA[$V{SomaQuantidade}]]></variableExpression>
+	</variable>
+	<variable name="somaGeral" class="java.lang.Integer" incrementType="Group" incrementGroup="DataVenda" calculation="Sum">
+		<variableExpression><![CDATA[$V{somaMes}]]></variableExpression>
 	</variable>
 	<group name="DataVenda">
 		<groupExpression><![CDATA[$F{venda.dataVenda}]]></groupExpression>
@@ -22,7 +31,7 @@
 				<textField>
 					<reportElement uuid="56f29c25-9ecc-4c43-834f-6f2a00e88767" x="44" y="3" width="100" height="20"/>
 					<textElement/>
-					<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{venda.dataVenda})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("MM/yyyy").format($F{venda.dataVenda})]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement uuid="aa965c58-49a2-4420-92f4-f7ba92f26f70" x="11" y="3" width="34" height="20"/>
@@ -42,17 +51,42 @@
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="31">
+			<band height="24">
 				<textField>
 					<reportElement uuid="98b39376-0546-4bf6-8916-14a8b5270e4e" x="288" y="3" width="100" height="20"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{somaMes}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="ccced6b0-8fd6-4f05-90d1-8e915d59ce74" x="211" y="3" width="75" height="20"/>
+					<textElement textAlignment="Right">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[SubTotal:]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="ProdutoNome">
+		<groupExpression><![CDATA[$F{produto.nome}]]></groupExpression>
+		<groupHeader>
+			<band height="22">
+				<textField>
+					<reportElement uuid="273e2b42-8f3e-47fb-a502-39d0d0689e14" x="41" y="0" width="251" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{produto.nome}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="22">
+				<textField>
+					<reportElement uuid="cbd5ba0a-81d9-46e0-a243-290af8c48f81" x="309" y="0" width="100" height="20"/>
 					<textElement/>
 					<textFieldExpression><![CDATA[$V{SomaQuantidade}]]></textFieldExpression>
 				</textField>
-				<staticText>
-					<reportElement uuid="ccced6b0-8fd6-4f05-90d1-8e915d59ce74" x="238" y="3" width="48" height="20"/>
-					<textElement/>
-					<text><![CDATA[Total:]]></text>
-				</staticText>
 			</band>
 		</groupFooter>
 	</group>
@@ -94,20 +128,6 @@
 			</line>
 		</band>
 	</columnHeader>
-	<detail>
-		<band height="24">
-			<textField>
-				<reportElement uuid="273e2b42-8f3e-47fb-a502-39d0d0689e14" x="41" y="3" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{produto.nome}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="cbd5ba0a-81d9-46e0-a243-290af8c48f81" x="292" y="1" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{quantidade}]]></textFieldExpression>
-			</textField>
-		</band>
-	</detail>
 	<columnFooter>
 		<band/>
 	</columnFooter>
@@ -131,6 +151,21 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band/>
+		<band height="34">
+			<textField>
+				<reportElement uuid="5e70677e-c282-493d-8e46-59b62a9d4714" mode="Opaque" x="309" y="0" width="145" height="20" backcolor="#CCCCCC"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{somaGeral}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="19eebbed-7979-4330-ad7e-9682cba5afe2" mode="Opaque" x="209" y="0" width="100" height="20" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Total Geral:]]></text>
+			</staticText>
+		</band>
 	</summary>
 </jasperReport>
