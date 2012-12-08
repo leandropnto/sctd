@@ -9,6 +9,7 @@ import br.com.tcc.sctd.model.Produto;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -27,5 +28,11 @@ public class ProdutoDao extends DaoGenericoImpl<Produto> {
         criterio.add(Restrictions.ilike("nome", "%" + term + "%"));
         return criterio.list();
     }
-    
+
+    public List<Produto> buscarPorNomeComQuantidadeMaiorQueZero(String term) {
+        Criteria criterio = sessao.createCriteria(Produto.class);
+        criterio.add(Restrictions.ilike("nome", term, MatchMode.ANYWHERE));
+        criterio.add(Restrictions.gt("quantidade", 0));
+        return criterio.list();
+    }
 }

@@ -1,5 +1,24 @@
 <script>
     $(function() {
+        
+        
+        
+        $("#qtdItem").keypress(function(event) {
+            var tecla = event.which;
+            if ( event.which == 13 ) {
+                event.preventDefault();
+                confirmaVenda();   
+            } else if ((tecla > 47 && tecla < 58)) // numeros de 0 a 9  
+                return true;  
+            else {  
+                if (tecla != 8) // backspace  
+                //event.keyCode = 0;  
+                    return false;  
+                else  
+                    return true;  
+            }  
+            
+        });
 
         //pedidoid
         //Busca produto
@@ -111,7 +130,7 @@
                                 </label>
                                 <label>Quantidade<br/>
                                     <input type="text" name="ordem.quantidade" value="${ordem.quantidade}" style="width: 100px;  "
-                                           class="required numeric"/> 
+                                           class="required numeric" id="qtdItem"/> 
                                     <span>Informe a quantidade</span>
                                 </label>
                             </li>    

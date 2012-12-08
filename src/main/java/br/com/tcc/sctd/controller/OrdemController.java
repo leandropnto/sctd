@@ -14,6 +14,7 @@ import static br.com.caelum.vraptor.view.Results.json;
 import br.com.tcc.sctd.constants.StatusItemPedido;
 import br.com.tcc.sctd.constants.StatusOrdemServico;
 import br.com.tcc.sctd.constants.StatusPedido;
+import br.com.tcc.sctd.constants.StatusProduto;
 import br.com.tcc.sctd.dao.FuncionarioDao;
 import br.com.tcc.sctd.dao.ItemPedidoDao;
 import br.com.tcc.sctd.dao.OrdemDao;
@@ -97,7 +98,7 @@ public class OrdemController {
         ordens.salvar(ordem);
 
         result.include("msg", "Ordem de Serviço Registrada com sucesso.");
-        result.redirectTo(this).index();
+        result.redirectTo(this).filtrar(ordem);
     }
 
     @Path("/salvarordempedido")
@@ -202,6 +203,7 @@ public class OrdemController {
         LOG.debug("Atualizando quantidade do produto de " + produto.getQuantidade() + " para " + produto.getQuantidade()
                 + ordemRecuperada.getQuantidade());
         produto.setQuantidade(produto.getQuantidade() + ordemRecuperada.getQuantidade());
+        produto.setStatus(StatusProduto.DISPONIVEL);
 
         if (item != null) {
             LOG.debug("Atualizando status/quantidade do item.");

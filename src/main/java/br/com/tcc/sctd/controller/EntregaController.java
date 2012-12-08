@@ -127,9 +127,9 @@ public class EntregaController {
 
             } else {
                 if (vendaRecuperada.getEntrega() != null) {
-                    venda.getEntrega().setDataRecolhimento(data);
+                    venda.getEntrega().setDataEntrega(data);                    
                     vendas.atualizar(vendaRecuperada);
-                    result.include("msg", "Recolhimento da venda registrado com sucesso.");
+                    result.include("msg", "Entrega registrada com sucesso.");
                 } else {
                     validator.add(new ValidationMessage("Venda sem entrega registrada.", "Venda"));
                     LOG.debug("Venda sem entrega registrada.");
@@ -137,15 +137,16 @@ public class EntregaController {
             }
         }
 
-        validator.onErrorRedirectTo(this).recolhimentoParaEntrega();
+        validator.onErrorRedirectTo(this).informarEntrega();
 
         if (pedido != null && pedido.getId() != null) {
             Pedido pedidoRecuperado = pedidos.buscarPorId(pedido.getId());
             if (pedido != null) {
                 if (pedidoRecuperado.getStatus() == StatusPedido.CONCLUIDO) {
-                    pedidoRecuperado.getEntrega().setDataRecolhimento(data);
+                    pedidoRecuperado.getEntrega().setDataEntrega(data);
+                    pedidoRecuperado.setDataEntrega(data);
                     pedidos.atualizar(pedidoRecuperado);
-                    result.include("msg", "Recolhimento do pedido registrado com sucesso.");
+                    result.include("msg", "Entrega registrada com sucesso.");
                 } else {
                     validator.add(new ValidationMessage("A entrega somente pode ser liberada para pedidos concluídos. "
                             + "Atualmente o status do pedido é: " + pedidoRecuperado.getStatus(), "Status Pedido"));

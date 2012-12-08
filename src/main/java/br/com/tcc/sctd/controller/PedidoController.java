@@ -14,6 +14,7 @@ import br.com.tcc.sctd.constants.FormaPagamento;
 import br.com.tcc.sctd.constants.StatusFatura;
 import br.com.tcc.sctd.constants.StatusItemPedido;
 import br.com.tcc.sctd.constants.StatusPedido;
+import br.com.tcc.sctd.constants.StatusProduto;
 import br.com.tcc.sctd.dao.*;
 import br.com.tcc.sctd.exceptions.DaoException;
 import br.com.tcc.sctd.model.*;
@@ -116,6 +117,12 @@ public class PedidoController {
         BigDecimal totalVenda = new BigDecimal("0.00");
         totalVenda.setScale(2, RoundingMode.HALF_UP);
         List<ItemVenda> itens = venda.getItens();
+        
+         if (itens == null || itens.isEmpty()){
+            validator.add(new ValidationMessage("Venda sem itens. Insira itens antes de finalizar a Venda.", "Venda"));
+        }
+        
+        validator.onErrorRedirectTo(this).formularioVenda();
 
 
         for (ItemVenda itemVenda : itens) {
@@ -123,6 +130,10 @@ public class PedidoController {
             BigDecimal calculado = new BigDecimal(p.getValor().multiply(new BigDecimal(itemVenda.getQuantidade().toString())).toString()); //p.getValor().multiply(new BigDecimal(itemVenda.getQuantidade().toString()));
             totalVenda = new BigDecimal(totalVenda.add(calculado).toString());
             itemVenda.setVenda(venda);
+            p.setQuantidade(p.getQuantidade()-itemVenda.getQuantidade());
+            if (p.getQuantidade() <= 0){
+                p.setStatus(StatusProduto.ESGOTADO);
+            }
         }
 
         //Busca o cliente
