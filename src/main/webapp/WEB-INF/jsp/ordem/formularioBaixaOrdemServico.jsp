@@ -94,11 +94,11 @@
             <br/>
 
             <div id="stylized" class="myform">
-                <form action="<c:url value="/pedidos/ordem/registrarbaixa"/>" method="post" id="form" name="form" class="validate">
+                <form action="<c:url value="/pedidos/ordem/filtrarparabaixa"/>" method="post" id="form" name="form" class="validate">
 
 
                     <fieldset class="formato1">
-                        <legend>Baixa de Serviço</legend>
+                        <legend>Buscar ordem Serviço</legend>
                         <ul>
                             <li>
                                 <label>Número da Ordem de Serviço<br/>
@@ -108,12 +108,37 @@
                                 </label>  
                             </li>
                             <li>
-                                <button type="submit" class="button">Baixar</button>
+                                <button type="submit" class="button">Buscar</button>
                             </li>
+
 
                         </ul>
                     </fieldset>
                 </form>
+                <c:if test="${ordem.id != null}">
+                    <form action="<c:url value="/pedidos/ordem/registrarbaixa"/>" method="post" id="form" name="form" class="validate">
+                        <fieldset class="formato1">
+                            <legend>Informações da Ordem de Serviço</legend>
+                            <ul>
+                                <input type="hidden" value="${ordem.id}" name="ordem.id"/>
+                                <li style="padding-top: 10px;">Nº da Ordem: ${ordem.id}</li>
+                                <li>Data: <fmt:formatDate pattern="dd/MM/yyyy" value="${ordem.dataInicio}"/></li>
+                                <li>Quantidade: ${ordem.quantidade}</li>                                
+                                <li>Produto: ${ordem.produto.nome}</li> 
+                                <c:choose>
+                                    <c:when test="${ordem.item != null}">
+                                        <li>Registrada para o pedido: ${ordem.item.pedido.id}</li>
+                                    </c:when>                                    
+                                </c:choose>
+                                <li>Status: ${ordem.status.toString()}</li>                                
+                                <c:if test="${ordem.status.ordinal() == 0}">
+                                    <button type="submit" class="button">Baixar</button>
+                                </c:if>
+                            </ul>
+                        </fieldset>
+                        
+                    </form>
+                </c:if>
             </div>
 
         </section>

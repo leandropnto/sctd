@@ -82,14 +82,24 @@
                 </tr>
             </table>   
 
-                    <form action="<c:url value="/pedidos/pedido/cancelar/registarcancelamento"/>" class="validade" method="post" 
-                          style="margin-top: 30px;">
+            <form action="<c:url value="/pedidos/pedido/cancelar/registarcancelamento"/>" class="validade" method="post" 
+                  style="margin-top: 30px;">
                 <fieldset class="formato1">
                     <ul>
                         <li>&nbsp; <input type="hidden" name="pedido.id" value="${pedido.id}"/>
                         </li>
                         <li>
-                            <button type="submit" class="button">Cancelar</button>
+                            <c:choose>
+                                <c:when test="${pedido.status.toString() == 'Aberto'}">
+                                    <button type="submit" class="button">Cancelar</button>
+                                </c:when>
+                                <c:otherwise>
+                                    <span style="color: red; font-size: 14px;">
+                                        PEDIDO '${pedido.status.toString()}' não pode ser cancelado!
+                                    </span>
+                                </c:otherwise>    
+                            </c:choose>
+
                         </li>
                     </ul>
                 </fieldset>

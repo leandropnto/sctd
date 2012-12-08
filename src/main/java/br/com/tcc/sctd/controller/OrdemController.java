@@ -155,6 +155,17 @@ public class OrdemController {
 
 
     }
+    
+    
+    @Path("/filtrarparabaixa")
+    public void filtrarbaixa(OrdemServico ordem) throws DaoException {
+        LOG.debug("/pedidos/ordem/filtrarbaixa");
+       
+        result.include("ordem", ordens.buscarPorId(ordem.getId()));
+        result.redirectTo(this).formularioBaixaOrdemServico();
+
+
+    }
 
     @Path("/buscarpedido")
     public void buscarPedido(String term) throws DaoException {
@@ -227,7 +238,7 @@ public class OrdemController {
         ordens.atualizar(ordemRecuperada);
 
         result.include("msg", "Ordem de serviço concluída.");
-        result.redirectTo(this).formularioBaixaOrdemServico();
+        result.redirectTo(this).filtrarbaixa(ordem);
     }
     
     

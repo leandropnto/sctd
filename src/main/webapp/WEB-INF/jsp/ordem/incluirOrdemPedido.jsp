@@ -1,3 +1,13 @@
+<style>
+    .ui-autocomplete-loading {
+        background: white url('<c:url value="/images/ui-anim_basic_16x16.gif"/>') right center no-repeat;
+    }
+
+    p.clicavel { color:red; margin:5px; cursor:pointer; }
+
+
+</style>
+
 <script>
     $(function() {
         

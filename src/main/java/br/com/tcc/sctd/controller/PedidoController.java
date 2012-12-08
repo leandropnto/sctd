@@ -345,6 +345,8 @@ public class PedidoController {
             result.redirectTo(this).formularioCancelarPedido();
             return;
         }
+        
+        
         Entrega entrega = p.getEntrega();
 
         if (entrega != null) {
@@ -366,6 +368,7 @@ public class PedidoController {
            }
         }
         
+        p.setEntrega(null);
         p.setStatus(StatusPedido.CANCELADO);
         
 

@@ -73,6 +73,7 @@
                         <th>Preço</th>           
                         <th>Valor Pago</th>           
                         <th>Data</th>           
+                        <th>Status</th>           
                         <th>Entrega</th>           
                         <th>Cliente</th>           
                         <th>Funcionário</th>           
@@ -86,6 +87,7 @@
                             <td style="text-align: left; width: 150px;"><fmt:formatNumber type="currency" value="${pedido.precoTotal}"/></td>
                             <td style="text-align: left; width: 100px;"><fmt:formatNumber type="currency" value="${pedido.valorPago}"/></td>
                             <td style="text-align: right; width: 30px;"><fmt:formatDate pattern="dd/MM/yyyy" value="${pedido.dataPedido}"/></td>
+                            <td style="text-align: right; width: 45px;">${pedido.status.toString()}</td>
                             <td style="text-align: left; width: 50px;"><fmt:formatDate pattern="dd/MM/yyyy" value="${pedido.entrega.dataEntrega}"/></td>
                             <td style="text-align: left; width: 60px;">${pedido.cliente.nome}</td>
                             <td style="text-align: left; width: 60px;">${pedido.funcionario.nome}</td>
