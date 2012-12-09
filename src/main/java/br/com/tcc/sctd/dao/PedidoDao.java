@@ -10,6 +10,7 @@ import br.com.tcc.sctd.exceptions.DaoException;
 import br.com.tcc.sctd.model.ItemPedido;
 import br.com.tcc.sctd.model.Pedido;
 import java.lang.reflect.Field;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
@@ -103,5 +104,12 @@ public class PedidoDao extends DaoGenericoImpl<Pedido> {
         }
 
 
+    }
+
+    public Long quantidadePorDataPedido(Date dataInicial, Date dataFinal) {
+        Criteria criterio = sessao.createCriteria(Pedido.class, "p");
+        criterio.add(Restrictions.between("p.dataPedido", dataInicial, dataFinal));
+        criterio.setProjection(Projections.count("p.id"));
+        return (Long) criterio.uniqueResult();
     }
 }

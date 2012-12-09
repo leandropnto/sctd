@@ -5,6 +5,7 @@
 package br.com.tcc.sctd.controller;
 
 import br.com.caelum.vraptor.*;
+import br.com.caelum.vraptor.validator.ValidationMessage;
 import br.com.caelum.vraptor.validator.Validations;
 import br.com.tcc.sctd.dao.ModeloDao;
 import br.com.tcc.sctd.dao.TipoDao;
@@ -45,6 +46,12 @@ public class ModeloController {
     public void filtrar(Modelo modelo) throws DaoException {
         LOG.debug("/cadastros/modelos/filtrar");
         Long qtdModelos = modelos.qtdRegistros(modelo);
+        
+        if (qtdModelos == 0){
+            validator.add(new ValidationMessage("Modelo não encontrado", "Modelos"));
+        }
+        validator.onErrorRedirectTo(this).index();
+        
         Long qtdPaginas = qtdModelos / REG_POR_PAGINA;
         qtdPaginas += (qtdModelos % REG_POR_PAGINA > 0) ? 1 : 0;
         result.include("modelos", modelos.buscarPorExemplo(modelo));

@@ -11,6 +11,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -30,25 +31,19 @@ public class VendaDao extends DaoGenericoImpl<Venda> {
         return (Venda) criterio.uniqueResult();
     }
 
-//    public List<Venda> buscarPorDataDeVenda(Date dataInicial, Date dataFinal) {
-//        Criteria criterio = sessao.createCriteria(Venda.class);
-//        criterio.add(Restrictions.between("dataVenda", dataInicial, dataFinal));
-//        Criteria criterio2 = criterio.createCriteria("itens");
-//        Criteria criterio3 = criterio2.createCriteria("produto");
-//        
-//        criterio.addOrder(Order.asc("dataVenda"));
-//        criterio3.addOrder(Order.asc("nome"));
-//        
-//        criterio.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-//        
-//        
-//        return criterio.list();
-//    }
+
     public List<Venda> buscarPorDataDeVenda(Date dataInicial, Date dataFinal) {
         Criteria criterio = sessao.createCriteria(Venda.class);
         criterio.add(Restrictions.between("dataVenda", dataInicial, dataFinal));
         criterio.addOrder(Order.asc("dataVenda"));
         criterio.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         return criterio.list();
+    }
+
+    public Long quantidadePorDataVenda(Date dataInicial, Date dataFinal) {
+        Criteria criterio = sessao.createCriteria(Venda.class, "v");
+        criterio.add(Restrictions.between("v.dataVenda", dataInicial, dataFinal));
+        criterio.setProjection(Projections.count("v.id"));
+        return (Long) criterio.uniqueResult();
     }
 }

@@ -38,7 +38,7 @@
                         </li>
                         <li>
                             <label>Tamanho<br/>
-                                <input type="text" name="modelo.tamanho" value="${modelo.tamanho}" />                      
+                                <input type="text" name="modelo.tamanho" value="${modelo.tamanho}" class="numeric"/>                      
                             </label>    
                             <label>Molde<br/>
                                 <input type="text" name="modelo.molde" value="${modelo.molde}" />                      
