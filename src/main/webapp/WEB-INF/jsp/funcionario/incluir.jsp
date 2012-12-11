@@ -42,7 +42,7 @@
                                 </label>   
                                 <label>Salário<br/>
                                     <input type="text" name="funcionario.salario" value="${funcionario.salario}" id="salario"
-                                           style="width: 75px;" class=" numeric"/>
+                                           style="width: 75px;" class="required numeric"/>
                                     <span>Salário</span>
                                 </label>      
                             </li>

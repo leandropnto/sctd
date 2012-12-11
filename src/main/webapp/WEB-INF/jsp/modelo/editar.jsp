@@ -52,7 +52,8 @@
                                     <select name="modelo.sexo">
                                         <option value>Selecione o Sexo</option>
                                         <option value="M" <c:if test="${modelo.sexo == 'M'.charAt(0)}"> selected</c:if>>Masculino</option>
-                                        <option value="F" <c:if test="${modelo.sexo != 'M'.charAt(0)}"> selected</c:if>>Feminino</option>
+                                        <option value="F" <c:if test="${modelo.sexo == 'F'.charAt(0)}"> selected</c:if>>Feminino</option>
+                                        <option value="U" <c:if test="${modelo.sexo == 'U'.charAt(0)}"> selected</c:if>>Unisex</option>
                                     </select>
                                 </label>                
 

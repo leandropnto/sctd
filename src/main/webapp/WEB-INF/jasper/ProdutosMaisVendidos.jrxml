@@ -3,8 +3,9 @@
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="97"/>
-	<parameter name="dataInicial" class="java.util.Date"/>
-	<parameter name="dataFinal" class="java.util.Date"/>
+	<parameter name="dataInicial" class="java.lang.String"/>
+	<parameter name="dataFinal" class="java.lang.String"/>
+	<parameter name="tiposMaisVendidos" class="java.util.List"/>
 	<parameter name="tiposQuantidade" class="java.util.List"/>
 	<parameter name="masculino" class="java.lang.Integer"/>
 	<parameter name="feminino" class="java.lang.Integer"/>
@@ -12,25 +13,23 @@
 	<parameter name="pequeno" class="java.lang.Integer"/>
 	<parameter name="medio" class="java.lang.Integer"/>
 	<parameter name="grande" class="java.lang.Integer"/>
-	<parameter name="venda" class="java.lang.Long"/>
-	<parameter name="pedido" class="java.lang.Long"/>
-	<parameter name="tiposMaisVendidosNome1" class="java.lang.String"/>
-	<parameter name="tiposMaisVendidosNome2" class="java.lang.String"/>
-	<parameter name="tiposMaisVendidosNome3" class="java.lang.String"/>
-	<parameter name="tiposMaisVendidosNome4" class="java.lang.String"/>
-	<parameter name="tiposMaisVendidosNome0" class="java.lang.String"/>
-	<parameter name="tiposMaisVendidosQuantidade0" class="java.lang.Integer"/>
-	<parameter name="tiposMaisVendidosQuantidade1" class="java.lang.Integer"/>
-	<parameter name="tiposMaisVendidosQuantidade2" class="java.lang.Integer"/>
-	<parameter name="tiposMaisVendidosQuantidade3" class="java.lang.Integer"/>
-	<parameter name="tiposMaisVendidosQuantidade4" class="java.lang.Integer"/>
+	<parameter name="venda" class="java.lang.Integer"/>
+	<parameter name="pedido" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
 	<field name="nome" class="java.lang.String"/>
-	<field name="valorUnitario" class="java.math.BigDecimal"/>
+	<field name="valor" class="java.math.BigDecimal"/>
 	<field name="quantidade" class="java.lang.Integer"/>
-	<field name="valorTotal" class="java.math.BigDecimal"/>
+	<variable name="total" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor}.multiply(new BigDecimal($F{quantidade}.toString()))]]></variableExpression>
+	</variable>
+	<variable name="quantidadeTotal" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{quantidade}]]></variableExpression>
+	</variable>
+	<group name="Group1"/>
+	<group name="Group2"/>
+	<group name="Group3"/>
 	<background>
 		<band/>
 	</background>
@@ -57,7 +56,7 @@
 					<text><![CDATA[Relatório dos]]></text>
 				</staticText>
 				<elementGroup>
-					<textField pattern="dd/MM/yyyy">
+					<textField>
 						<reportElement uuid="8f558157-7837-4597-90b3-52a339410a7a" x="367" y="110" width="60" height="20"/>
 						<textElement textAlignment="Right" verticalAlignment="Middle">
 							<font fontName="Arial" size="12"/>
@@ -65,7 +64,7 @@
 						</textElement>
 						<textFieldExpression><![CDATA[$P{dataInicial}]]></textFieldExpression>
 					</textField>
-					<textField pattern="dd/MM/yyyy">
+					<textField>
 						<reportElement uuid="c229663d-4ea6-4b6a-bbc8-a736af2d8f3e" x="443" y="110" width="60" height="20"/>
 						<textElement verticalAlignment="Middle">
 							<font fontName="Arial" size="12"/>
@@ -149,7 +148,7 @@
 					<font fontName="Arial" size="12"/>
 					<paragraph leftIndent="6"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{valorUnitario}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤ #,##0.00">
 				<reportElement uuid="8da70384-6071-4586-af75-063d8eb82df7" x="429" y="8" width="125" height="20"/>
@@ -157,7 +156,7 @@
 					<font fontName="Arial" size="12"/>
 					<paragraph leftIndent="6"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{valorTotal}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{valor}.multiply(new BigDecimal($F{quantidade}.toString()))]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="dd492d2d-068d-49be-8af1-356a9ce071ad" x="205" y="8" width="100" height="20"/>
@@ -188,7 +187,15 @@
 				<rectangle>
 					<reportElement uuid="6571e72b-fefc-4fa3-832c-8bf562b869be" x="250" y="5" width="300" height="40" backcolor="#E6E6E6"/>
 				</rectangle>
-				<textField isBlankWhenNull="true">
+				<textField>
+					<reportElement uuid="3a146a79-99a3-47c4-816d-f74fa86b83f4" x="450" y="5" width="100" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="true"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{quantidadeTotal}]]></textFieldExpression>
+				</textField>
+				<textField>
 					<reportElement uuid="5aca8202-da6b-491b-9050-8e5ec1d5f4c1" x="330" y="95" width="60" height="20"/>
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial" size="12"/>
@@ -204,7 +211,7 @@
 					</textElement>
 					<text><![CDATA[Masculino:]]></text>
 				</staticText>
-				<textField isBlankWhenNull="true">
+				<textField>
 					<reportElement uuid="a9f94a26-1a2d-48ae-a516-e742bfbfc2b2" x="330" y="75" width="60" height="20"/>
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial" size="12"/>
@@ -218,7 +225,7 @@
 						<font fontName="Arial" size="12"/>
 						<paragraph rightIndent="6"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{tiposMaisVendidosNome3}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$P{tiposMaisVendidos}.get(3)]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement uuid="9f296b22-2da7-4695-bcce-b902ca098ff2" x="5" y="5" width="200" height="20"/>
@@ -232,31 +239,31 @@
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="Arial" size="12" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Itens por Genêro]]></text>
+					<text><![CDATA[Vendas por Genêro]]></text>
 				</staticText>
-				<textField isBlankWhenNull="true">
+				<textField>
 					<reportElement uuid="ceb5d92e-10e8-4fd2-8af9-12e311ca1eee" x="145" y="45" width="60" height="20"/>
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial" size="12"/>
 						<paragraph leftIndent="6"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{tiposMaisVendidosQuantidade1}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$P{tiposQuantidade}.get(1)]]></textFieldExpression>
 				</textField>
-				<textField isBlankWhenNull="true">
+				<textField>
 					<reportElement uuid="204aa238-3869-476b-bc43-be554e4e00f7" x="5" y="45" width="140" height="20"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="Arial" size="12"/>
 						<paragraph rightIndent="6"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{tiposMaisVendidosNome1}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$P{tiposMaisVendidos}.get(1)]]></textFieldExpression>
 				</textField>
-				<textField isBlankWhenNull="true">
+				<textField>
 					<reportElement uuid="ceb5d92e-10e8-4fd2-8af9-12e311ca1eee" x="145" y="85" width="60" height="20"/>
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial" size="12"/>
 						<paragraph leftIndent="6"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{tiposMaisVendidosQuantidade3}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$P{tiposQuantidade}.get(3)]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement uuid="204aa238-3869-476b-bc43-be554e4e00f7" x="5" y="65" width="140" height="20"/>
@@ -264,23 +271,23 @@
 						<font fontName="Arial" size="12"/>
 						<paragraph rightIndent="6"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{tiposMaisVendidosNome3}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$P{tiposMaisVendidos}.get(2)]]></textFieldExpression>
 				</textField>
-				<textField isBlankWhenNull="true">
+				<textField>
 					<reportElement uuid="204aa238-3869-476b-bc43-be554e4e00f7" x="5" y="25" width="140" height="20"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="Arial" size="12"/>
 						<paragraph rightIndent="6"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{tiposMaisVendidosNome0}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$P{tiposMaisVendidos}.get(0)]]></textFieldExpression>
 				</textField>
-				<textField isBlankWhenNull="true">
+				<textField>
 					<reportElement uuid="ceb5d92e-10e8-4fd2-8af9-12e311ca1eee" x="145" y="105" width="60" height="20"/>
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial" size="12"/>
 						<paragraph leftIndent="6"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{tiposMaisVendidosQuantidade4}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$P{tiposQuantidade}.get(4)]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement uuid="d0a23fd2-41d3-48b0-84fc-cc2a1d6229ed" x="250" y="25" width="200" height="20"/>
@@ -290,13 +297,13 @@
 					</textElement>
 					<text><![CDATA[Valor Total das Vendas:]]></text>
 				</staticText>
-				<textField isBlankWhenNull="true">
+				<textField>
 					<reportElement uuid="ceb5d92e-10e8-4fd2-8af9-12e311ca1eee" x="145" y="25" width="60" height="20"/>
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial" size="12"/>
 						<paragraph leftIndent="6"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{tiposMaisVendidosQuantidade0}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$P{tiposQuantidade}.get(0)]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement uuid="204aa238-3869-476b-bc43-be554e4e00f7" x="5" y="105" width="140" height="20"/>
@@ -304,7 +311,7 @@
 						<font fontName="Arial" size="12"/>
 						<paragraph rightIndent="6"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{tiposMaisVendidosNome4}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$P{tiposMaisVendidos}.get(4)]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement uuid="4ed49fa1-706a-445f-a3d9-91e41a37ae0c" x="250" y="95" width="80" height="20"/>
@@ -314,13 +321,21 @@
 					</textElement>
 					<text><![CDATA[Feminino:]]></text>
 				</staticText>
-				<textField isBlankWhenNull="true">
+				<textField pattern="¤ #,##0.00">
+					<reportElement uuid="bee3f649-c3d6-4d1d-b5e0-197e4b29cd86" x="450" y="25" width="100" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="true"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+				</textField>
+				<textField>
 					<reportElement uuid="ceb5d92e-10e8-4fd2-8af9-12e311ca1eee" x="145" y="65" width="60" height="20"/>
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial" size="12"/>
 						<paragraph leftIndent="6"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{tiposMaisVendidosQuantidade2}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$P{tiposQuantidade}.get(2)]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement uuid="da46f68a-e5fc-489c-9b6a-0a7d07ebb137" mode="Transparent" x="250" y="5" width="200" height="20"/>
@@ -338,7 +353,7 @@
 					</textElement>
 					<text><![CDATA[Unisex:]]></text>
 				</staticText>
-				<textField isBlankWhenNull="true">
+				<textField>
 					<reportElement uuid="143a0daf-d430-4692-af68-fdfc48c59c64" x="330" y="115" width="60" height="20"/>
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial" size="12"/>

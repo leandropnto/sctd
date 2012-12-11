@@ -56,6 +56,7 @@
                                     <option value>Selecione o Sexo</option>
                                     <option value="M">Masculino</option>
                                     <option value="F">Feminino</option>
+                                    <option value="U">Unisex</option>
                                 </select>
                                 <span>Informe o sexo</span>
                             </label>                

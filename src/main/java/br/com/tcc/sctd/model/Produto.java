@@ -17,7 +17,7 @@ import org.hibernate.annotations.FetchMode;
  */
 @Entity
 @Table(catalog = "tcc", schema = "public", name = "Produto")
-public class Produto implements Serializable {
+public class Produto implements Serializable, Comparable<Produto> {
 
     @Id
     @Column(name="id")
@@ -154,6 +154,18 @@ public class Produto implements Serializable {
         return true;
     }
 
+    @Override
+    public int compareTo(Produto produto) {
+        int result = 0;
+        if(this.quantidade < produto.quantidade) {
+            result = -1;
+        }
+        if(this.quantidade > produto.quantidade) {
+            result = 1;
+        }
+        return result;
+    }
+    
     @Override
     public String toString() {
         return nome.toUpperCase();

@@ -74,6 +74,7 @@ public class BotaoController {
     
     @Path("/excluir/{botao.id}")
     public void excluir(Botao botao) throws DaoException{
+        validator.onErrorRedirectTo(this).index();
         if (botao != null && botao.getId() != null){
             botoes.excluir(botao);
         }

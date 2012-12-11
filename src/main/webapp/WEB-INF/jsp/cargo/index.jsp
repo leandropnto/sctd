@@ -37,7 +37,7 @@
 
 
                         <li>
-                            <button type="submit" style="color:#0029FF; width: 100px; font-family: arial; font-weight: bold">Buscar</button>
+                            <button type="submit" class="button">Buscar</button>
                         </li>
                         <div class="spacer"></div>
                     </ul>

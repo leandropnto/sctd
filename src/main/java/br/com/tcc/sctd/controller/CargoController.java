@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.tcc.sctd.controller;
 
 import br.com.caelum.vraptor.*;
@@ -12,6 +8,8 @@ import br.com.tcc.sctd.model.Cargo;
 import br.com.tcc.sctd.service.Opcoes;
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.exception.ConstraintViolationException;
+import org.postgresql.util.PSQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,13 +40,13 @@ public class CargoController {
     @Get
     public void index() throws DaoException {
         LOG.debug("/cargos/index");
-        
+
     }
 
     @Path("/editar/{cargo.id}")
     public void editar(Cargo cargo) throws DaoException {
         Cargo cargoRecuperado = cargos.buscarPorId(cargo.getId());
-        if(cargoRecuperado == null){
+        if (cargoRecuperado == null) {
             result.include("msg", "Cargo não encontrado.");
             result.notFound();
         }
@@ -91,20 +89,21 @@ public class CargoController {
     public void incluir() {
         LOG.debug("/cargos/incluir");
     }
-    
-    
+
     @Path("/excluir/{cargo.id}")
-    public void excluir(Cargo cargo) throws DaoException{
+    public void excluir(Cargo cargo) throws DaoException {
         LOG.debug("/cargo/excluir");
+        result.on(PSQLException.class).forwardTo(this).index();
+        
         cargos.excluir(cargo);
         result.redirectTo(this).filtrar(new Cargo());
-        
-        
+
+
     }
 
     @Path("/filtrar")
     public void filtrar(Cargo cargo) throws DaoException {
-         LOG.debug("/cargos/filtrar");
+        LOG.debug("/cargos/filtrar");
 
         List<Cargo> listaCargos = cargos.buscarPorExemplo(cargo);
         Long qtdCargos = cargos.qtdRegistros(cargo);
@@ -116,7 +115,7 @@ public class CargoController {
 
         result.include("opcoes", opcoes);
         result.include("paginaAtual", 1);
-        
+
         result.redirectTo(this).index();
     }
 }
