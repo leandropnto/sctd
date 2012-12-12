@@ -8,7 +8,7 @@
             <span class="children">Clientes</span>
         </section>
         <section class="text-box">
-            <form class="validate" action="<c:url value="/relatorios/clietes/gerar" />" method="post">
+            <form class="validate" action="<c:url value="/relatorios/clientes/gerar" />" method="post">
                 <fieldset class="formato1">
                     <legend>Relatório de Clientes</legend>
                     <ul>

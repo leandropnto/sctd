@@ -46,7 +46,7 @@
 
                             </li>                
                             <li>
-                                <label style="width: 150px;">Modelo<br/>
+                                <label style="width: 300px;">Modelo<br/>
                                     <select name="produto.modelo.id" class="required">
                                         <option value>Informe o modelo</option>
                                         <c:forEach items="${modelos}" var="modelo">

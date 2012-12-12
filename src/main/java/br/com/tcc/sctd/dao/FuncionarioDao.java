@@ -88,4 +88,11 @@ public class FuncionarioDao extends DaoGenericoImpl<Funcionario> {
         criterio.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         return criterio.list();
     }
+
+    public Funcionario buscarPorCPF(String cpf) {
+        Criteria criterio = sessao.createCriteria(Funcionario.class, "f");
+        criterio.add(Restrictions.eq("cpf", cpf));
+        return (Funcionario) criterio.uniqueResult();
+        
+    }
 }

@@ -43,12 +43,17 @@
                             </label>  
                         </li>
                         <li>
-                            <label>Tamanho<br/>
-                                <input type="text" name="modelo.tamanho" value="${modelo.tamanho}" class="required numeric"/> 
+                            <label>Tamanho<br/>                                
+                                <select name="modelo.tamanho" class="required">
+                                    <option value>Selecione o Tamanho</option>
+                                    <option value="P">Pequeno</option>
+                                    <option value="M">Médio</option>
+                                    <option value="G">Grande</option>
+                                </select>
                                 <span>Informe o tamanho</span>
                             </label>    
                             <label>Molde<br/>
-                                <input type="text" name="modelo.molde" value="${modelo.molde}" class="required"/>  
+                                <input type="text" name="modelo.molde" value="${modelo.molde}" class=""/>  
                                 <span>Informe o molde</span>
                             </label>   
                             <label>Sexo<br/>

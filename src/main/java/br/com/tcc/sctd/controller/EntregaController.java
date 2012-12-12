@@ -87,7 +87,7 @@ public class EntregaController {
                     pedidos.atualizar(pedidoRecuperado);
                     result.include("msg", "Recolhimento do pedido registrado com sucesso.");
                 } else {
-                    validator.add(new ValidationMessage("A entrega somente pode ser liberada para pedidos concluídos. "
+                    validator.add(new ValidationMessage("Entrega liberada apenas para pedidos concluídos. "
                             + "Atualmente o status do pedido é: " + pedidoRecuperado.getStatus(), "Status Pedido"));
                 }
 

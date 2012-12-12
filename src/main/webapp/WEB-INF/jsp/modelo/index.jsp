@@ -38,7 +38,12 @@
                         </li>
                         <li>
                             <label>Tamanho<br/>
-                                <input type="text" name="modelo.tamanho" value="${modelo.tamanho}" class="numeric"/>                      
+                                 <select name="modelo.tamanho" class="">
+                                    <option value>Selecione o Tamanho</option>
+                                    <option value="P">Pequeno</option>
+                                    <option value="M">Médio</option>
+                                    <option value="G">Grande</option>
+                                </select>
                             </label>    
                             <label>Molde<br/>
                                 <input type="text" name="modelo.molde" value="${modelo.molde}" />                      

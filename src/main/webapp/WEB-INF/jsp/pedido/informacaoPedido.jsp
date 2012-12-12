@@ -11,6 +11,8 @@
             <fieldset class="formato1">
                 <legend>Pedido Registrado</legend>
                 <ul>
+                    <li style="padding-top: 10px;">ID: ${pedido.id}</li>
+                    <li>Fatura: ${pedido.fatura.id}</li>
                     <li>Data: <fmt:formatDate pattern="dd/MM/yyyy" value="${pedido.dataPedido}"/></li>
                     <li>Valor: <fmt:formatNumber currencySymbol="R$" value="${pedido.precoTotal}" type="currency" minFractionDigits="2"/></li>
                     <li>Funcionário: ${pedido.funcionario.nome}</li>

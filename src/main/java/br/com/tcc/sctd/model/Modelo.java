@@ -24,7 +24,7 @@ public class Modelo implements Serializable {
     private String nome;
 
     @Column
-    private Float tamanho;
+    private Character tamanho;
 
     @Column(length = 150)
     private String descricao;
@@ -83,11 +83,11 @@ public class Modelo implements Serializable {
         this.sexo = sexo;
     }
 
-    public Float getTamanho() {
+    public Character getTamanho() {
         return tamanho;
     }
 
-    public void setTamanho(Float tamanho) {
+    public void setTamanho(Character tamanho) {
         this.tamanho = tamanho;
     }
 

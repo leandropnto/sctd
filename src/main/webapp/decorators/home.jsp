@@ -40,11 +40,11 @@
                     </h1>
                     <nav class="ui-list">
                         <ul class="list-h top-menu">
-                            <li class="ui-item first"><a href="">Usuários</a></li>
+                            <li class="ui-item first"><a href="#">Usuários</a></li>
                             <li class="ui-item bracket">|</li>
-                            <li class="ui-item"><a href="">Configurações</a></li>
+                            <li class="ui-item"><a href="#">Configurações</a></li>
                             <li class="ui-item bracket">|</li>
-                            <li class="ui-item last"><a href="">FAQ</a></li>
+                            <li class="ui-item last"><a href="#">FAQ</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -57,7 +57,7 @@
                                 <li class="ui-item"><a href="<c:url value="/pedidos/"/>">Pedidos</a></li>
                                 <li class="ui-item"><a href="<c:url value="/financeiro/"/>">Financeiro</a></li>
                                 <li class="ui-item"><a href="<c:url value="/relatorios/"/>">Relatórios</a></li>
-                                <li class="ui-item last"><a href="<c:url value="/contato/"/>">Contato</a></li>
+                                <li class="ui-item last"><a href="#">Contato</a></li>
                             </ul>
                         </nav>
                     </div>

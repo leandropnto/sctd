@@ -76,10 +76,12 @@
                                 <label>Especialidade<br/>                      
                                     <select name="funcionario.tipoEspecialidades[].id" class="" multiple>                                        
                                         <c:forEach items="${listaEspecialidades}" var="especialidade">
-                                            <option value="${especialidade.id}" 
-                                                    <c:if test="${especialidade.id == funcionario.especialidade.id}">selected</c:if> >
+                                            
+                                               <option value="${especialidade.id}" <c:if test="${funcionario.tipoEspecialidades.contains(especialidade)}">selected</c:if> >
                                                 ${especialidade.descricao}
                                             </option>
+                                                    
+                                                 
                                         </c:forEach>
                                     </select>
                                     <span>Selecione a especialidade</span>

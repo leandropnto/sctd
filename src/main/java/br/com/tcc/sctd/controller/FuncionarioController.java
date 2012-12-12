@@ -8,6 +8,7 @@ import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
+import br.com.caelum.vraptor.validator.ValidationMessage;
 import br.com.caelum.vraptor.validator.Validations;
 import br.com.tcc.sctd.constants.StatusFuncionario;
 import br.com.tcc.sctd.dao.*;
@@ -101,6 +102,13 @@ public class FuncionarioController {
 
         funcionario.setDataContratacao(new Date(System.currentTimeMillis()));
         funcionario.setCpf(funcionario.getCpf().replaceAll("[.-]", ""));
+        
+        Funcionario funcionarioCadastrado = funcionarios.buscarPorCPF(funcionario.getCpf());
+        if (funcionarioCadastrado != null){           
+            validator.add(new ValidationMessage("CPF já cadastrado.", "CPF"));
+        }
+        
+        validator.onErrorRedirectTo(this).incluir();
         
         /* Regra para alocação de funcionário */
         
