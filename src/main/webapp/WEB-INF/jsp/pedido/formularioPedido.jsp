@@ -6,6 +6,9 @@
     p.clicavel { color:red; margin:5px; cursor:pointer; }
 
 
+    .rmLinha{
+        cursor: pointer;
+    }
 </style>
 <script>
     $(function() {
@@ -244,6 +247,21 @@
                 $('#nomeproduto').focus();
                 return;
             }
+            
+            
+            var linha = $('#ln' + $('#prodid').val()); 
+            if(linha.size() > 0){
+                alert("O produto já esta na lista de itens.");
+                return;
+            }
+
+            if($('#qtde').val() ==""){
+                alert("Informe a quantidade de itens!");
+                $('#qtde').val("1");
+                return;
+            }
+            
+            
             var numid = num;
             num++;
                 
@@ -251,24 +269,24 @@
             precoTotal += preco;
                 
             //monta e insere a linha na tabela
-            $("#bodydados").last().append("<tr><td>" + num + "</td><td>" 
+            $("#bodydados").last().append("<tr id='ln" + $('#prodid').val() + "'><td>" + num + "</td><td>" 
                 + $('#nomeproduto').val() + "</td><td>" + 
                 $('#qtde').val() + "</td><td style='text-align: right'>" + 
-                preco.toFixed(2) +  "</td></tr>");
+                preco.toFixed(2) +  "</td><td><img  src='<c:url value="/images/remover.png"/>' class='rmLinha' title='Remover Item'/></tr>");
                 
             //preenche os campos hidden
             $('<input>').attr({
                 type: 'hidden',                    
                 name: 'pedido.itens['+numid+'].produto.id',
                 value: $('#prodid').val()
-            }).appendTo('#form');
+            }).appendTo('#ln'+$('#prodid').val());
                 
             $('<input>').attr({
                 type: 'hidden',   
                 id: "item_" + num,
                 name: 'pedido.itens['+ numid + '].quantidade',
                 value: $('#qtde').val()
-            }).appendTo('#form');
+            }).appendTo('#ln'+$('#prodid').val());
                 
             //limpa e remota o focu
             $('#prodid').val("");
@@ -284,10 +302,13 @@
         
         $( "#nomeproduto" ).keypress(function(event){
             if (event.which == 13){
-                event.preventDefault();
-                alert("Teste");
+                event.preventDefault();                
                 return;
             }
+        });
+        
+        $('.rmLinha').live('click', function(){
+            $(this).parent().parent().remove();            
         });
     });
     
@@ -369,7 +390,7 @@
                                             <input type="text" name="cliente" value="" style="width: 100px" id="clienteBusca" class="cpf"/>                                                
                                         </label> 
                                         <label style="width: 250px;">Nome<br/>
-                                            <input type="text" name="clienteNome" value="" style="width: 240px" id="clienteNome"/>                                                   
+                                            <input type="text" name="clienteNome" value="" style="width: 240px" id="clienteNome" readonly/>                                                   
 
                                         </label>
                                         <label id="clienteStatus" style="padding-top: 15px; padding-left: 10px; color:red;"> 

@@ -5,6 +5,9 @@
 
     p.clicavel { color:red; margin:5px; cursor:pointer; }
 
+    .rmLinha{
+        cursor: pointer;
+    }
 
 </style>
 <script>
@@ -260,6 +263,13 @@
                 return;
             }
             
+           
+            var linha = $('#ln' + $('#prodid').val()); 
+            if(linha.size() > 0){
+                alert("O produto já esta na lista de itens.");
+                return false;
+            }
+            
             if($('#qtde').val() ==""){
                 alert("Informe a quantidade de itens!");
                 $('#qtde').val("1");
@@ -272,24 +282,24 @@
             precoTotal += preco;
                 
             //monta e insere a linha na tabela
-            $("#bodydados").last().append("<tr><td>" + num + "</td><td>" 
+            $("#bodydados").last().append("<tr id='ln" + $('#prodid').val() + "'" + "><td>" + num + "</td><td>" 
                 + $('#nomeproduto').val() + "</td><td>" + 
                 $('#qtde').val() + "</td><td style='text-align: right'>" + 
-                preco.toFixed(2) +  "</td></tr>");
+                preco.toFixed(2) +  "</td><td><img  src='<c:url value="/images/remover.png"/>' class='rmLinha' title='Remover Item' /></tr>");
                 
             //preenche os campos hidden
             $('<input>').attr({
                 type: 'hidden',                    
                 name: 'venda.itens['+numid+'].produto.id',
                 value: $('#prodid').val()
-            }).appendTo('#form');
+            }).appendTo('#ln' + $('#prodid').val());
                 
             $('<input>').attr({
                 type: 'hidden',   
                 id: "item_" + num,
                 name: 'venda.itens['+ numid + '].quantidade',
                 value: $('#qtde').val()
-            }).appendTo('#form');
+            }).appendTo('#ln' + $('#prodid').val());
                 
             //limpa e remota o focu
             $('#prodid').val("");
@@ -301,6 +311,10 @@
                 
              
         } 
+        
+        $('.rmLinha').live('click', function(){
+            $(this).parent().parent().remove();            
+        });
     });
     
 </script>
@@ -351,7 +365,7 @@
                                 <input type="text" name="venda.dataVenda" value='<fmt:formatDate value="${data}" type="both" pattern="dd/MM/yyyy" />' readonly/>
                                 <span>Informe a data</span>
                             </label>        
-                            <label style="width: 150px;">Total da Venda<br/>
+                            <label style="width: 150px; display: none">Total da Venda<br/>
                                 <input type="text" name="venda.precoTotal" value="0" readonly style="text-align: right"/>                                   
                             </label> 
                         </li>
@@ -381,7 +395,7 @@
                                             <input type="text" name="cliente" value="" style="width: 100px" id="clienteBusca" class="cpf"/>                                                
                                         </label> 
                                         <label style="width: 250px;">Nome<br/>
-                                            <input type="text" name="clienteNome" value="" style="width: 240px" id="clienteNome"/>                                                   
+                                            <input type="text" name="clienteNome" value="" style="width: 240px" id="clienteNome" readonly/>                                                   
 
                                         </label>
                                         <label id="clienteStatus" style="padding-top: 15px; padding-left: 10px; color:red;"> 
@@ -548,4 +562,3 @@
     </fieldset>
 
 </div>  
-<!-- div "escondida" para o formulario de cadastro de endereco -->                                            
